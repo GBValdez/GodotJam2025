@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd0wvt5y28nh4"]
+
+[ext_resource type="Script" path="res://objects/resetter/resetter.gd" id="1_fdsgi"]
+[ext_resource type="AudioStream" uid="uid://515vsscb6nrs" path="res://objects/resetter/sound/Bucle_Tiempo_Activado.wav" id="2_j020u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcfsn"]
+size = Vector2(63.5, 65)
+
+[sub_resource type="Gradient" id="Gradient_kjepf"]
+offsets = PackedFloat32Array(0.688312)
+colors = PackedColorArray(1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xpr0r"]
+gradient = SubResource("Gradient_kjepf")
+
+[node name="Resetter" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_fdsgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31.25, 31.5)
+shape = SubResource("RectangleShape2D_dcfsn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = SubResource("GradientTexture2D_xpr0r")
+
+[node name="aud_bucle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_j020u")
+pitch_scale = 2.0
+bus = &"Sfx"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="finished" from="aud_bucle" to="." method="_on_aud_bucle_finished"]
