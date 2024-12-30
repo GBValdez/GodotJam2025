@@ -95,7 +95,7 @@ text = "Art: Eddodoodles (Eduardo Nila )"
 [node name="Label17" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Art: Cuthulu"
+text = "Art: Sl Game"
 
 [node name="Label13" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2

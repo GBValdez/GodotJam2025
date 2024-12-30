@@ -1,43 +1,46 @@
 extends Entity
-class_name  Player
-@export_category("Controls")
-@export var enableControl:bool=true
-var previousVelocity:Vector2=Vector2.ZERO
-var direction:Vector2= Vector2.ZERO
-func _ready() -> void:
-	$AnimationPlayer.play("idle")
-	
+var direction:Vector2=Vector2.ZERO
+
 
 func _physics_process(delta: float) -> void:
 	# Detectar entrada del jugador
-	if (enableControl):
-		direction = Vector2.ZERO
-		direction.x = Input.get_axis("ui_left", "ui_right")
-		direction.y = Input.get_axis("ui_up", "ui_down")
-	direction = direction.normalized()
-	
-	# Aplicar movimiento basado en entrada
-	velocity += direction * SPEED*delta	
+	direction = Vector2.ZERO
+	direction.x= validateX($left,1)-validateX($right,-1)
+	direction.y= validateY($down,-1)-validateY($up,1)
+	if direction!=Vector2.ZERO:
+		velocity.y -= SPEED*direction.y
+		velocity.x += SPEED*direction.x
+
+		
+			
 	apply_inertia(delta,direction)
 	apply_limit(delta) 
-	#attempt_correction(5)
-	previousVelocity=velocity
 	move_and_slide()
-	animation()
-	
-func animation():
-	if General.endGame:
-		return
+	if velocity!= Vector2.ZERO:
+		General.applyPitchScale($audio,1,1.2)
 		
-	if velocity.length() > 0:
-		$AnimationPlayer.play("walk")
-		General.applyPitchScale($audioStep,0.8,1)
-	else:
-		$AnimationPlayer.play("idle")
+func validRaycast(raycast:RayCast2D)->Vector2:
+	if not raycast.is_colliding():
+		return Vector2.ZERO
+	var body:Node2D= raycast.get_collider()
+	if not body.is_in_group("player"):
+		return Vector2.ZERO	
+	return body.previousVelocity
 
-	if velocity.x!=0:
-		$Sprite2D.scale.x= sign(velocity.x) * abs($Sprite2D.scale.x) 
+func validateX(raycast:RayCast2D,deseable:int)->int:
+	var vel= validRaycast(raycast)
+	print(vel)
+	if sign(vel.x)!= deseable:
+		return 0
+	return 1
+	
 
+func validateY(raycast:RayCast2D,deseable:int)->int:
+	var vel= validRaycast(raycast)
+	if sign(vel.y)!= deseable:
+		return 0
+	return 1	
+	
 func apply_inertia(delta: float,direction:Vector2) -> void:
 	var velNormalize=velocity.normalized()		
 		
@@ -54,13 +57,6 @@ func apply_inertia(delta: float,direction:Vector2) -> void:
 			velocity.y=0
 
 
-func reset():
-	enableControl=false
-	$AnimationPlayer.play("reset")
-	direction=Vector2.ZERO
-
-func start():
-	pass
 
 func attempt_correction(amount: int):
 	var delta = get_physics_process_delta_time()

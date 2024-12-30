@@ -13,11 +13,12 @@ func _process(delta: float) -> void:
 
 func upPresed(body: Node2D) -> void:
 	configure("1",false)
+	print("hola")
 	pass # Replace with function body.
 
 
 func upDelease(body: Node2D) -> void:
-	General.createTimer(2,configure.bind("1",true))
+	General.createTimer(1.3,configure.bind("1",true))
 	pass # Replace with function body.
 
 
@@ -27,11 +28,14 @@ func downPressed(body: Node2D) -> void:
 
 
 func downDelease(body: Node2D) -> void:
-	General.createTimer(2,configure.bind("2",true))
+	General.createTimer(1.3,configure.bind("2",true))
 	
 
 func configure(section:String,enable:bool):
-	var area:Area2D=get_node(section).get_node("autoReset")
-	area.monitoring=enable
-	var tilemap:TileMapLayer=get_node(section).get_node("TileMapLayer")
-	tilemap.enabled=enable
+	var nodes:Array[Node]=get_node(section).get_children()
+	for node in nodes:
+		var elect:electricity= node
+		if enable:
+			elect.setOn()
+		else:
+			elect.setOff()

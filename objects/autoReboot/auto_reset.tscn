@@ -5,10 +5,11 @@
 
 [node name="autoReset" type="Area2D"]
 collision_layer = 0
+collision_mask = 8
 monitorable = false
 script = ExtResource("1_50w1e")
 
 [node name="aud_bucle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6er2y")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

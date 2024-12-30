@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qyqkuq6xegdj"
-path="res://.godot/imported/Normal button.jpg-2ade2d3647882a79d525078c767a9986.ctex"
+uid="uid://cdkn5hl34r5yn"
+path="res://.godot/imported/Door 2 blank.png-8cd87721642d9c0bb897a7706d8c5582.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/button/sprite/Normal button.jpg"
-dest_files=["res://.godot/imported/Normal button.jpg-2ade2d3647882a79d525078c767a9986.ctex"]
+source_file="res://objects/door/sprite/Door 2 blank.png"
+dest_files=["res://.godot/imported/Door 2 blank.png-8cd87721642d9c0bb897a7706d8c5582.ctex"]
 
 [params]
 

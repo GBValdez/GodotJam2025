@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=4 uid="uid://dftmbmg7m880h"]
+
+[ext_resource type="Script" path="res://utils/General/levels.gd" id="1_jgk4q"]
+[ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_r2vip"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_6vofo"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_dv14j"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_pwv6v"]
+[ext_resource type="Script" path="res://utils/General/zone.gd" id="7_vhykv"]
+[ext_resource type="TileSet" uid="uid://c0eok0rh1674m" path="res://utils/tiles/tiles.tres" id="8_t2n5w"]
+[ext_resource type="PackedScene" uid="uid://bd0wvt5y28nh4" path="res://objects/resetter/resetter.tscn" id="9_jru30"]
+[ext_resource type="PackedScene" uid="uid://bnqlf15ta6jee" path="res://objects/button/button.tscn" id="10_2m382"]
+[ext_resource type="PackedScene" uid="uid://v7c0dfv5ytx6" path="res://objects/eco/eco.tscn" id="11_cy2iq"]
+[ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="12_0k1qh"]
+[ext_resource type="Script" path="res://levels/level4/door_mechanisc.gd" id="13_0v1ei"]
+[ext_resource type="PackedScene" uid="uid://c5to1bgatcq53" path="res://objects/door/door.tscn" id="13_hcuyy"]
+[ext_resource type="PackedScene" uid="uid://bqxt05g7wbi4l" path="res://objects/box/box.tscn" id="14_slkiw"]
+[ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="15_a0uu8"]
+[ext_resource type="AudioStream" uid="uid://n6hw8f2ljplr" path="res://utils/music/NaveFría.mp3" id="16_pjeyr"]
+
+[sub_resource type="Resource" id="Resource_we0p4"]
+script = ExtResource("5_pwv6v")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qqwp"]
+size = Vector2(165, 20)
+
+[node name="Level2" type="Node2D"]
+script = ExtResource("1_jgk4q")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
+position = Vector2(24, 96)
+anchor_mode = 0
+zoom = Vector2(0.72, 0.72)
+script = ExtResource("2_r2vip")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_6vofo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
+visible = false
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
+
+[node name="zones" type="Node2D" parent="."]
+
+[node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
+position = Vector2(24, 96)
+script = ExtResource("4_dv14j")
+zoom = Vector2(0.72, 0.72)
+tween_resource = SubResource("Resource_we0p4")
+draw_limits = true
+
+[node name="r_init" type="Node2D" parent="zones" node_paths=PackedStringArray("camera") groups=["zoneCmr"]]
+script = ExtResource("7_vhykv")
+camera = NodePath("../c_init")
+key = "tuto_room_init"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAAFAAAAAQABAAEAAAAFAAEAAQABAAEAAAAFAAIAAQABAAEAAAAFAAMAAQABAAEAAAABAAMAAQABAAEAAAACAAMAAQABAAEAAAADAAMAAQABAAEAAAAEAAMAAQABAAEAAAAAAAMAAQABAAEAAAAAAAIAAQABAAEAAAAAAAEAAQABAAEAAAABAAAAAQABAAEAAAACAAAAAQABAAEAAAADAAAAAQABAAEAAAAEAAAAAQABAAEAAAABAAEAAQABAAEAAAABAAIAAQABAAEAAAACAAEAAQABAAEAAAACAAIAAQABAAEAAAADAAEAAQABAAEAAAADAAIAAQABAAEAAAAEAAEAAQABAAEAAAAEAAIAAQABAAEAAAAGAAEAAQABAAEAAAAGAAIAAQABAAEAAAAGAAMAAQABAAEAAAAHAAEAAQABAAEAAAAHAAIAAQABAAEAAAAHAAMAAQABAAEAAAAAAAQAAQABAAEAAAABAAQAAQABAAEAAAACAAQAAQABAAEAAAADAAQAAQABAAEAAAAEAAQAAQABAAEAAAAFAAQAAQABAAEAAAAGAAQAAQABAAEAAAAHAAQAAQABAAEAAAAIAAQAAQABAAEAAAAIAAEAAQABAAEAAAAIAAIAAQABAAEAAAAIAAMAAQABAAEAAAAIAAAAAQABAAEAAAAGAAAAAQABAAEAAAAHAAAAAQABAAEAAAAAAAUAAQABAAEAAAAAAAYAAQABAAEAAAAAAAcAAQABAAEAAAABAAUAAQABAAEAAAABAAYAAQABAAEAAAABAAcAAQABAAEAAAACAAUAAQABAAEAAAACAAYAAQABAAEAAAACAAcAAQABAAEAAAADAAUAAQABAAEAAAADAAYAAQABAAEAAAADAAcAAQABAAEAAAAEAAUAAQABAAEAAAAEAAYAAQABAAEAAAAEAAcAAQABAAEAAAAFAAUAAQABAAEAAAAFAAYAAQABAAEAAAAFAAcAAQABAAEAAAAGAAUAAQABAAEAAAAGAAYAAQABAAEAAAAGAAcAAQABAAEAAAAHAAUAAQABAAEAAAAHAAYAAQABAAEAAAAHAAcAAQABAAEAAAAIAAUAAQABAAEAAAAIAAYAAQABAAEAAAAIAAcAAQABAAEAAAAJAAAAAQABAAEAAAAJAAEAAQABAAEAAAAJAAIAAQABAAEAAAAJAAMAAQABAAEAAAAJAAQAAQABAAEAAAAJAAUAAQABAAEAAAAJAAYAAQABAAEAAAAJAAcAAQABAAEAAAAKAAAAAQABAAEAAAAKAAEAAQABAAEAAAAKAAIAAQABAAEAAAAKAAMAAQABAAEAAAAKAAQAAQABAAEAAAAKAAUAAQABAAEAAAAKAAYAAQABAAEAAAAKAAcAAQABAAEAAAALAAAAAQABAAEAAAALAAEAAQABAAEAAAALAAIAAQABAAEAAAALAAMAAQABAAEAAAALAAQAAQABAAEAAAALAAUAAQABAAEAAAALAAYAAQABAAEAAAALAAcAAQABAAEAAAA=")
+tile_set = ExtResource("8_t2n5w")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAAAAgAEAAUAAAAAAAEAAgAFAAQAAAAAAAIAAgAFAAQAAAAAAAMAAgAFAAQAAAAAAAQAAgAFAAQAAAAAAAUAAgAFAAQAAAAAAAYAAgAFAAQAAAAAAAcAAgAEAAQAAAABAAAAAgAEAAUAAAABAAMAAgAEAAQAAAABAAcAAgAEAAQAAAACAAAAAgAEAAUAAAACAAYAAgADAAMAAAACAAcAAgAEAAQAAAADAAAAAgAEAAUAAAADAAMAAgAEAAQAAAADAAQAAgAEAAQAAAADAAUAAgAEAAQAAAADAAYAAgAEAAMAAAADAAcAAgAEAAQAAAAEAAAAAgAEAAUAAAAEAAMAAgAEAAQAAAAEAAYAAgAEAAMAAAAEAAcAAgAEAAQAAAAFAAAAAgAEAAUAAAAFAAMAAgAEAAQAAAAFAAYAAgAEAAMAAAAFAAcAAgAEAAQAAAAGAAAAAgAEAAUAAAAGAAMAAgAEAAQAAAAGAAYAAgAEAAMAAAAGAAcAAgAEAAQAAAAHAAAAAgAEAAUAAAAHAAMAAgAEAAQAAAAHAAYAAgAEAAMAAAAHAAcAAgAEAAQAAAAIAAAAAgAEAAUAAAAIAAMAAgAEAAQAAAAIAAYAAgAEAAMAAAAIAAcAAgAEAAQAAAAJAAMAAgAEAAQAAAAJAAQAAgADAAUAAAAJAAYAAgAEAAMAAAAJAAcAAgAEAAQAAAAKAAAAAgADAAQAAAAKAAEAAgADAAQAAAAKAAIAAgADAAQAAAAKAAMAAgADAAQAAAAKAAQAAgADAAQAAAAKAAUAAgADAAQAAAAKAAYAAgAEAAMAAAAKAAcAAgAEAAQAAAALAAAAAgAEAAQAAAALAAEAAgAEAAQAAAALAAIAAgAEAAQAAAALAAMAAgAEAAQAAAALAAQAAgAEAAQAAAALAAUAAgAEAAQAAAALAAYAAgAEAAQAAAALAAcAAgAEAAQAAAA=")
+tile_set = ExtResource("8_t2n5w")
+
+[node name="Resetter" parent="zones/r_init" instance=ExtResource("9_jru30")]
+position = Vector2(352, 350)
+
+[node name="Button" parent="zones/r_init" instance=ExtResource("10_2m382")]
+position = Vector2(874, 184)
+
+[node name="Button2" parent="zones/r_init" instance=ExtResource("10_2m382")]
+position = Vector2(731, 592)
+
+[node name="eco" parent="zones/r_init" instance=ExtResource("11_cy2iq")]
+position = Vector2(617, 754)
+first = true
+
+[node name="eco2" parent="zones/r_init" instance=ExtResource("11_cy2iq")]
+position = Vector2(749, 331)
+first = true
+
+[node name="endLevel" parent="zones/r_init" instance=ExtResource("12_0k1qh")]
+redirectLevel = "res://levels/level5/level5.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/endLevel"]
+position = Vector2(1304.5, 81)
+shape = SubResource("RectangleShape2D_7qqwp")
+
+[node name="door" parent="zones/r_init" instance=ExtResource("13_hcuyy")]
+position = Vector2(1214, -137)
+
+[node name="doorMechanisc" type="Node" parent="zones/r_init/door"]
+script = ExtResource("13_0v1ei")
+
+[node name="box" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(208, 773)
+
+[node name="box2" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(759, 775)
+
+[node name="box3" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(208, 216)
+
+[node name="box4" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(206, 352)
+
+[node name="box5" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(893, 350)
+
+[node name="box6" parent="zones" instance=ExtResource("14_slkiw")]
+position = Vector2(1303, 354)
+
+[node name="player" parent="." groups=["playerPro"] instance=ExtResource("15_a0uu8")]
+position = Vector2(203, 891)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
+stream = ExtResource("16_pjeyr")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="deleaseSignal" from="zones/r_init/Button" to="zones/r_init/door/doorMechanisc" method="_on_button_delease_signal"]
+[connection signal="pressSignal" from="zones/r_init/Button" to="zones/r_init/door/doorMechanisc" method="_on_button_press_signal"]
+[connection signal="deleaseSignal" from="zones/r_init/Button2" to="zones/r_init/door/doorMechanisc" method="_on_button_2_delease_signal"]
+[connection signal="pressSignal" from="zones/r_init/Button2" to="zones/r_init/door/doorMechanisc" method="_on_button_2_press_signal"]

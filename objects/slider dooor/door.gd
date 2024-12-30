@@ -1,4 +1,4 @@
-extends TileMapLayer
+extends StaticBody2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,11 +10,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-func _on_button_press_signal(body: Node2D) -> void:
-	enabled=false
+func open():
+	$AnimationPlayer.play("open")
+	General.applyPitchScale($AudioStreamPlayer2D,1,1.1)
+func close():
+	$AnimationPlayer.play("close")
+	General.applyPitchScale($AudioStreamPlayer2D,0.9,1)
 	
-
-
-func _on_button_delease_signal(body: Node2D) -> void:
-	enabled=true

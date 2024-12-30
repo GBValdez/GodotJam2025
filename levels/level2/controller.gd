@@ -1,4 +1,4 @@
-extends TileMapLayer
+extends Node
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,9 +11,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func pressBtn(body: Node2D) -> void:
-	enabled=false
+func _on_button_press_signal(body: Node2D) -> void:
+	get_parent().open()
 
 
-func delease(body: Node2D) -> void:
-	enabled=true
+func _on_button_delease_signal(body: Node2D) -> void:
+	get_parent().close()

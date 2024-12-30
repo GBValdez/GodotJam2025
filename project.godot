@@ -15,13 +15,16 @@ run/main_scene="res://levels/MenuPrincipal/menu_principal.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
 config/icon="res://utils/General/icon.jpg"
-config/windows_native_icon="res://utils/General/icon.ico"
 
 [autoload]
 
 EcoSystem="*res://objects/eco/ecoSystem.gd"
 General="*res://utils/General/general.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

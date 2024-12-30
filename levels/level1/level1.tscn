@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://b37k5c6s7iwgw"]
+[gd_scene load_steps=20 format=4 uid="uid://b37k5c6s7iwgw"]
 
 [ext_resource type="Script" path="res://utils/General/levels.gd" id="1_8u5sd"]
 [ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_a4tm0"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bd0wvt5y28nh4" path="res://objects/resetter/resetter.tscn" id="9_851b3"]
 [ext_resource type="PackedScene" uid="uid://bnqlf15ta6jee" path="res://objects/button/button.tscn" id="10_j1fnn"]
 [ext_resource type="PackedScene" uid="uid://v7c0dfv5ytx6" path="res://objects/eco/eco.tscn" id="11_inj7h"]
+[ext_resource type="PackedScene" uid="uid://c5to1bgatcq53" path="res://objects/door/door.tscn" id="13_17gye"]
+[ext_resource type="Script" path="res://levels/level1/door.gd" id="14_m0s0a"]
+[ext_resource type="AudioStream" uid="uid://n6hw8f2ljplr" path="res://utils/music/NaveFría.mp3" id="16_26gle"]
 [ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="17_uo6i5"]
 [ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="18_qxwgp"]
-[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="19_0g0b3"]
 
 [sub_resource type="Resource" id="Resource_wy7hf"]
 script = ExtResource("5_vhlqk")
@@ -82,10 +84,10 @@ tile_map_data = PackedByteArray("AAAAAAEAAgAFAAQAAAAAAAIAAgAFAAQAAAAAAAAAAgAEAAQ
 tile_set = ExtResource("8_pnome")
 
 [node name="Resetter" parent="zones/r_init" instance=ExtResource("9_851b3")]
-position = Vector2(232, 362)
+position = Vector2(344, 386)
 
 [node name="Button" parent="zones/r_init" instance=ExtResource("10_j1fnn")]
-position = Vector2(536, 294)
+position = Vector2(576, 254)
 
 [node name="eco" parent="zones/r_init" instance=ExtResource("11_inj7h")]
 position = Vector2(864, 384)
@@ -98,10 +100,19 @@ redirectLevel = "res://levels/level2/level2.tscn"
 position = Vector2(616.5, -31)
 shape = SubResource("RectangleShape2D_848a1")
 
+[node name="door" parent="zones/r_init" instance=ExtResource("13_17gye")]
+position = Vector2(525, -137)
+
+[node name="doorMechanisc" type="Node" parent="zones/r_init/door"]
+script = ExtResource("14_m0s0a")
+
 [node name="player" parent="." groups=["playerPro"] instance=ExtResource("18_qxwgp")]
 position = Vector2(866, 385)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
-stream = ExtResource("19_0g0b3")
-volume_db = -15.0
+stream = ExtResource("16_26gle")
+volume_db = -5.0
 autoplay = true
+
+[connection signal="deleaseSignal" from="zones/r_init/Button" to="zones/r_init/door/doorMechanisc" method="_on_button_delease_signal"]
+[connection signal="pressSignal" from="zones/r_init/Button" to="zones/r_init/door/doorMechanisc" method="_on_button_press_signal"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6i26cm4cvd2x"]
+[gd_scene load_steps=15 format=3 uid="uid://c6i26cm4cvd2x"]
 
 [ext_resource type="Script" path="res://objects/player/player.gd" id="1_tln4k"]
 [ext_resource type="Shader" path="res://utils/shaders/teleport/teleport.gdshader" id="2_vrpyu"]
 [ext_resource type="Texture2D" uid="uid://dpshvc80j3fsh" path="res://objects/player/sprite/walk.png" id="3_j8ntr"]
 [ext_resource type="Texture2D" uid="uid://umbxk0712bsx" path="res://objects/player/sprite/Idle_scale(1)(1).png" id="3_ygv3p"]
 [ext_resource type="Texture2D" uid="uid://x8inslistnn5" path="res://objects/player/sprite/Idle_Scale (2).png" id="4_4o4ri"]
+[ext_resource type="AudioStream" uid="uid://dl8gwlf5sn7ai" path="res://objects/player/sound/Player_steps.mp3" id="6_f8ec1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sy3ph"]
 shader = ExtResource("2_vrpyu")
@@ -235,7 +236,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0wgm"]
-size = Vector2(67, 89)
+size = Vector2(67, 75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3uceb"]
 size = Vector2(50, 33)
@@ -263,7 +264,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 12.5)
+position = Vector2(2, 19.5)
 shape = SubResource("RectangleShape2D_i0wgm")
 
 [node name="interactive" type="Area2D" parent="."]
@@ -274,3 +275,10 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactive"]
 position = Vector2(0, 47)
 shape = SubResource("RectangleShape2D_3uceb")
+
+[node name="audioStep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f8ec1")
+volume_db = -15.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

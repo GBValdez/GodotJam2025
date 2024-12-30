@@ -11,18 +11,16 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
-	print("aaaa")
-	if (validate(body)):
-		$aud_bucle.play()
-		EcoSystem._reboot()
-
-	pass # Replace with function body.
-
-func validate(body:Node2D)->bool:
-	if not body.is_in_group("player"):
+func validate(body:Area2D)->bool:
+	if not body.get_parent().is_in_group("player"):
 		return false
-	var player:Player= body
+	var player:Player= body.get_parent()
 	if not player.enableControl:
 		return false
 	return true
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if (validate(area)):
+		$aud_bucle.play()
+		EcoSystem._reboot()

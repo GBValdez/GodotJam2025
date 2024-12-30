@@ -115,7 +115,8 @@ func getNodeByGroup(node:Node2D,groupName:String) -> Array[Node2D]:
 
 func go_to_level(levelNew:String):
 	for player in players:
-		player.reset()
+		if player != null:
+			player.reset()
 	createTimer(2,endLevel.bind(levelNew))
 	
 func  endLevel(levelNew:String):
@@ -171,3 +172,11 @@ func transMusic(music1:AudioStreamPlayer,music2:AudioStreamPlayer,duration:float
 	
 	if fnc!=null:		
 		tween2.connect("finished",fnc)
+
+func applyPitchScale(audio,min:float,max:float):
+	if(audio.playing):
+		return
+	randomize()
+	var pich= randf_range(min,max)
+	audio.pitch_scale=pich
+	audio.play()
