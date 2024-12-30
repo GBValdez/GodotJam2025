@@ -1,12 +1,135 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6i26cm4cvd2x"]
+[gd_scene load_steps=14 format=3 uid="uid://c6i26cm4cvd2x"]
 
 [ext_resource type="Script" path="res://objects/player/player.gd" id="1_tln4k"]
-[ext_resource type="Material" uid="uid://cac38l6gbshsu" path="res://utils/shaders/teleport/teleport.tres" id="2_mih7f"]
+[ext_resource type="Shader" path="res://utils/shaders/teleport/teleport.gdshader" id="2_vrpyu"]
+[ext_resource type="Texture2D" uid="uid://dpshvc80j3fsh" path="res://objects/player/sprite/walk.png" id="3_j8ntr"]
+[ext_resource type="Texture2D" uid="uid://umbxk0712bsx" path="res://objects/player/sprite/Idle_scale(1)(1).png" id="3_ygv3p"]
+[ext_resource type="Texture2D" uid="uid://x8inslistnn5" path="res://objects/player/sprite/Idle_Scale (2).png" id="4_4o4ri"]
 
-[sub_resource type="Gradient" id="Gradient_cotl8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sy3ph"]
+shader = ExtResource("2_vrpyu")
+shader_parameter/progress = 1.0
+shader_parameter/noise_desnity = 1000.0
+shader_parameter/beam_size = 0.15
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tx2u5"]
-gradient = SubResource("Gradient_cotl8")
+[sub_resource type="Animation" id="Animation_cpy3h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ygv3p")]
+}
+
+[sub_resource type="Animation" id="Animation_5k3vg"]
+resource_name = "idle"
+length = 0.230777
+loop_mode = 1
+step = 0.0769231
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0769231, 0.153846),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_4o4ri")]
+}
 
 [sub_resource type="Animation" id="Animation_l1eit"]
 resource_name = "reset"
@@ -24,60 +147,113 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 1.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
-[sub_resource type="Animation" id="Animation_cpy3h"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_3ye5q"]
+resource_name = "walk"
+length = 0.250008
+loop_mode = 1
+step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [ExtResource("3_j8ntr")]
 }
-
-[sub_resource type="Animation" id="Animation_5k3vg"]
-resource_name = "idle"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/progress")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:hframes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jdn6c"]
 _data = {
 "RESET": SubResource("Animation_cpy3h"),
 "idle": SubResource("Animation_5k3vg"),
-"reset": SubResource("Animation_l1eit")
+"reset": SubResource("Animation_l1eit"),
+"walk": SubResource("Animation_3ye5q")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0wgm"]
-size = Vector2(80, 81)
+size = Vector2(67, 89)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uceb"]
+size = Vector2(50, 33)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_tln4k")
-SPEED = 4000.0
-INERTIA = 4500.0
-LIMIT = 200
+SPEED = 5000.0
+INERTIA = 5500.0
+LIMIT = 300
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource("2_mih7f")
-position = Vector2(40, 40)
-scale = Vector2(0.3125, 77.5)
-texture = SubResource("GradientTexture1D_tx2u5")
+material = SubResource("ShaderMaterial_sy3ph")
+position = Vector2(-3, -4)
+scale = Vector2(0.68125, 0.68125)
+texture = ExtResource("3_ygv3p")
+hframes = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -87,6 +263,14 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(40, 39.5)
+position = Vector2(2, 12.5)
 shape = SubResource("RectangleShape2D_i0wgm")
+
+[node name="interactive" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive"]
+position = Vector2(0, 47)
+shape = SubResource("RectangleShape2D_3uceb")

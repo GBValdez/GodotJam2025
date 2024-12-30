@@ -1,0 +1,156 @@
+[gd_scene load_steps=17 format=3 uid="uid://bv4qxsxwvk5ne"]
+
+[ext_resource type="Script" path="res://utils/General/levels.gd" id="1_jwuxd"]
+[ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_jhqct"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_1yjw1"]
+[ext_resource type="Texture2D" uid="uid://db52glwgabwt4" path="res://utils/General/BG.png" id="5_10jhh"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_7qy4h"]
+[ext_resource type="Script" path="res://Levels/MenuPrincipal/menuCtrl.gd" id="8_cfeoc"]
+[ext_resource type="Script" path="res://Levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
+[ext_resource type="Script" path="res://utils/General/zone.gd" id="8_qq8ly"]
+[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="9_5i22e"]
+[ext_resource type="AudioStream" uid="uid://cwtqdko0t2ob1" path="res://utils/effect/menu/Interfaz_Hover_1.wav" id="9_u7paq"]
+[ext_resource type="AudioStream" uid="uid://bs538t2y2yt1" path="res://utils/effect/menu/Interfaz_Click_Hit.wav" id="11_u20v0"]
+
+[sub_resource type="Resource" id="Resource_k7p71"]
+script = ExtResource("6_7qy4h")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="Animation" id="Animation_wmek1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/CanvasLayer/Marker2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.01, 1.01)]
+}
+
+[sub_resource type="Animation" id="Animation_84kgc"]
+resource_name = "idle"
+length = 5.00001
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/CanvasLayer/Marker2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7axx"]
+_data = {
+"RESET": SubResource("Animation_wmek1"),
+"idle": SubResource("Animation_84kgc")
+}
+
+[node name="menuPrincipal" type="Node2D"]
+script = ExtResource("1_jwuxd")
+saveLevel = false
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
+anchor_mode = 0
+zoom = Vector2(2, 2)
+script = ExtResource("2_ipj18")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_jhqct")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+script = ExtResource("8_dwtby")
+
+[node name="Marker2D" type="Marker2D" parent="Camera2D/CanvasLayer"]
+position = Vector2(584, 320)
+scale = Vector2(1.01, 1.01)
+
+[node name="Bg" type="Sprite2D" parent="Camera2D/CanvasLayer/Marker2D"]
+position = Vector2(4, 3)
+scale = Vector2(0.62037, 0.62037)
+texture = ExtResource("5_10jhh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/Marker2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = 75.0
+offset_right = 92.5
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("8_cfeoc")
+
+[node name="NuevoJuego" type="Label" parent="Camera2D/CanvasLayer/Marker2D/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.760784)
+layout_mode = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 33
+text = "New Game"
+
+[node name="salir" type="Label" parent="Camera2D/CanvasLayer/Marker2D/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.760784)
+layout_mode = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Exit"
+
+[node name="blackSquare" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
+visible = false
+z_as_relative = false
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 1539.0
+offset_bottom = 874.0
+color = Color(0, 0, 0, 1)
+
+[node name="zones" type="Node2D" parent="."]
+
+[node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
+script = ExtResource("5_1yjw1")
+zoom = Vector2(2, 2)
+tween_resource = SubResource("Resource_k7p71")
+draw_limits = true
+
+[node name="r_init" type="Node2D" parent="zones" groups=["zoneCmr"]]
+script = ExtResource("8_qq8ly")
+key = "init"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
+stream = ExtResource("9_5i22e")
+volume_db = -10.0
+autoplay = true
+
+[node name="moveMenuAudio" type="AudioStreamPlayer" parent="." groups=["soundMenu"]]
+stream = ExtResource("9_u7paq")
+volume_db = -10.0
+
+[node name="audioSelectItem" type="AudioStreamPlayer" parent="." groups=["soundMenuClick"]]
+stream = ExtResource("11_u20v0")
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s7axx")
+}
+autoplay = "idle"

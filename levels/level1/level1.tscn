@@ -1,0 +1,107 @@
+[gd_scene load_steps=18 format=4 uid="uid://b37k5c6s7iwgw"]
+
+[ext_resource type="Script" path="res://utils/General/levels.gd" id="1_8u5sd"]
+[ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_a4tm0"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_r2nwx"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_5nw6t"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_vhlqk"]
+[ext_resource type="Script" path="res://utils/camera/trigCamera.gd" id="6_7ufja"]
+[ext_resource type="Script" path="res://utils/General/zone.gd" id="7_cj71r"]
+[ext_resource type="TileSet" uid="uid://c0eok0rh1674m" path="res://utils/tiles/tiles.tres" id="8_pnome"]
+[ext_resource type="PackedScene" uid="uid://bd0wvt5y28nh4" path="res://objects/resetter/resetter.tscn" id="9_851b3"]
+[ext_resource type="PackedScene" uid="uid://bnqlf15ta6jee" path="res://objects/button/button.tscn" id="10_j1fnn"]
+[ext_resource type="PackedScene" uid="uid://v7c0dfv5ytx6" path="res://objects/eco/eco.tscn" id="11_inj7h"]
+[ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="17_uo6i5"]
+[ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="18_qxwgp"]
+[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="19_0g0b3"]
+
+[sub_resource type="Resource" id="Resource_wy7hf"]
+script = ExtResource("5_vhlqk")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j736d"]
+b = Vector2(229, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_848a1"]
+size = Vector2(165, 20)
+
+[node name="Level1" type="Node2D" groups=["level"]]
+script = ExtResource("1_8u5sd")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
+position = Vector2(24, 16)
+anchor_mode = 0
+zoom = Vector2(0.96, 0.96)
+script = ExtResource("2_a4tm0")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_r2nwx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
+visible = false
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
+
+[node name="zones" type="Node2D" parent="."]
+
+[node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
+position = Vector2(24, 16)
+script = ExtResource("4_5nw6t")
+zoom = Vector2(0.96, 0.96)
+tween_resource = SubResource("Resource_wy7hf")
+draw_limits = true
+
+[node name="Area2D" type="Area2D" parent="zones/c_init"]
+monitorable = false
+script = ExtResource("6_7ufja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/c_init/Area2D"]
+position = Vector2(392, 25)
+shape = SubResource("SegmentShape2D_j736d")
+
+[node name="r_init" type="Node2D" parent="zones" node_paths=PackedStringArray("camera") groups=["zoneCmr"]]
+script = ExtResource("7_cj71r")
+camera = NodePath("../c_init")
+key = "tuto_room_init"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAFAAAAAQABAAAAAAAFAAEAAQABAAEAAAAFAAIAAQABAAEAAAAFAAMAAQABAAEAAAABAAMAAQABAAEAAAACAAMAAQABAAEAAAADAAMAAQABAAEAAAAEAAMAAQABAAEAAAAAAAMAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAEAAQAAAAEAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQABAAAAAAAEAAAAAQABAAAAAAABAAEAAQABAAEAAAABAAIAAQABAAEAAAACAAEAAQABAAEAAAACAAIAAQABAAEAAAADAAEAAQABAAEAAAADAAIAAQABAAEAAAAEAAEAAQABAAEAAAAEAAIAAQABAAEAAAAGAAEAAQABAAEAAAAGAAIAAQABAAEAAAAGAAMAAQABAAEAAAAHAAEAAQABAAEAAAAHAAIAAQABAAEAAAAHAAMAAQABAAEAAAAAAAQAAQAAAAIAAAABAAQAAQABAAIAAAACAAQAAQABAAIAAAADAAQAAQABAAIAAAAEAAQAAQABAAIAAAAFAAQAAQABAAIAAAAGAAQAAQABAAIAAAAHAAQAAQABAAIAAAAIAAQAAQACAAIAAAAIAAEAAQACAAEAAAAIAAIAAQACAAEAAAAIAAMAAQACAAEAAAAIAAAAAQACAAAAAAAGAAAAAQABAAAAAAAHAAAAAQABAAAAAAA=")
+tile_set = ExtResource("8_pnome")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAEAAgAFAAQAAAAAAAIAAgAFAAQAAAAAAAAAAgAEAAQAAAAAAAMAAgAFAAQAAAAAAAQAAgAEAAQAAAABAAQAAgAEAAMAAAACAAQAAgAEAAMAAAADAAQAAgAEAAMAAAAEAAQAAgAEAAMAAAAFAAQAAgAEAAMAAAAGAAQAAgAEAAMAAAAHAAQAAgAEAAMAAAAIAAQAAgAEAAQAAAAIAAEAAgADAAQAAAAIAAIAAgADAAQAAAAIAAMAAgADAAQAAAAIAAAAAgAEAAQAAAABAAAAAgAEAAUAAAACAAAAAgAEAAUAAAADAAAAAgAFAAUAAAAFAAAAAgADAAUAAAAGAAAAAgAEAAUAAAAHAAAAAgAEAAUAAAA=")
+tile_set = ExtResource("8_pnome")
+
+[node name="Resetter" parent="zones/r_init" instance=ExtResource("9_851b3")]
+position = Vector2(232, 362)
+
+[node name="Button" parent="zones/r_init" instance=ExtResource("10_j1fnn")]
+position = Vector2(536, 294)
+
+[node name="eco" parent="zones/r_init" instance=ExtResource("11_inj7h")]
+position = Vector2(864, 384)
+first = true
+
+[node name="endLevel" parent="zones/r_init" instance=ExtResource("17_uo6i5")]
+redirectLevel = "res://levels/level2/level2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/endLevel"]
+position = Vector2(616.5, -31)
+shape = SubResource("RectangleShape2D_848a1")
+
+[node name="player" parent="." groups=["playerPro"] instance=ExtResource("18_qxwgp")]
+position = Vector2(866, 385)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
+stream = ExtResource("19_0g0b3")
+volume_db = -15.0
+autoplay = true

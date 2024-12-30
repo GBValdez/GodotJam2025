@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnqlf15ta6jee"]
+
+[ext_resource type="Script" path="res://objects/button/button.gd" id="1_7nnht"]
+
+[sub_resource type="Gradient" id="Gradient_5ohd5"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.174173, 0.127215, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vwrbe"]
+gradient = SubResource("Gradient_5ohd5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72hiq"]
+size = Vector2(77, 78)
+
+[node name="Button" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_7nnht")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(33, 32)
+texture = SubResource("GradientTexture2D_vwrbe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(31, 34)
+shape = SubResource("RectangleShape2D_72hiq")
+
+[connection signal="body_entered" from="." to="." method="press"]
+[connection signal="body_exited" from="." to="." method="delease"]

@@ -1,0 +1,173 @@
+[gd_scene load_steps=27 format=4 uid="uid://nnucvy6jfpg1"]
+
+[ext_resource type="Script" path="res://utils/General/levels.gd" id="1_motus"]
+[ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_ti8kp"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_6doff"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="4_ks8la"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_6wjo6"]
+[ext_resource type="Script" path="res://utils/camera/trigCamera.gd" id="6_1drfp"]
+[ext_resource type="Script" path="res://utils/General/zone.gd" id="7_ot52h"]
+[ext_resource type="TileSet" uid="uid://c0eok0rh1674m" path="res://utils/tiles/tiles.tres" id="8_paj2y"]
+[ext_resource type="PackedScene" uid="uid://bd0wvt5y28nh4" path="res://objects/resetter/resetter.tscn" id="9_u7p4f"]
+[ext_resource type="PackedScene" uid="uid://bnqlf15ta6jee" path="res://objects/button/button.tscn" id="10_e2m8k"]
+[ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="11_7jns6"]
+[ext_resource type="Script" path="res://levels/tutorial/way.gd" id="12_1bsxl"]
+[ext_resource type="PackedScene" uid="uid://v7c0dfv5ytx6" path="res://objects/eco/eco.tscn" id="12_rwhac"]
+[ext_resource type="PackedScene" uid="uid://bumybyae6tktt" path="res://objects/autoReboot/auto_reset.tscn" id="13_5wdd4"]
+[ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="13_7sj1q"]
+[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="14_0o0ox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dglqh"]
+size = Vector2(536, 136.688)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if2ea"]
+size = Vector2(129.5, 271.344)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frgi4"]
+size = Vector2(407.75, 136.672)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gc0x6"]
+size = Vector2(128.25, 128.797)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1us3n"]
+size = Vector2(405.125, 128.797)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syu7g"]
+size = Vector2(128.25, 128.797)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wali"]
+size = Vector2(539.563, 128.797)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca2eu"]
+size = Vector2(165, 20)
+
+[sub_resource type="Resource" id="Resource_wy7hf"]
+script = ExtResource("5_6wjo6")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j736d"]
+b = Vector2(229, 20)
+
+[node name="level2" type="Node2D" groups=["level"]]
+script = ExtResource("1_motus")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
+position = Vector2(24, 16)
+anchor_mode = 0
+zoom = Vector2(0.73, 0.73)
+script = ExtResource("2_ti8kp")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_6doff")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
+visible = false
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
+
+[node name="zones" type="Node2D" parent="."]
+
+[node name="r_init" type="Node2D" parent="zones" node_paths=PackedStringArray("camera") groups=["zoneCmr"]]
+script = ExtResource("7_ot52h")
+camera = NodePath("../c_init")
+key = "tuto_room_init"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAAFAAAAAQABAAAAAAAFAAEAAQABAAEAAAAFAAIAAQABAAEAAAAFAAMAAQABAAEAAAABAAMAAQABAAEAAAACAAMAAQABAAEAAAADAAMAAQABAAEAAAAEAAMAAQABAAEAAAAAAAMAAQAAAAEAAAAAAAIAAQAAAAEAAAAAAAEAAQAAAAEAAAABAAAAAQABAAAAAAACAAAAAQABAAAAAAADAAAAAQABAAAAAAAEAAAAAQABAAAAAAABAAEAAQABAAEAAAABAAIAAQABAAEAAAACAAEAAQABAAEAAAACAAIAAQABAAEAAAADAAEAAQABAAEAAAADAAIAAQABAAEAAAAEAAEAAQABAAEAAAAEAAIAAQABAAEAAAAGAAEAAQABAAEAAAAGAAIAAQABAAEAAAAGAAMAAQABAAEAAAAHAAEAAQABAAEAAAAHAAIAAQABAAEAAAAHAAMAAQABAAEAAAAAAAQAAQAAAAEAAAABAAQAAQABAAEAAAACAAQAAQABAAEAAAADAAQAAQABAAEAAAAEAAQAAQABAAEAAAAFAAQAAQABAAEAAAAGAAQAAQABAAEAAAAHAAQAAQABAAEAAAAIAAQAAQABAAEAAAAIAAEAAQABAAEAAAAIAAIAAQABAAEAAAAIAAMAAQABAAEAAAAIAAAAAQABAAAAAAAGAAAAAQABAAAAAAAHAAAAAQABAAAAAAABAAUAAQABAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAAFAAUAAQABAAEAAAAGAAUAAQABAAEAAAAHAAUAAQABAAEAAAAIAAUAAQABAAEAAAAJAAEAAQABAAEAAAAJAAIAAQABAAEAAAAJAAMAAQABAAEAAAAJAAQAAQABAAEAAAAJAAUAAQABAAEAAAAKAAEAAQABAAEAAAAKAAIAAQABAAEAAAAKAAMAAQABAAEAAAAKAAQAAQABAAEAAAAKAAUAAQABAAEAAAAAAAUAAQAAAAEAAAABAAYAAQABAAIAAAACAAYAAQABAAIAAAADAAYAAQABAAIAAAAEAAYAAQABAAIAAAAFAAYAAQABAAIAAAAGAAYAAQABAAIAAAAHAAYAAQABAAIAAAAIAAYAAQABAAIAAAAJAAYAAQABAAIAAAAKAAYAAQABAAIAAAAAAAYAAQAAAAIAAAALAAYAAQACAAIAAAALAAEAAQACAAEAAAALAAIAAQACAAEAAAALAAMAAQACAAEAAAALAAQAAQACAAEAAAALAAUAAQACAAEAAAALAAAAAQACAAAAAAAJAAAAAQABAAAAAAAKAAAAAQABAAAAAAA=")
+tile_set = ExtResource("8_paj2y")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="zones/r_init"]
+scale = Vector2(0.7, 0.7)
+tile_map_data = PackedByteArray("AAAAAAAAAgAEAAQAAAAAAAEAAgAFAAQAAAAAAAIAAgAFAAQAAAAAAAMAAgAFAAQAAAAAAAQAAgAEAAQAAAAAAAUAAgAFAAQAAAALAAAAAgAEAAQAAAAAAAYAAgAEAAQAAAALAAYAAgAEAAQAAAABAAYAAgAEAAMAAAACAAYAAgAEAAQAAAADAAYAAgAEAAQAAAAEAAYAAgAEAAMAAAAFAAYAAgAEAAMAAAAGAAYAAgAEAAMAAAAHAAYAAgAEAAMAAAAIAAYAAgAEAAMAAAAJAAYAAgAEAAMAAAAKAAYAAgAEAAMAAAALAAEAAgADAAQAAAALAAIAAgADAAQAAAALAAMAAgADAAQAAAALAAQAAgADAAQAAAALAAUAAgADAAQAAAABAAAAAgAEAAUAAAACAAAAAgAEAAUAAAADAAAAAgAEAAUAAAAEAAAAAgAEAAUAAAAFAAAAAgAEAAUAAAAGAAAAAgAEAAUAAAAHAAAAAgAEAAUAAAAIAAAAAgAEAAUAAAAHAAQAAgAFAAUAAAAGAAQAAgAEAAUAAAAFAAQAAgADAAUAAAADAAQAAgAFAAMAAAACAAQAAgAEAAMAAAABAAQAAgAEAAMAAAABAAUAAgAEAAQAAAACAAUAAgAEAAQAAAADAAUAAgAFAAQAAAAFAAMAAgADAAQAAAAHAAMAAgAEAAQAAAAGAAMAAgAEAAQAAAAIAAIAAgAEAAUAAAAJAAIAAgAEAAUAAAAKAAIAAgAEAAUAAAAHAAIAAgAEAAMAAAAGAAIAAgAEAAMAAAAFAAIAAgAEAAMAAAAEAAIAAgAEAAMAAAADAAIAAgAEAAMAAAACAAIAAgAEAAMAAAAJAAAAAgAFAAUAAAA=")
+tile_set = ExtResource("8_paj2y")
+
+[node name="Resetter" parent="zones/r_init" instance=ExtResource("9_u7p4f")]
+position = Vector2(1283, 632)
+
+[node name="eco" parent="zones/r_init" instance=ExtResource("12_rwhac")]
+position = Vector2(1421, 629)
+first = true
+
+[node name="Button2" parent="zones/r_init" instance=ExtResource("10_e2m8k")]
+position = Vector2(1274, 750)
+
+[node name="Button3" parent="zones/r_init" instance=ExtResource("10_e2m8k")]
+position = Vector2(1391, 760)
+
+[node name="way" type="Node2D" parent="zones/r_init"]
+position = Vector2(1264, 1144)
+script = ExtResource("12_1bsxl")
+
+[node name="1" type="Node2D" parent="zones/r_init/way"]
+
+[node name="autoReset" parent="zones/r_init/way/1" instance=ExtResource("13_5wdd4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/way/1/autoReset"]
+position = Vector2(-443, -368)
+shape = SubResource("RectangleShape2D_dglqh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="zones/r_init/way/1/autoReset"]
+position = Vector2(-1063.75, -871.672)
+shape = SubResource("RectangleShape2D_if2ea")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="zones/r_init/way/1/autoReset"]
+position = Vector2(-370.875, -935.336)
+shape = SubResource("RectangleShape2D_frgi4")
+
+[node name="2" type="Node2D" parent="zones/r_init/way"]
+
+[node name="autoReset" parent="zones/r_init/way/2" instance=ExtResource("13_5wdd4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/way/2/autoReset"]
+position = Vector2(-646, -506)
+shape = SubResource("RectangleShape2D_gc0x6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="zones/r_init/way/2/autoReset"]
+position = Vector2(-781.563, -932)
+shape = SubResource("RectangleShape2D_1us3n")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="zones/r_init/way/2/autoReset"]
+position = Vector2(-94, -927)
+shape = SubResource("RectangleShape2D_syu7g")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="zones/r_init/way/2/autoReset"]
+position = Vector2(-852.781, -655)
+shape = SubResource("RectangleShape2D_7wali")
+
+[node name="endLevel" parent="zones/r_init" instance=ExtResource("11_7jns6")]
+redirectLevel = "res://levels/level2/level2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/endLevel"]
+position = Vector2(1433.5, -32)
+shape = SubResource("RectangleShape2D_ca2eu")
+
+[node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
+position = Vector2(24, 16)
+script = ExtResource("4_ks8la")
+zoom = Vector2(0.73, 0.73)
+tween_resource = SubResource("Resource_wy7hf")
+draw_limits = true
+
+[node name="Area2D" type="Area2D" parent="zones/c_init"]
+monitorable = false
+script = ExtResource("6_1drfp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/c_init/Area2D"]
+position = Vector2(392, 25)
+shape = SubResource("SegmentShape2D_j736d")
+
+[node name="player" parent="." groups=["playerPro"] instance=ExtResource("13_7sj1q")]
+position = Vector2(1417, 628)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
+stream = ExtResource("14_0o0ox")
+volume_db = -15.0
+autoplay = true

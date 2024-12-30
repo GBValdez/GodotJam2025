@@ -1,10 +1,88 @@
-[gd_scene load_steps=3 format=3 uid="uid://v7c0dfv5ytx6"]
+[gd_scene load_steps=11 format=3 uid="uid://v7c0dfv5ytx6"]
 
 [ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="1_0gm5m"]
 [ext_resource type="Script" path="res://objects/eco/eco.gd" id="1_m8ilj"]
+[ext_resource type="Shader" path="res://utils/shaders/teleport/teleport.gdshader" id="3_d8v4k"]
+[ext_resource type="Texture2D" uid="uid://c7q7qggt2841a" path="res://objects/eco/sprites/Frame 1.png" id="4_rl53n"]
+[ext_resource type="Texture2D" uid="uid://cas0o2bjiknq2" path="res://objects/eco/sprites/Frame 2.png" id="5_3h8ce"]
+
+[sub_resource type="Animation" id="Animation_21tgl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_3h8ce")]
+}
+
+[sub_resource type="Animation" id="Animation_5ofa8"]
+resource_name = "idle"
+length = 0.142864
+loop_mode = 1
+step = 0.0714286
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0714286),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_rl53n"), ExtResource("5_3h8ce")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ki0f2"]
+_data = {
+"RESET": SubResource("Animation_21tgl"),
+"idle": SubResource("Animation_5ofa8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7s35"]
+size = Vector2(138, 147.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ctoj"]
+shader = ExtResource("3_d8v4k")
+shader_parameter/progress = 1.0
+shader_parameter/noise_desnity = 1000.0
+shader_parameter/beam_size = 0.15
+shader_parameter/color = Color(0, 1.02, 1.2, 1)
+shader_parameter/modulate = Color(1, 1, 1, 0.784314)
 
 [node name="eco" type="Marker2D"]
 script = ExtResource("1_m8ilj")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ki0f2")
+}
+autoplay = "idle"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -104)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(8.31245, -16.3125)
+scale = Vector2(0.282292, 0.282292)
+texture = ExtResource("5_3h8ce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(9, -9.75)
+shape = SubResource("RectangleShape2D_n7s35")
+
 [node name="player" parent="." instance=ExtResource("1_0gm5m")]
 enableControl = false
+
+[node name="Sprite2D" parent="player" index="0"]
+material = SubResource("ShaderMaterial_4ctoj")
+
+[editable path="player"]

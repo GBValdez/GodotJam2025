@@ -11,14 +11,21 @@ config_version=5
 [application]
 
 config/name="Ecos del pasado"
-run/main_scene="res://levels/tutorial/tutorial.tscn"
+run/main_scene="res://levels/MenuPrincipal/menu_principal.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="res://utils/General/icon.jpg"
+config/windows_native_icon="res://utils/General/icon.ico"
 
 [autoload]
 
 EcoSystem="*res://objects/eco/ecoSystem.gd"
+General="*res://utils/General/general.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
@@ -33,3 +40,8 @@ ui_action={
 2d_physics/layer_1="player"
 2d_physics/layer_2="entity"
 2d_physics/layer_3="wall"
+2d_physics/layer_4="interaction"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

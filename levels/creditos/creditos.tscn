@@ -1,0 +1,143 @@
+[gd_scene load_steps=8 format=3 uid="uid://d27ifmkjm0lkx"]
+
+[ext_resource type="Script" path="res://Levels/creditos/creditos.gd" id="1_84r2m"]
+[ext_resource type="Texture2D" uid="uid://cne1d3fgwsj3n" path="res://levels/creditos/sprites/Created by.png" id="2_j0ner"]
+[ext_resource type="Texture2D" uid="uid://dnjj2lf2vr5f3" path="res://levels/creditos/sprites/Thanks for playing.png" id="3_55j1h"]
+[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="4_c4kdh"]
+
+[sub_resource type="Animation" id="Animation_0skra"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Marker2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.01, 1.01)]
+}
+
+[sub_resource type="Animation" id="Animation_82bse"]
+resource_name = "idle"
+length = 5.00001
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Marker2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.01, 1.01)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r6c27"]
+_data = {
+"RESET": SubResource("Animation_0skra"),
+"idle": SubResource("Animation_82bse")
+}
+
+[node name="creditos" type="Node2D"]
+script = ExtResource("1_84r2m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
+position = Vector2(572, 320)
+scale = Vector2(1.01, 1.01)
+
+[node name="CreatedBy" type="Sprite2D" parent="CanvasLayer/Marker2D"]
+position = Vector2(8.8889, 5.00001)
+scale = Vector2(0.612963, 0.612963)
+texture = ExtResource("2_j0ner")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Marker2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = 50.0
+offset_right = 202.0
+offset_bottom = 278.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label14" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="Label3" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Programmer: Gabriel Valdez
+"
+
+[node name="Label15" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="Label12" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Art: Eddodoodles (Eduardo Nila )"
+
+[node name="Label17" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Art: Cuthulu"
+
+[node name="Label13" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="Label2" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Music: Joshua Mayorga"
+
+[node name="Label16" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="Label7" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Sound effects: Lydium Music
+"
+
+[node name="ThanksForPlaying" type="Sprite2D" parent="CanvasLayer/Marker2D"]
+visible = false
+position = Vector2(8.889, 5)
+scale = Vector2(0.613, 0.613)
+texture = ExtResource("3_55j1h")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["blackSquare"]]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r6c27")
+}
+autoplay = "idle"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
+stream = ExtResource("4_c4kdh")
+volume_db = -10.0
+autoplay = true

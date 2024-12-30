@@ -13,7 +13,7 @@ uniform float progress : hint_range(0.0, 1.0);
 uniform float noise_desnity = 60;
 uniform float beam_size : hint_range(0.01, 0.15);
 uniform vec4 color : source_color = vec4(0.0, 1.02, 1.2, 1.0);
-
+uniform vec4 modulate:source_color=vec4(1,1,1,1);
 // We are generating our own noise here. You could experiment with the 
 // built in SimplexNoise or your own noise texture for other effects.
 vec2 random(vec2 uv){
@@ -48,5 +48,5 @@ void fragment()
 	tex.rgb += beam;
 	tex.a *= d2;
 	
-	COLOR = tex;
+	COLOR = tex* modulate;
 }
