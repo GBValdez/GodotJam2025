@@ -44,7 +44,7 @@ func animation():
 			var currentColor:Color=Color.WHITE
 			currentColor.a=0.1
 			General.spriteShadow($Sprite2D,0.2,currentColor)
-			#General.shakeCameraDir(5,1,velocity.normalized())
+			General.shakeCameraDir(0.5,0.1,velocity.normalized())
 		else:	
 			if abs(velocity.x)>LIMIT*0.1:
 				$AnimationPlayer.play("walk")
