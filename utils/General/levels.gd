@@ -20,7 +20,6 @@ func _init() -> void:
 		General.currentEndpont=endpointData
 func _ready():
 	General.endGame=false
-	EcoSystem.counter=0
 	setShadow(true)
 	if(saveLevel):
 		General.dataGame.currentLevel= scene_file_path

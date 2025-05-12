@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bs0252qb8ruos"]
 
-[ext_resource type="Script" path="res://utils/endLevel/end_level.gd" id="1_gmva7"]
+[ext_resource type="Script" uid="uid://df4g7ibkuhtoo" path="res://utils/endLevel/end_level.gd" id="1_gmva7"]
 
 [node name="endLevel" type="Area2D"]
 collision_layer = 0

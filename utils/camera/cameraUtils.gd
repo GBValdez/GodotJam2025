@@ -93,5 +93,6 @@ func get_active_camera()-> camera2dInfo:
 		if camera.camera.priority>max:
 			cameraReturn=camera
 			max=camera.camera.priority
+			print("CAMARA")
 			
 	return cameraReturn

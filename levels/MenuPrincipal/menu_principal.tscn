@@ -1,17 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv4qxsxwvk5ne"]
+[gd_scene load_steps=19 format=3 uid="uid://bv4qxsxwvk5ne"]
 
-[ext_resource type="Script" path="res://utils/General/levels.gd" id="1_jwuxd"]
-[ext_resource type="Script" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_jhqct"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_1yjw1"]
+[ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_jwuxd"]
+[ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
+[ext_resource type="Script" uid="uid://bdg4rd177egl7" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_jhqct"]
+[ext_resource type="Script" uid="uid://8p6wacq2yrdq" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_1yjw1"]
 [ext_resource type="Texture2D" uid="uid://db52glwgabwt4" path="res://utils/General/BG.png" id="5_10jhh"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_7qy4h"]
-[ext_resource type="Script" path="res://Levels/MenuPrincipal/menuCtrl.gd" id="8_cfeoc"]
-[ext_resource type="Script" path="res://Levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
-[ext_resource type="Script" path="res://utils/General/zone.gd" id="8_qq8ly"]
+[ext_resource type="Script" uid="uid://qbpqf3uf1xsg" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_7qy4h"]
+[ext_resource type="Shader" uid="uid://ci64dvtbm31vx" path="res://utils/shaderTest.gdshader" id="7_ndfuf"]
+[ext_resource type="Script" uid="uid://jefe05u3a4dq" path="res://levels/MenuPrincipal/menuCtrl.gd" id="8_cfeoc"]
+[ext_resource type="Script" uid="uid://h8o3lm2jyyrl" path="res://levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
+[ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="8_qq8ly"]
 [ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="9_5i22e"]
 [ext_resource type="AudioStream" uid="uid://cwtqdko0t2ob1" path="res://utils/effect/menu/Interfaz_Hover_1.wav" id="9_u7paq"]
 [ext_resource type="AudioStream" uid="uid://bs538t2y2yt1" path="res://utils/effect/menu/Interfaz_Click_Hit.wav" id="11_u20v0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_csbyc"]
+shader = ExtResource("7_ndfuf")
+shader_parameter/iMouse = Vector4(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_k7p71"]
 script = ExtResource("6_7qy4h")
@@ -54,8 +59,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s7axx"]
 _data = {
-"RESET": SubResource("Animation_wmek1"),
-"idle": SubResource("Animation_84kgc")
+&"RESET": SubResource("Animation_wmek1"),
+&"idle": SubResource("Animation_84kgc")
 }
 
 [node name="menuPrincipal" type="Node2D"]
@@ -124,6 +129,14 @@ offset_right = 1539.0
 offset_bottom = 874.0
 color = Color(0, 0, 0, 1)
 
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_csbyc")
+offset_left = -23.0
+offset_right = 1224.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+
 [node name="zones" type="Node2D" parent="."]
 
 [node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
@@ -151,6 +164,6 @@ volume_db = -10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_s7axx")
+&"": SubResource("AnimationLibrary_s7axx")
 }
 autoplay = "idle"
