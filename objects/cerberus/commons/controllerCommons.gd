@@ -8,11 +8,13 @@ var player:Player
 var attack:String=""
 var typeAttack:Array[String]=[]
 var initAttack: bool=true
-
+var numAttacks:int= 0;
+var currentNumAttack:int=0;
 func _ready() -> void:
-	player=General.players[0]
-	changeAttack()
+	player=get_tree().get_first_node_in_group("player")
 	_ready_help()
+	changeAttack()
+	
 
 func _ready_help():
 	pass
@@ -40,3 +42,7 @@ func shotWithTimeCerbero(direction:Vector2=Vector2.ZERO):
 func changeAttack():
 	attack= typeAttack.pick_random()
 	initAttack=true
+
+func generateNumAttacks(num:int):
+	randomize()
+	numAttacks= randi_range(1,num)
