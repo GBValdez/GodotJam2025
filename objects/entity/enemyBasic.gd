@@ -1,38 +1,37 @@
 extends Entity
 class_name enemyBasic;
+@export_category("Enemy Atributes")
+@export var forceHit=1000;
+@export var forceHitMe=1000;
+
 @onready var hitAreaMe:Area2D= $hitMe
 @onready var hitAreaOther:Area2D= $hitOther
-var playerHitMe:Entity
+
+var playerHitMe:Area2D
 
 	
 func onHitMe(body: Node2D):
-	if (body.is_in_group("player")):
-		var entityBody = body as Entity
-		if(entityBody.global_position.y<global_position.y):
-			playerHitMe= entityBody			
-			body.velocity.y=-200
-			hitDamage(1,body.global_position,200,false)
+	if (body.is_in_group("player-damage")):
+		hitDamage(1,body.global_position,forceHitMe,false)
 
 	
 func onHitOther(body: Node2D):
 	if (body.is_in_group("player")):
 		var entityBody = body as Entity
 		if playerHitMe== null:
-			entityBody.hitDamage(1,global_position,200)
+			entityBody.hitDamage(1,global_position,forceHit)
 
 func exitHetme(body:Node2D):
-	if (body.is_in_group("player")):
+	if (body.is_in_group("player-damage")):
 		playerHitMe=null
 
 
 func conectHit():
 	if(hitAreaMe!=null):
-		hitAreaMe.body_entered.connect(onHitMe)
-		hitAreaMe.body_exited.connect(exitHetme)
+		hitAreaMe.area_entered.connect(onHitMe)
+		hitAreaMe.area_exited.connect(exitHetme)
 	if(hitAreaOther!=null):
 		hitAreaOther.body_entered.connect(onHitOther)
-	#hitAreaMe.connect("body_entered",onHitMe)
-	#hitAreaOther.connect("body_entered",onHitOther)
 
 func is_in_damage()-> bool:
 	return not anim.current_animation  in ["hit"]

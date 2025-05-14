@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b37k5c6s7iwgw"]
+[gd_scene load_steps=14 format=3 uid="uid://b37k5c6s7iwgw"]
 
 [ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_8u5sd"]
 [ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_a4tm0"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://qbpqf3uf1xsg" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_vhlqk"]
 [ext_resource type="Script" uid="uid://8bljb3tg4ahk" path="res://utils/camera/trigCamera.gd" id="6_7ufja"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="7_cj71r"]
-[ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="17_uo6i5"]
+[ext_resource type="PackedScene" uid="uid://b68h0o7hthbhu" path="res://objects/cerberus/fire/fireController.tscn" id="10_jhqhn"]
 [ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="18_qxwgp"]
 
 [sub_resource type="Resource" id="Resource_wy7hf"]
@@ -20,13 +20,15 @@ ease = 2
 b = Vector2(229, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_848a1"]
-size = Vector2(165, 20)
+size = Vector2(594, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqhn"]
+size = Vector2(32, 375)
 
 [node name="Level1" type="Node2D" groups=["level"]]
 script = ExtResource("1_8u5sd")
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
-position = Vector2(24, 16)
 anchor_mode = 0
 script = ExtResource("2_a4tm0")
 
@@ -46,7 +48,6 @@ color = Color(0, 0, 0, 1)
 [node name="zones" type="Node2D" parent="."]
 
 [node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
-position = Vector2(24, 16)
 script = ExtResource("4_5nw6t")
 tween_resource = SubResource("Resource_wy7hf")
 draw_limits = true
@@ -64,17 +65,33 @@ script = ExtResource("7_cj71r")
 camera = NodePath("../c_init")
 key = "tuto_room_init"
 
-[node name="endLevel" parent="zones/r_init" instance=ExtResource("17_uo6i5")]
-redirectLevel = "res://levels/level2/level2.tscn"
+[node name="StaticBody2D" type="StaticBody2D" parent="zones/r_init"]
+position = Vector2(-24, -15)
+collision_layer = 8
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/endLevel"]
-position = Vector2(616.5, -31)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/StaticBody2D"]
+position = Vector2(316, 4)
 shape = SubResource("RectangleShape2D_848a1")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="zones/r_init/StaticBody2D"]
+position = Vector2(316, 351)
+shape = SubResource("RectangleShape2D_848a1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="zones/r_init/StaticBody2D"]
+position = Vector2(6, 177.5)
+shape = SubResource("RectangleShape2D_jhqhn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="zones/r_init/StaticBody2D"]
+position = Vector2(618, 177.5)
+shape = SubResource("RectangleShape2D_jhqhn")
+
 [node name="player" parent="." groups=["playerPro"] instance=ExtResource("18_qxwgp")]
-position = Vector2(364, 263)
+position = Vector2(364, 246)
 speedDash = 500.0
 SPEED = 4000.0
 INERTIA = 5000.0
 LIMIT = 150
 SPEED_LIMIT = 6000.0
+
+[node name="fireController" parent="." instance=ExtResource("10_jhqhn")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chk13mmboa72i"
-path="res://.godot/imported/Fire.png-dc8cf7ff07f12f0ded05a7545c392220.ctex"
+uid="uid://d3lv3e1bu5c48"
+path="res://.godot/imported/Lighting 1.png-66664aae5059d75fba191cf233860aab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/cerberus/fire/sprites/Fire.png"
-dest_files=["res://.godot/imported/Fire.png-dc8cf7ff07f12f0ded05a7545c392220.ctex"]
+source_file="res://objects/cerberus/fire/Lighting 1.png"
+dest_files=["res://.godot/imported/Lighting 1.png-66664aae5059d75fba191cf233860aab.ctex"]
 
 [params]
 

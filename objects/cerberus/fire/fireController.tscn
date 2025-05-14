@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b68h0o7hthbhu"]
+
+[ext_resource type="Script" uid="uid://23j32p8nfrn8" path="res://objects/cerberus/fire/fire_controller.gd" id="1_f6wed"]
+[ext_resource type="PackedScene" uid="uid://c63x1bf80svej" path="res://objects/cerberus/fire/cerberus_fire.tscn" id="2_rke2b"]
+
+[node name="fireController" type="Node2D"]
+script = ExtResource("1_f6wed")
+
+[node name="cancerbero" parent="." instance=ExtResource("2_rke2b")]
+
+[node name="shotTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="shotTimerCancerbero" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true

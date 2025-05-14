@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://c63x1bf80svej"]
+[gd_scene load_steps=16 format=3 uid="uid://c63x1bf80svej"]
 
 [ext_resource type="Script" uid="uid://by5m7u8mpryvg" path="res://objects/cerberus/fire/cerberus_fire.gd" id="1_he64u"]
 [ext_resource type="Texture2D" uid="uid://dbjcohylva2u8" path="res://objects/cerberus/fire/sprites/run.png" id="1_rmqa1"]
 [ext_resource type="Texture2D" uid="uid://b7oj4vbag1dp" path="res://objects/cerberus/fire/sprites/idle.png" id="2_pipyo"]
-[ext_resource type="Texture2D" uid="uid://chk13mmboa72i" path="res://objects/cerberus/fire/sprites/Fire.png" id="4_vdyo6"]
+[ext_resource type="Texture2D" uid="uid://chk13mmboa72i" path="res://objects/cerberus/fire/sprites/effects/Fire.png" id="4_vdyo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pipyo"]
 size = Vector2(45, 45)
@@ -46,47 +46,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [1]
 }
-
-[sub_resource type="Animation" id="Animation_3kae2"]
-resource_name = "attack"
-length = 0.40001
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:vframes")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
@@ -98,6 +57,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_pipyo")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-21, 15)]
 }
 
 [sub_resource type="Animation" id="Animation_pipyo"]
@@ -153,6 +124,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ExtResource("2_pipyo")]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_vdyo6"]
 resource_name = "run"
@@ -207,11 +190,22 @@ tracks/3/keys = {
 "update": 1,
 "values": [ExtResource("1_rmqa1")]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26, 10)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vdyo6"]
 _data = {
 &"RESET": SubResource("Animation_he64u"),
-&"attack": SubResource("Animation_3kae2"),
 &"idle": SubResource("Animation_pipyo"),
 &"run": SubResource("Animation_vdyo6")
 }
@@ -222,7 +216,7 @@ size = Vector2(30, 33)
 [sub_resource type="Gradient" id="Gradient_3kae2"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.509091, 1)
-colors = PackedColorArray(0.964706, 0.270588, 0.156863, 0, 0.964706, 0.270588, 0.156863, 0.270588, 0.964706, 0.270588, 0.156863, 0)
+colors = PackedColorArray(0.964706, 0.270588, 0.156863, 0, 0.964706, 0.270588, 0.156863, 0.188235, 0.964706, 0.270588, 0.156863, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_oee5m"]
 gradient = SubResource("Gradient_3kae2")
@@ -249,12 +243,16 @@ color_ramp = SubResource("GradientTexture1D_oee5m")
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_he64u")
-health = 5
+SPEED = 500.0
+LIMIT = 400
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_pipyo")
 vframes = 4
 frame = 1
+
+[node name="shotPointer" type="Marker2D" parent="sprite"]
+position = Vector2(-21, 15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -265,6 +263,7 @@ shape = SubResource("RectangleShape2D_pipyo")
 libraries = {
 &"": SubResource("AnimationLibrary_vdyo6")
 }
+autoplay = "idle"
 
 [node name="hitMe" type="Area2D" parent="."]
 visible = false
@@ -274,7 +273,6 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_he64u")
 
 [node name="hitOther" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 position = Vector2(0, 8.5)
@@ -283,4 +281,9 @@ shape = SubResource("RectangleShape2D_he64u")
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 20
 texture = ExtResource("4_vdyo6")
+lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_bevhv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.499999, 3.5)
+scale = Vector2(2.75, 2.45)

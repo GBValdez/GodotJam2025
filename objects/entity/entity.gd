@@ -12,6 +12,7 @@ class_name  Entity
 
 var inmortal:bool=false
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var animEffects: AnimationPlayer = $AnimEffects
 var direction:Vector2= Vector2.ZERO
 @onready var sprite = $sprite
 
@@ -27,7 +28,6 @@ func hitDamage(damage: int, point: Vector2,force:float,forceHit:bool=false):
 	if ((health > 0 && not inmortal) or forceHit):	
 		health -= damage
 		velocity = (global_position - point).normalized() * force
-		anim.play("hit")
 	onHitDamage(forceHit)
 	if (health <= 0):
 		death()
@@ -37,6 +37,20 @@ func onHitDamage(forceHit:bool):
 func death():
 	pass
 
+func apply_inertia(delta: float,direction:Vector2) -> void:
+	var velNormalize=velocity.normalized()		
+		
+	if velocity.x != 0 and direction.x==0:
+		var SIGN= sign(velNormalize.x)
+		velocity.x -= INERTIA * velNormalize.x * delta
+		if sign(velocity.x)!= SIGN:
+			velocity.x=0
+
+	if velocity.y !=0 and direction.y==0:
+		var SIGN= sign(velNormalize.y)
+		velocity.y -= INERTIA * velNormalize.y * delta
+		if sign(velocity.y)!= SIGN:
+			velocity.y=0
 #func animScale():
 #	var velocityPorc: Vector2 = Vector2.ZERO
 #	velocityPorc.x = (100 * velocity.x / LIMIT_V.x) / 100

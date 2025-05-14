@@ -1,6 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://c6i26cm4cvd2x"]
+[gd_scene load_steps=39 format=3 uid="uid://c6i26cm4cvd2x"]
 
 [ext_resource type="Script" uid="uid://c2fntvxmbu07g" path="res://objects/player/player.gd" id="1_tln4k"]
+[ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_45rsp"]
 [ext_resource type="Texture2D" uid="uid://da2qr0vej8vt5" path="res://objects/player/sprite/ps jam 32x32  dash espalda-Sheet.png" id="2_45urx"]
 [ext_resource type="Texture2D" uid="uid://drl3rvyxyuq64" path="res://objects/player/sprite/ps jam 32x32 dash de frente-Sheet.png" id="2_c34wb"]
 [ext_resource type="Texture2D" uid="uid://denajkfscju0q" path="res://objects/player/sprite/ps jam 32x32  atacando espada espalda-Sheet.png" id="2_m4kly"]
@@ -13,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://bv5m8t2f1v0gb" path="res://objects/player/sprite/ps jam 32x32 atacando (espada)-Sheet.png" id="3_xkryw"]
 [ext_resource type="Texture2D" uid="uid://cvymp4s75335i" path="res://objects/player/sprite/ps jam 32x32 caminando-Sheet.png" id="4_gnkmh"]
 [ext_resource type="AudioStream" uid="uid://dl8gwlf5sn7ai" path="res://objects/player/sound/Player_steps.mp3" id="6_f8ec1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylcck"]
+shader = ExtResource("2_45rsp")
+shader_parameter/colorFull = Color(0.520269, 1.49807e-06, 3.36915e-07, 1)
+shader_parameter/intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssrue"]
 size = Vector2(20, 11)
@@ -1114,8 +1120,76 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0wgm"]
 size = Vector2(11, 17)
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 6
+[sub_resource type="Animation" id="Animation_dthqj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x5bgp"]
+resource_name = "hit"
+length = 0.10001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_ylcck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.7]
+}
+
+[sub_resource type="Animation" id="Animation_ylcck"]
+resource_name = "normal"
+length = 0.10001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dthqj"]
+_data = {
+&"RESET": SubResource("Animation_dthqj"),
+&"hit": SubResource("Animation_x5bgp"),
+&"normal": SubResource("Animation_ylcck")
+}
+
+[node name="player" type="CharacterBody2D" groups=["entity", "player"]]
+collision_mask = 12
 script = ExtResource("1_tln4k")
 speedDash = 300.0
 health = 3
@@ -1123,30 +1197,30 @@ SPEED = 100.0
 INERTIA = 200.0
 SPEED_LIMIT = 200.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ylcck")
 position = Vector2(-3, -4)
-texture = ExtResource("2_m4kly")
+texture = ExtResource("2_45urx")
 hframes = 6
 frame = 1
 
-[node name="HitOther" type="Area2D" parent="Sprite2D"]
+[node name="HitOther" type="Area2D" parent="sprite"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitOther"]
-position = Vector2(1, -17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sprite/HitOther"]
+position = Vector2(1, 14)
 shape = SubResource("RectangleShape2D_ssrue")
 disabled = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="sprite"]
 z_as_relative = false
 position = Vector2(0, 7)
-emitting = false
 amount = 15
 texture = ExtResource("3_bi5m7")
 lifetime = 0.4
 process_material = SubResource("ParticleProcessMaterial_c34wb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
+root_node = NodePath("../sprite")
 libraries = {
 &"": SubResource("AnimationLibrary_jdn6c")
 }
@@ -1171,4 +1245,18 @@ one_shot = true
 wait_time = 0.05
 one_shot = true
 
+[node name="inmortalidad" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="audioHit" type="AudioStreamPlayer" parent="."]
+
+[node name="audioDead" type="AudioStreamPlayer" parent="."]
+
+[node name="AnimEffects" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dthqj")
+}
+autoplay = "normal"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="inmortalidad" to="." method="endInmortailidad"]

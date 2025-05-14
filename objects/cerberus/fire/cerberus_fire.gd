@@ -1,4 +1,3 @@
-extends enemyBasic
-var player:Player
-func _ready():
-	conectHit()
+extends CancerBerusCommons
+func _ready_help():
+	bulletScene=load("res://objects/cerberus/fire/balls_fire/ball_fire.tscn")
