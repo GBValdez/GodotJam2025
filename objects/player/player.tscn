@@ -1125,20 +1125,21 @@ SPEED_LIMIT = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3, -4)
-texture = ExtResource("2_45urx")
+texture = ExtResource("2_m4kly")
 hframes = 6
 frame = 1
 
 [node name="HitOther" type="Area2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitOther"]
-position = Vector2(1, 14)
+position = Vector2(1, -17)
 shape = SubResource("RectangleShape2D_ssrue")
 disabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D"]
 z_as_relative = false
 position = Vector2(0, 7)
+emitting = false
 amount = 15
 texture = ExtResource("3_bi5m7")
 lifetime = 0.4
