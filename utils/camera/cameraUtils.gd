@@ -5,6 +5,7 @@ var isShake: bool = false
 var forceShake: float = 0
 var dirShake:Vector2=Vector2.ZERO
 var cameraOrigin:camera2dInfo
+var offsetOrigin:Vector2= Vector2.ZERO
 @onready var glitchLayout: ColorRect = $CanvasLayer/glitchLayout
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready():
@@ -14,13 +15,16 @@ func _process(delta):
 	if (isShake && dirShake==Vector2.ZERO):
 		var x = randf_range( - forceShake, forceShake)
 		var y = randf_range( - forceShake, forceShake)
-		offset = Vector2(x, y)
+		cameraOrigin=get_active_camera()
+		cameraOrigin.camera.position= offsetOrigin + Vector2(x,y)
 	
 			
 
 func makeShake(force: float, time: float):
 	forceShake = force
 	isShake = true;
+	cameraOrigin=get_active_camera()
+	offsetOrigin= cameraOrigin.camera.position
 	startAlarm(time)
 	
 func makeShakeCurrent(force: float):
@@ -43,7 +47,7 @@ func makeShakeDir(force: float, time: float,dir:Vector2):
 	isShake = true;
 	dirShake=dir
 	cameraOrigin=get_active_camera()
-	offset=Vector2.ZERO
+	offsetOrigin= cameraOrigin.camera.position
 			
 	var TWEN = create_tween()
 	TWEN.set_trans(Tween.TRANS_CUBIC)
@@ -58,7 +62,7 @@ func makeShakeDir(force: float, time: float,dir:Vector2):
 	var TWEENROFFSET = create_tween()
 	TWEENROFFSET.set_trans(Tween.TRANS_LINEAR)
 	TWEENROFFSET.set_ease(Tween.EASE_OUT )
-	TWEENROFFSET.tween_property(self,"offset",Vector2.ZERO,time*10).set_delay(time*10)
+	TWEENROFFSET.tween_property(self,"offset",offsetOrigin,time*10).set_delay(time*10)
 	startAlarm(time*20)
 
 func interPoolShake(time:int):
@@ -80,7 +84,7 @@ func interPoolShake(time:int):
 		offsetFinal.y= (1/cameraOrigin.camera.zoom.y-1)*-648
 		offsetFinal.y-=offsetCalcOrg.y
 	offsetFinal+=posVar
-	offset=offsetFinal
+	cameraOrigin.camera.position= offsetOrigin + offsetFinal
 
 func startAlarm(time:float):
 	var timer = get_tree().create_timer(time)
@@ -93,6 +97,5 @@ func get_active_camera()-> camera2dInfo:
 		if camera.camera.priority>max:
 			cameraReturn=camera
 			max=camera.camera.priority
-			print("CAMARA")
 			
 	return cameraReturn

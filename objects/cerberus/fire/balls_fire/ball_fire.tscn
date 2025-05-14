@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7pfv1m33bgo8"]
+[gd_scene load_steps=11 format=3 uid="uid://b7pfv1m33bgo8"]
 
-[ext_resource type="Texture2D" uid="uid://chk13mmboa72i" path="res://objects/cerberus/fire/sprites/Fire.png" id="1_n1mll"]
+[ext_resource type="Script" uid="uid://cqxo4py1nlym0" path="res://objects/cerberus/commons/proyectileCommons.gd" id="1_hnb0h"]
+[ext_resource type="Texture2D" uid="uid://b7vdr6whqyo3m" path="res://objects/cerberus/fire/sprites/effects/fireBall/Fire ball(3).png" id="2_hnb0h"]
+[ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="3_hnb0h"]
 
 [sub_resource type="Gradient" id="Gradient_n1mll"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.509091, 1)
-colors = PackedColorArray(0.964706, 0.270588, 0.156863, 0, 0.964706, 0.270588, 0.156863, 0.270588, 0.964706, 0.270588, 0.156863, 0)
+colors = PackedColorArray(1, 1, 1, 0, 0.995914, 0.685623, 0.624658, 0.662745, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_oee5m"]
 gradient = SubResource("Gradient_n1mll")
@@ -20,7 +22,7 @@ curve = SubResource("Curve_n1mll")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1mll"]
 particle_flag_disable_z = true
 emission_shape = 2
-emission_sphere_radius = 10.25
+emission_sphere_radius = 7.17
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = -1.16
 tangential_accel_max = 27.58
@@ -28,9 +30,37 @@ scale_min = 0.7
 scale_curve = SubResource("CurveTexture_oee5m")
 color_ramp = SubResource("GradientTexture1D_oee5m")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oee5m"]
+radius = 8.06226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnb0h"]
+radius = 8.06226
+
 [node name="BallFire" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_hnb0h")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 20
-texture = ExtResource("1_n1mll")
+amount = 7
+texture = ExtResource("2_hnb0h")
+lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_n1mll")
+
+[node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("3_hnb0h")
+force = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+shape = SubResource("CircleShape2D_oee5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_hnb0h")
+disabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.8)

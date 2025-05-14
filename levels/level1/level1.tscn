@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b37k5c6s7iwgw"]
+[gd_scene load_steps=14 format=3 uid="uid://b37k5c6s7iwgw"]
 
 [ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_8u5sd"]
 [ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_a4tm0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://qbpqf3uf1xsg" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_vhlqk"]
 [ext_resource type="Script" uid="uid://8bljb3tg4ahk" path="res://utils/camera/trigCamera.gd" id="6_7ufja"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="7_cj71r"]
+[ext_resource type="PackedScene" uid="uid://c63x1bf80svej" path="res://objects/cerberus/fire/cerberus_fire.tscn" id="11_ddtso"]
 [ext_resource type="PackedScene" uid="uid://bs0252qb8ruos" path="res://utils/endLevel/end_level.tscn" id="17_uo6i5"]
 [ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="18_qxwgp"]
 
@@ -78,3 +79,6 @@ SPEED = 4000.0
 INERTIA = 5000.0
 LIMIT = 150
 SPEED_LIMIT = 6000.0
+
+[node name="cerberus_fire" parent="." instance=ExtResource("11_ddtso")]
+position = Vector2(84, 63)

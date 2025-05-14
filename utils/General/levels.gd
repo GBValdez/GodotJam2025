@@ -104,11 +104,6 @@ func normalCamera():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var indexCameraTest:int=0
 func _physics_process(delta):
-	if(Input.is_action_just_pressed("key_test")):
-		var cameraCurrent= listPhamToCamera[indexCameraTest]
-		General.setCamera(cameraCurrent.camera)
-		indexCameraTest+=1
-		if(indexCameraTest>=listPhamToCamera.size()):
-			indexCameraTest=0	
+
 	#labelFPS.text=str(Engine.get_frames_per_second())+ " " + str(general.dataGame["score"])
 	pass

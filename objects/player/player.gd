@@ -6,10 +6,13 @@ class_name  Player
 var previousVelocity:Vector2=Vector2.ZERO
 var buffer : bufferPlayer= bufferPlayer.new()
 var currentDash:bool= false
+@onready var inmorTimer:Timer= $inmortalidad
 
 @export var blockMove:bool=false;
 func _ready() -> void:
-	$AnimationPlayer.play("idle")
+	anim.play("idle")
+	#General.shakeCamera(5, 10)
+
 	
 
 func _physics_process(delta: float) -> void:
@@ -42,38 +45,25 @@ func animation():
 		if currentDash:
 			var currentColor:Color=Color.WHITE
 			currentColor.a=0.1
-			General.spriteShadow($Sprite2D,0.2,currentColor)
-			General.shakeCameraDir(0.5,0.1,velocity.normalized())
+			General.spriteShadow(sprite,0.2,currentColor)
+			#General.shakeCameraDir(0.5,0.1,velocity.normalized())
 		else:	
 			if abs(velocity.x)>LIMIT*0.1:
-				$AnimationPlayer.play("walk")
+				anim.play("walk")
 			else:
 				if velocity.y<0:
-					$AnimationPlayer.play("walk_up")
+					anim.play("walk_up")
 				else:
-					$AnimationPlayer.play("walk_down")
+					anim.play("walk_down")
 		General.applyPitchScale($audioStep,0.8,1)
 	else:
 		if not currentDash:
-			$AnimationPlayer.play("idle")
+			anim.play("idle")
 
 	if velocity.x!=0:
-		$Sprite2D.scale.x= sign(velocity.x) * abs($Sprite2D.scale.x) 
+		sprite.scale.x= sign(velocity.x) * abs(sprite.scale.x) 
 
-func apply_inertia(delta: float,direction:Vector2) -> void:
-	var velNormalize=velocity.normalized()		
-		
-	if velocity.x != 0 and direction.x==0:
-		var SIGN= sign(velNormalize.x)
-		velocity.x -= INERTIA * velNormalize.x * delta
-		if sign(velocity.x)!= SIGN:
-			velocity.x=0
 
-	if velocity.y !=0 and direction.y==0:
-		var SIGN= sign(velNormalize.y)
-		velocity.y -= INERTIA * velNormalize.y * delta
-		if sign(velocity.y)!= SIGN:
-			velocity.y=0
 
 func dash():
 	if (Input.is_action_just_pressed("ui_dash")):
@@ -85,33 +75,33 @@ func dash():
 			$dashTimer.start()
 			currentDash=true
 			if abs(velocity.x)>LIMIT*0.1:
-					$AnimationPlayer.play("dash_lateral")		
+					anim.play("dash_lateral")		
 			else:
 				if velocity.y<0:
-					$AnimationPlayer.play("dash_up")
+					anim.play("dash_up")
 				else:
-					$AnimationPlayer.play("dash_down")
+					anim.play("dash_down")
 			
 func attack():
 	if (Input.is_action_just_pressed("ui_action")):
 		buffer.addKey(("attack"))
-	if (not $AnimationPlayer.current_animation=="attack"):
+	if (not anim.current_animation=="attack"):
 		if (buffer.validFirst("attack")):
 			buffer.eraseKey("attack")
 			if (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
-				$AnimationPlayer.play("attack")
+				anim.play("attack")
 			elif Input.is_action_pressed("ui_up"):
-				$AnimationPlayer.play("atack_up")
+				anim.play("atack_up")
 			elif Input.is_action_pressed("ui_down"):
-					$AnimationPlayer.play("attack_down")
+					anim.play("attack_down")
 			else:
-				$AnimationPlayer.play("attack")
+				anim.play("attack")
 			blockMove=true
 			currentDash=false
 	
 func reset():
 	enableControl=false
-	$AnimationPlayer.play("reset")
+	anim.play("reset")
 	direction=Vector2.ZERO
 
 func start():
@@ -140,8 +130,48 @@ func attempt_correction(amount: int):
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print("haaa")
 	match  anim_name:
 		"dash_up","dash_down","dash_lateral":
 			currentDash=false
-			print("hola")
+func onHitDamage(forceHit:bool):
+	if((not inmortal or forceHit) and  enableControl):
+		inmorTimer.start()
+		inmortal=true
+		if(health>0):
+			$audioHit.pitch_scale-=0.5
+			$audioHit.play()
+		else:
+			$audioDead.play()
+		General.shakeCamera(2, 1)
+		animEffects.play("hit")
+	
+		#General.showEffectGlitch(true)
+		var timer = get_tree().create_timer(0.05)
+		var TWEN = get_tree().create_tween()
+		TWEN.set_trans(Tween.TRANS_CUBIC)
+		TWEN.set_ease(Tween.EASE_IN_OUT)
+		TWEN.tween_property(Engine, "time_scale", 0.1, 0.05)
+		TWEN.tween_property(self,"modulate", Color(1, 1, 1,0.5),0.2)
+		timer.connect("timeout", _finishGlish);
+	
+	
+
+func _finishGlish():
+	var TWEN = get_tree().create_tween()
+	TWEN.set_trans(Tween.TRANS_CUBIC)
+	TWEN.set_ease(Tween.EASE_IN_OUT)
+	TWEN.tween_property(Engine, "time_scale", 1, 0.05)
+	animEffects.play("normal")
+	if(health==0):
+		get_tree().reload_current_scene()
+
+func death():
+	pass
+
+
+func endInmortailidad() -> void:
+	inmortal=false
+	var TWEN = get_tree().create_tween()
+	TWEN.set_trans(Tween.TRANS_CUBIC)
+	TWEN.set_ease(Tween.EASE_IN_OUT)
+	TWEN.tween_property(self,"modulate", Color(1, 1, 1,1),0.2)

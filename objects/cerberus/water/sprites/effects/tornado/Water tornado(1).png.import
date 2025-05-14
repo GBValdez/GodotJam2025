@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bec3ao7qd51n0"
-path="res://.godot/imported/water.png-25838ba9a876b0800a54a97952ab1ac8.ctex"
+uid="uid://bvon463gvnsg3"
+path="res://.godot/imported/Water tornado(1).png-b0035953bcca790bbca8ac7f2fb0498f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/cerberus/water/sprites/water.png"
-dest_files=["res://.godot/imported/water.png-25838ba9a876b0800a54a97952ab1ac8.ctex"]
+source_file="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(1).png"
+dest_files=["res://.godot/imported/Water tornado(1).png-b0035953bcca790bbca8ac7f2fb0498f.ctex"]
 
 [params]
 
