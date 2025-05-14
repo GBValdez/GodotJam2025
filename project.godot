@@ -23,7 +23,11 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 
 [display]
 
+window/size/viewport_width=576
+window/size/viewport_height=324
+window/size/mode=2
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -52,7 +56,6 @@ ui_change={
 2d_physics/layer_1="player"
 2d_physics/layer_2="entity"
 2d_physics/layer_3="wall"
-2d_physics/layer_4="interaction"
 
 [rendering]
 

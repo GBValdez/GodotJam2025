@@ -4,7 +4,6 @@ class_name  Player
 @export var enableControl:bool=true
 @export var speedDash: float = 10000;
 var previousVelocity:Vector2=Vector2.ZERO
-var direction:Vector2= Vector2.ZERO
 var buffer : bufferPlayer= bufferPlayer.new()
 var currentDash:bool= false
 

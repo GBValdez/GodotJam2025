@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7pfv1m33bgo8"]
+
+[ext_resource type="Texture2D" uid="uid://chk13mmboa72i" path="res://objects/cerberus/fire/sprites/Fire.png" id="1_n1mll"]
+
+[sub_resource type="Gradient" id="Gradient_n1mll"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.509091, 1)
+colors = PackedColorArray(0.964706, 0.270588, 0.156863, 0, 0.964706, 0.270588, 0.156863, 0.270588, 0.964706, 0.270588, 0.156863, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oee5m"]
+gradient = SubResource("Gradient_n1mll")
+
+[sub_resource type="Curve" id="Curve_n1mll"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0.932584), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oee5m"]
+curve = SubResource("Curve_n1mll")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1mll"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 10.25
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -1.16
+tangential_accel_max = 27.58
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_oee5m")
+color_ramp = SubResource("GradientTexture1D_oee5m")
+
+[node name="BallFire" type="CharacterBody2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+texture = ExtResource("1_n1mll")
+process_material = SubResource("ParticleProcessMaterial_n1mll")
