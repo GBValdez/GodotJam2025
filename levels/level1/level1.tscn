@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://qbpqf3uf1xsg" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_vhlqk"]
 [ext_resource type="Script" uid="uid://8bljb3tg4ahk" path="res://utils/camera/trigCamera.gd" id="6_7ufja"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="7_cj71r"]
-[ext_resource type="PackedScene" uid="uid://dh1kec7kdvmcb" path="res://objects/cerberus/water/waterController.tscn" id="8_gw1fo"]
 [ext_resource type="Texture2D" uid="uid://clhi5pnevkotk" path="res://utils/tiles/tileset forest.png" id="9_jhqhn"]
+[ext_resource type="PackedScene" uid="uid://cb2mjyva4xhwx" path="res://objects/cerberus/electric/cerberus_electric_controller.tscn" id="10_ddtso"]
 [ext_resource type="PackedScene" uid="uid://c6i26cm4cvd2x" path="res://objects/player/player.tscn" id="18_qxwgp"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f7y8c"]
@@ -146,7 +146,7 @@ shape = SubResource("RectangleShape2D_jhqhn")
 position = Vector2(618, 177.5)
 shape = SubResource("RectangleShape2D_jhqhn")
 
-[node name="waterController" parent="zones/r_init" instance=ExtResource("8_gw1fo")]
+[node name="cerberus_electric_controller" parent="zones/r_init" instance=ExtResource("10_ddtso")]
 
 [node name="player" parent="." groups=["playerPro"] instance=ExtResource("18_qxwgp")]
 position = Vector2(156, 254)
