@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb2mjyva4xhwx"]
+
+[ext_resource type="Script" uid="uid://bk75sqo8s33ov" path="res://objects/cerberus/electric/cerberus_electric_controller.gd" id="1_2n24p"]
+[ext_resource type="PackedScene" uid="uid://t0s8qih6s4ri" path="res://objects/cerberus/electric/cerberus_electric.tscn" id="1_25a5f"]
+
+[node name="cerberus_electric_controller" type="Node2D"]
+script = ExtResource("1_2n24p")
+
+[node name="cancerbero" parent="." instance=ExtResource("1_25a5f")]
+
+[node name="shotTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="shotTimerCancerbero" type="Timer" parent="."]

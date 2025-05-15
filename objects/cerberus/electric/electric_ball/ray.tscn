@@ -1,0 +1,157 @@
+[gd_scene load_steps=15 format=3 uid="uid://b51n6l0mnfjcl"]
+
+[ext_resource type="Script" uid="uid://sd52ftw77ntj" path="res://objects/cerberus/electric/electric_ball/ray.gd" id="1_af0l2"]
+[ext_resource type="Texture2D" uid="uid://b2c4d3mlgsrw" path="res://objects/cerberus/electric/sprites/effects/sparks/Lighting 2.png" id="2_af0l2"]
+[ext_resource type="Script" uid="uid://drnk3bnb7ymks" path="res://objects/cerberus/electric/electric_ball/hit_other.gd" id="3_wlni2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bqon"]
+atlas = ExtResource("2_af0l2")
+region = Rect2(0, 0, 32, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlni2"]
+atlas = ExtResource("2_af0l2")
+region = Rect2(0, 57, 32, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fubhp"]
+atlas = ExtResource("2_af0l2")
+region = Rect2(0, 114, 32, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnkyx"]
+atlas = ExtResource("2_af0l2")
+region = Rect2(0, 171, 32, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v8hn"]
+atlas = ExtResource("2_af0l2")
+region = Rect2(0, 228, 32, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nmgdo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bqon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlni2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fubhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnkyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v8hn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtdua"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q77j2"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_r3yye"]
+resource_name = "ray"
+length = 0.17
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitOther/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.17),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_dhksc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("hitOther/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bo3xq"]
+_data = {
+&"RESET": SubResource("Animation_dhksc"),
+&"ray": SubResource("Animation_r3yye")
+}
+
+[node name="ray" type="CharacterBody2D"]
+script = ExtResource("1_af0l2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nmgdo")
+frame = 1
+
+[node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("3_wlni2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(0, 21)
+shape = SubResource("CircleShape2D_gtdua")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_q77j2")
+disabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(1, 0.5)
+scale = Vector2(1.6, 1.85)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bo3xq")
+}
