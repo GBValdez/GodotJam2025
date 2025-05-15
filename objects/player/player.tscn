@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c6i26cm4cvd2x"]
+[gd_scene load_steps=45 format=3 uid="uid://c6i26cm4cvd2x"]
 
 [ext_resource type="Script" uid="uid://c2fntvxmbu07g" path="res://objects/player/player.gd" id="1_tln4k"]
 [ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_45rsp"]
@@ -13,7 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://dyk3edwnocpxc" path="res://objects/player/sprite/ps jam 32x32 descansando-Sheet.png" id="3_jnjyq"]
 [ext_resource type="Texture2D" uid="uid://bv5m8t2f1v0gb" path="res://objects/player/sprite/ps jam 32x32 atacando (espada)-Sheet.png" id="3_xkryw"]
 [ext_resource type="Texture2D" uid="uid://cvymp4s75335i" path="res://objects/player/sprite/ps jam 32x32 caminando-Sheet.png" id="4_gnkmh"]
-[ext_resource type="AudioStream" uid="uid://dl8gwlf5sn7ai" path="res://objects/player/sound/Player_steps.mp3" id="6_f8ec1"]
+[ext_resource type="AudioStream" uid="uid://c2fc3h0hmh0x6" path="res://objects/player/sound/step/Player_Foosteps_Grass_1.wav" id="14_x5bgp"]
+[ext_resource type="AudioStream" uid="uid://dlrb408m8hqfu" path="res://objects/player/sound/step/Player_Foosteps_Grass_2.wav" id="15_dthqj"]
+[ext_resource type="AudioStream" uid="uid://c5pki7nhh3wue" path="res://objects/player/sound/step/Player_Foosteps_Grass_3.wav" id="16_xlkbi"]
+[ext_resource type="AudioStream" uid="uid://b6ywwuiqtyopj" path="res://objects/player/sound/Player_Attack_Sword.wav" id="17_dthqj"]
+[ext_resource type="AudioStream" uid="uid://ce61wpril2b5y" path="res://objects/player/sound/hit/Player_RecibeDaño.wav" id="17_l55sg"]
+[ext_resource type="AudioStream" uid="uid://v3xovamcenpx" path="res://objects/player/sound/hit/Player_RecibeDaño_2.wav" id="18_28utn"]
+[ext_resource type="AudioStream" uid="uid://xo7xap8fsri4" path="res://objects/player/sound/Player_Dash.wav" id="20_28utn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ylcck"]
 shader = ExtResource("2_45rsp")
@@ -1230,10 +1236,6 @@ autoplay = "idle"
 position = Vector2(-2.5, -5.5)
 shape = SubResource("RectangleShape2D_i0wgm")
 
-[node name="audioStep" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_f8ec1")
-volume_db = -15.0
-
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
 
@@ -1248,15 +1250,39 @@ one_shot = true
 [node name="inmortalidad" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="audioHit" type="AudioStreamPlayer" parent="."]
-
-[node name="audioDead" type="AudioStreamPlayer" parent="."]
-
 [node name="AnimEffects" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_dthqj")
 }
 autoplay = "normal"
+
+[node name="audio" type="Node" parent="."]
+
+[node name="audioStep" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("14_x5bgp")
+volume_db = -10.0
+
+[node name="audioStep2" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("15_dthqj")
+volume_db = -10.0
+
+[node name="audioStep3" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("16_xlkbi")
+volume_db = -10.0
+
+[node name="audioHit" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("17_l55sg")
+
+[node name="audioHit2" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("18_28utn")
+
+[node name="audioDead" type="AudioStreamPlayer" parent="audio"]
+
+[node name="audioAttack" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("17_dthqj")
+
+[node name="audioDash" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("20_28utn")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="inmortalidad" to="." method="endInmortailidad"]

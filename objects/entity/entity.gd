@@ -51,6 +51,13 @@ func apply_inertia(delta: float,direction:Vector2) -> void:
 		velocity.y -= INERTIA * velNormalize.y * delta
 		if sign(velocity.y)!= SIGN:
 			velocity.y=0
+
+func playSound(name:String, min:float=1, max:float=1):
+	var audio= $audio.get_node(name)
+	General.applyPitchScale(audio,min,max)
+
+func playSoundRandom(list:Array[String], min:float=1, max:float=1):
+	playSound(list.pick_random(),min,max)
 #func animScale():
 #	var velocityPorc: Vector2 = Vector2.ZERO
 #	velocityPorc.x = (100 * velocity.x / LIMIT_V.x) / 100

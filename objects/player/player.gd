@@ -55,7 +55,7 @@ func animation():
 					anim.play("walk_up")
 				else:
 					anim.play("walk_down")
-		General.applyPitchScale($audioStep,0.8,1)
+		playSoundRandom(["audioStep","audioStep2","audioStep3"])
 	else:
 		if not currentDash:
 			anim.play("idle")
@@ -74,6 +74,7 @@ func dash():
 			velocity+= speedDash * direction
 			$dashTimer.start()
 			currentDash=true
+			playSound("audioDash",1,1.1)
 			if abs(velocity.x)>LIMIT*0.1:
 					anim.play("dash_lateral")		
 			else:
@@ -98,6 +99,7 @@ func attack():
 				anim.play("attack")
 			blockMove=true
 			currentDash=false
+			playSound("audioAttack")
 	
 func reset():
 	enableControl=false
@@ -138,8 +140,8 @@ func onHitDamage(forceHit:bool):
 		inmorTimer.start()
 		inmortal=true
 		if(health>0):
-			$audioHit.pitch_scale-=0.5
-			$audioHit.play()
+			playSoundRandom(["audioHit","audioHit2"],1,1.1)
+
 		else:
 			$audioDead.play()
 		General.shakeCamera(2, 1)

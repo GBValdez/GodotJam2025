@@ -11,8 +11,8 @@
 [ext_resource type="Script" uid="uid://h8o3lm2jyyrl" path="res://levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="8_qq8ly"]
 [ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="9_5i22e"]
-[ext_resource type="AudioStream" uid="uid://cwtqdko0t2ob1" path="res://utils/effect/menu/Interfaz_Hover_1.wav" id="9_u7paq"]
-[ext_resource type="AudioStream" uid="uid://bs538t2y2yt1" path="res://utils/effect/menu/Interfaz_Click_Hit.wav" id="11_u20v0"]
+[ext_resource type="AudioStream" uid="uid://cyt3qvqcchi7y" path="res://utils/effect/menu/Boton_Select.wav" id="12_1ymek"]
+[ext_resource type="AudioStream" uid="uid://b1squri1wehd2" path="res://utils/effect/menu/Boton_Press.wav" id="13_1xw1r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csbyc"]
 shader = ExtResource("7_ndfuf")
@@ -155,11 +155,11 @@ volume_db = -10.0
 autoplay = true
 
 [node name="moveMenuAudio" type="AudioStreamPlayer" parent="." groups=["soundMenu"]]
-stream = ExtResource("9_u7paq")
+stream = ExtResource("12_1ymek")
 volume_db = -10.0
 
 [node name="audioSelectItem" type="AudioStreamPlayer" parent="." groups=["soundMenuClick"]]
-stream = ExtResource("11_u20v0")
+stream = ExtResource("13_1xw1r")
 volume_db = -10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

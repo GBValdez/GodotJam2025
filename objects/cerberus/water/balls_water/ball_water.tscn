@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://smio2q5au223"]
+[gd_scene load_steps=17 format=3 uid="uid://smio2q5au223"]
 
 [ext_resource type="Script" uid="uid://nylq8lwxocc3" path="res://objects/cerberus/water/balls_water/ball_water.gd" id="1_5lc2m"]
 [ext_resource type="Texture2D" uid="uid://8s0hcxy1dqrm" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(2).png" id="2_w44aj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bvon463gvnsg3" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(1).png" id="7_bprkh"]
 [ext_resource type="Texture2D" uid="uid://bgxhqmhbqp6es" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(3).png" id="8_orfdu"]
 [ext_resource type="Texture2D" uid="uid://bniyhostgfv1f" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado.png" id="9_abroc"]
+[ext_resource type="AudioStream" uid="uid://fn7dq8urgd53" path="res://objects/cerberus/water/sounds/Cerbero_Agua.wav" id="10_x0mab"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_njnar"]
 radius = 8.0
@@ -106,3 +107,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_5lc2m")
 }
 autoplay = "burble"
+
+[node name="audio" type="Node" parent="."]
+
+[node name="audioWater" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("10_x0mab")

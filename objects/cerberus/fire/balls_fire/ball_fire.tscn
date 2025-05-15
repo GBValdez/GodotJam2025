@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7pfv1m33bgo8"]
+[gd_scene load_steps=12 format=3 uid="uid://b7pfv1m33bgo8"]
 
 [ext_resource type="Script" uid="uid://cqxo4py1nlym0" path="res://objects/cerberus/commons/proyectileCommons.gd" id="1_hnb0h"]
 [ext_resource type="Texture2D" uid="uid://b7vdr6whqyo3m" path="res://objects/cerberus/fire/sprites/effects/fireBall/Fire ball(3).png" id="2_hnb0h"]
 [ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="3_hnb0h"]
+[ext_resource type="AudioStream" uid="uid://c2r1yavtsjles" path="res://objects/cerberus/fire/sounds/Cerbero_Fuego_loop.wav" id="4_x0jlh"]
 
 [sub_resource type="Gradient" id="Gradient_n1mll"]
 interpolation_mode = 2
@@ -67,3 +68,8 @@ disabled = true
 visible = false
 position = Vector2(0, -1)
 scale = Vector2(1.5, 1.8)
+
+[node name="audio" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("4_x0jlh")
