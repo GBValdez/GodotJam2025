@@ -1,0 +1,243 @@
+[gd_scene load_steps=22 format=3 uid="uid://djbk3p3h1geic"]
+
+[ext_resource type="Texture2D" uid="uid://msflblejg1ct" path="res://objects/cerberus/electric/sprites/idle.png" id="1_gcgj4"]
+[ext_resource type="Script" path="res://objects/cerberus/electric/cerberus_electric.gd" id="1_tali4"]
+[ext_resource type="Texture2D" uid="uid://dqb48ks4sgiom" path="res://objects/cerberus/electric/sprites/run.png" id="2_wyjlh"]
+[ext_resource type="Material" uid="uid://yjwn6wt5g3jw" path="res://objects/cerberus/electric/cerberus_electric.tres" id="3_8emhv"]
+[ext_resource type="Texture2D" uid="uid://c3smhns1bgsty" path="res://objects/cerberus/electric/sprites/effects/sparks/Lightning effect .png" id="4_tali4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8emhv"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyjlh"]
+atlas = ExtResource("1_gcgj4")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iphx8"]
+atlas = ExtResource("1_gcgj4")
+region = Rect2(0, 69, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tali4"]
+atlas = ExtResource("1_gcgj4")
+region = Rect2(0, 138, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8emhv"]
+atlas = ExtResource("1_gcgj4")
+region = Rect2(0, 207, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buvug"]
+atlas = ExtResource("2_wyjlh")
+region = Rect2(0, 0, 64, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3b1q"]
+atlas = ExtResource("2_wyjlh")
+region = Rect2(0, 67, 64, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8igyw"]
+atlas = ExtResource("2_wyjlh")
+region = Rect2(0, 134, 64, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buvug"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyjlh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iphx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tali4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8emhv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buvug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3b1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8igyw")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67nyn"]
+size = Vector2(17, 23)
+
+[sub_resource type="Animation" id="Animation_o0dsh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_5kbai"]
+resource_name = "idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_buvug")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_tali4"]
+resource_name = "run"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wnar7"]
+_data = {
+&"RESET": SubResource("Animation_o0dsh"),
+&"idle": SubResource("Animation_5kbai"),
+&"run": SubResource("Animation_tali4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tali4"]
+size = Vector2(28.375, 30.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8emhv"]
+size = Vector2(38, 38)
+
+[node name="cerberus_electric" type="CharacterBody2D"]
+collision_mask = 9
+script = ExtResource("1_tali4")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_8emhv")
+amount = 4
+texture = ExtResource("4_tali4")
+lifetime = 0.7
+process_material = ExtResource("3_8emhv")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_buvug")
+animation = &"idle"
+frame = 1
+
+[node name="shotPointer" type="Marker2D" parent="sprite"]
+position = Vector2(50, 3)
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_8emhv")
+amount = 2
+texture = ExtResource("4_tali4")
+lifetime = 0.7
+process_material = ExtResource("3_8emhv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 6.5)
+shape = SubResource("RectangleShape2D_67nyn")
+debug_color = Color(0.963376, 0.0525709, 0.466859, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wnar7")
+}
+
+[node name="hitMe" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
+position = Vector2(-1.8125, 5)
+shape = SubResource("RectangleShape2D_tali4")
+
+[node name="hitOther" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(-1, 6)
+shape = SubResource("RectangleShape2D_8emhv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, 3.5)
+scale = Vector2(2.45, 2.45)

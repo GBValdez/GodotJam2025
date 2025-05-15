@@ -142,8 +142,8 @@ func onHitDamage(forceHit:bool):
 		if(health>0):
 			playSoundRandom(["audioHit","audioHit2"],1,1.1)
 
-		else:
-			$audioDead.play()
+		#else:
+			#$audioDead.play()
 		General.shakeCamera(2, 1)
 		animEffects.play("hit")
 	
