@@ -1,0 +1,291 @@
+[gd_scene load_steps=16 format=3 uid="uid://bho03prxroykj"]
+
+[ext_resource type="Script" uid="uid://b4qkr7w3m8y8c" path="res://objects/cerberus/water/cerberus_water.gd" id="1_e2i8p"]
+[ext_resource type="Texture2D" uid="uid://dkf73h18jv7p4" path="res://objects/cerberus/water/sprites/idle.png" id="3_e2i8p"]
+[ext_resource type="Texture2D" uid="uid://gr70i1xs73wd" path="res://objects/cerberus/water/sprites/run.png" id="4_y3b4r"]
+[ext_resource type="Texture2D" uid="uid://bec3ao7qd51n0" path="res://objects/cerberus/water/sprites/effects/water.png" id="5_e2i8p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pipyo"]
+size = Vector2(45, 45)
+
+[sub_resource type="Animation" id="Animation_he64u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_e2i8p")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-21, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_pipyo"]
+resource_name = "idle"
+length = 0.40001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_e2i8p")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vdyo6"]
+resource_name = "run"
+length = 0.30001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_y3b4r")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite/shotPointer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-26, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vdyo6"]
+_data = {
+&"RESET": SubResource("Animation_he64u"),
+&"idle": SubResource("Animation_pipyo"),
+&"run": SubResource("Animation_vdyo6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_he64u"]
+size = Vector2(26, 26)
+
+[sub_resource type="Gradient" id="Gradient_3kae2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.509091, 1)
+colors = PackedColorArray(0.964706, 0.270588, 0.156863, 0, 0.497963, 0.471036, 1, 0.188235, 0.964706, 0.270588, 0.156863, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oee5m"]
+gradient = SubResource("Gradient_3kae2")
+
+[sub_resource type="Curve" id="Curve_fho1k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0.932584), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oee5m"]
+curve = SubResource("Curve_fho1k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bevhv"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 19.51
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -1.16
+tangential_accel_max = 27.58
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_oee5m")
+color_ramp = SubResource("GradientTexture1D_oee5m")
+
+[node name="cerberus_water" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_e2i8p")
+INERTIA = 700.0
+LIMIT = 200
+SPEED_LIMIT = 500.0
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_e2i8p")
+vframes = 4
+frame = 1
+
+[node name="shotPointer" type="Marker2D" parent="sprite"]
+position = Vector2(-21, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 6.5)
+shape = SubResource("RectangleShape2D_pipyo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vdyo6")
+}
+autoplay = "idle"
+
+[node name="hitMe" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_he64u")
+
+[node name="hitOther" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(-2, 7)
+shape = SubResource("RectangleShape2D_he64u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+texture = ExtResource("5_e2i8p")
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_bevhv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(-0.499999, 3.5)
+scale = Vector2(2.75, 2.45)

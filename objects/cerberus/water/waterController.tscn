@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh1kec7kdvmcb"]
+
+[ext_resource type="Script" uid="uid://v2rn548tfavy" path="res://objects/cerberus/water/water_controller.gd" id="1_05cp3"]
+[ext_resource type="PackedScene" uid="uid://bho03prxroykj" path="res://objects/cerberus/water/cerberus_water.tscn" id="2_j7irq"]
+
+[node name="fireController" type="Node2D"]
+script = ExtResource("1_05cp3")
+
+[node name="shotTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="shotTimerCancerbero" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="cancerbero" parent="." instance=ExtResource("2_j7irq")]
+position = Vector2(280, 48)
+
+[node name="maker_right" type="Marker2D" parent="."]
+position = Vector2(544, 160)
+
+[node name="maker_left" type="Marker2D" parent="."]
+position = Vector2(40, 160)
+
+[node name="timerHelp" type="Timer" parent="."]
+one_shot = true
+
+[node name="timerEndAttack" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
+[connection signal="timeout" from="timerEndAttack" to="." method="_on_timer_end_attack_timeout"]
