@@ -27,7 +27,7 @@ position = Vector2(40, 160)
 one_shot = true
 
 [node name="timerEndAttack" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 7.0
 one_shot = true
 
 [connection signal="timeout" from="timerEndAttack" to="." method="_on_timer_end_attack_timeout"]

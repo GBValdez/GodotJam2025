@@ -57,7 +57,6 @@ _data = {
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_5lc2m")
-timeLive = 10.0
 LIMIT = 150
 
 [node name="hitOther" type="Area2D" parent="."]
