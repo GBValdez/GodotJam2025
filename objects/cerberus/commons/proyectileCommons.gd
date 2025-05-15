@@ -3,17 +3,14 @@ class_name  Proyectile
 @onready var detectOutside:VisibleOnScreenNotifier2D= $VisibleOnScreenNotifier2D
 @onready var particles:GPUParticles2D=$GPUParticles2D
 
-var timeLive:float = 2
+@export() var timeLive:float = 2
 func _ready() -> void:
 	detectOutside.connect("screen_exited",queue_free)
 	if timeLive!=0:
 		General.createTimer(timeLive,dead)
 		
 func dead():
-	particles.emitting=false
-	$hitOther/CollisionShape2D.disabled=true
-	General.createTimer(1,queue_free)
-
+	queue_free()
 func motion(delta:float):
 	velocity += direction * SPEED*delta	
 	apply_inertia(delta,direction)

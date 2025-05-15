@@ -10,6 +10,7 @@ var typeAttack:Array[String]=[]
 var initAttack: bool=true
 var numAttacks:int= 0;
 var currentNumAttack:int=0;
+var canInitAttack:bool=false
 func _ready() -> void:
 	player=get_tree().get_first_node_in_group("player")
 	_ready_help()
@@ -19,17 +20,19 @@ func _ready() -> void:
 func _ready_help():
 	pass
 
-func shot(pos:Vector2,direction:Vector2=Vector2.ZERO):
+func shot(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	var bulletCurrent:Proyectile=bulletScene.instantiate()
 	bulletCurrent.global_position=pos
 	bulletCurrent.direction=direction
+	if timeShot!=-1:
+		bulletCurrent.timeLive=timeShot
 	var level= get_tree().get_first_node_in_group("level")
 	level.add_child(bulletCurrent)
 
-func shotWithTime(pos:Vector2,direction:Vector2=Vector2.ZERO):
+func shotWithTime(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	if not shotTimer.is_stopped():
 		return
-	shot(pos,direction)
+	shot(pos,direction,timeShot)
 	shotTimer.start()
 
 func shotWithTimeCerbero(direction:Vector2=Vector2.ZERO):
@@ -42,7 +45,14 @@ func shotWithTimeCerbero(direction:Vector2=Vector2.ZERO):
 func changeAttack():
 	attack= typeAttack.pick_random()
 	initAttack=true
-
-func generateNumAttacks(num:int):
+	General.createTimer(6,activateAttack)
+	canInitAttack=false
+	
+func generateNumAttacks(min:int,max:int):
 	randomize()
-	numAttacks= randi_range(1,num)
+	numAttacks= randi_range(min,max)
+	currentNumAttack=0
+
+
+func activateAttack():
+	canInitAttack=true

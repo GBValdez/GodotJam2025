@@ -53,6 +53,7 @@ tween_resource = SubResource("Resource_wy7hf")
 draw_limits = true
 
 [node name="Area2D" type="Area2D" parent="zones/c_init"]
+position = Vector2(-208, 8)
 monitorable = false
 script = ExtResource("6_7ufja")
 
@@ -87,7 +88,7 @@ position = Vector2(618, 177.5)
 shape = SubResource("RectangleShape2D_jhqhn")
 
 [node name="player" parent="." groups=["playerPro"] instance=ExtResource("18_qxwgp")]
-position = Vector2(364, 246)
+position = Vector2(156, 254)
 speedDash = 500.0
 SPEED = 4000.0
 INERTIA = 5000.0

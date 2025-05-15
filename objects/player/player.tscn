@@ -1238,7 +1238,7 @@ volume_db = -15.0
 current = true
 
 [node name="dashTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 0.9
 one_shot = true
 
 [node name="dashParticleTimer" type="Timer" parent="."]

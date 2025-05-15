@@ -211,7 +211,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_he64u"]
-size = Vector2(30, 33)
+size = Vector2(26, 26)
 
 [sub_resource type="Gradient" id="Gradient_3kae2"]
 interpolation_mode = 2
@@ -241,10 +241,11 @@ color_ramp = SubResource("GradientTexture1D_oee5m")
 
 [node name="cerberus_fire" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_he64u")
-SPEED = 500.0
-LIMIT = 400
+SPEED = 5.0
+LIMIT = 10
+SPEED_LIMIT = 200.0
 
 [node name="sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_pipyo")
@@ -275,7 +276,7 @@ shape = SubResource("RectangleShape2D_he64u")
 [node name="hitOther" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
-position = Vector2(0, 8.5)
+position = Vector2(-2, 7)
 shape = SubResource("RectangleShape2D_he64u")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -285,5 +286,6 @@ lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_bevhv")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(-0.499999, 3.5)
 scale = Vector2(2.75, 2.45)
