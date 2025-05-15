@@ -289,3 +289,7 @@ process_material = SubResource("ParticleProcessMaterial_bevhv")
 visible = false
 position = Vector2(-0.499999, 3.5)
 scale = Vector2(2.75, 2.45)
+
+[node name="timerRastro" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true

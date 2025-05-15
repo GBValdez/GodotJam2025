@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh1kec7kdvmcb"]
+[gd_scene load_steps=5 format=3 uid="uid://dh1kec7kdvmcb"]
 
 [ext_resource type="Script" uid="uid://v2rn548tfavy" path="res://objects/cerberus/water/water_controller.gd" id="1_05cp3"]
 [ext_resource type="PackedScene" uid="uid://bho03prxroykj" path="res://objects/cerberus/water/cerberus_water.tscn" id="2_j7irq"]
 
-[node name="fireController" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_j7irq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -111, -2, 0, 0, 0, 0, -111, 331)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_3hyjn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 684, 0, 0, 0, 0, 0, 686, 323)
+}
+point_count = 2
+
+[node name="waterController" type="Node2D"]
 script = ExtResource("1_05cp3")
 
 [node name="shotTimer" type="Timer" parent="."]
@@ -29,5 +41,19 @@ one_shot = true
 [node name="timerEndAttack" type="Timer" parent="."]
 wait_time = 7.0
 one_shot = true
+
+[node name="path_left" type="Path2D" parent="."]
+curve = SubResource("Curve2D_j7irq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="path_left"]
+position = Vector2(-111, -2)
+rotation = 1.5708
+
+[node name="path_right" type="Path2D" parent="."]
+curve = SubResource("Curve2D_3hyjn")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="path_right"]
+position = Vector2(684, 0)
+rotation = 1.5646
 
 [connection signal="timeout" from="timerEndAttack" to="." method="_on_timer_end_attack_timeout"]

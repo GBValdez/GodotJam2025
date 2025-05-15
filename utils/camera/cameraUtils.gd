@@ -6,7 +6,7 @@ var forceShake: float = 0
 var dirShake:Vector2=Vector2.ZERO
 var cameraOrigin:camera2dInfo
 var offsetOrigin:Vector2= Vector2.ZERO
-@onready var glitchLayout: ColorRect = $CanvasLayer/glitchLayout
+#@onready var glitchLayout: ColorRect = $CanvasLayer/glitchLayout
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready():
 	var nodes=get_tree().get_nodes_in_group("cameraGame")
@@ -39,8 +39,8 @@ func _on_Timer_timeout():
 	offset = Vector2.ZERO
 	dirShake=Vector2.ZERO
 	
-func showEffectGlitch(showEffect: bool):
-	glitchLayout.visible = showEffect
+#func showEffectGlitch(showEffect: bool):
+#	glitchLayout.visible = showEffect
 	
 func makeShakeDir(force: float, time: float,dir:Vector2):
 	forceShake = force

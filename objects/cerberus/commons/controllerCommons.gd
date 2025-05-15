@@ -28,6 +28,7 @@ func shot(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 		bulletCurrent.timeLive=timeShot
 	var level= get_tree().get_first_node_in_group("level")
 	level.add_child(bulletCurrent)
+	return bulletCurrent
 
 func shotWithTime(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	if not shotTimer.is_stopped():
@@ -42,10 +43,10 @@ func shotWithTimeCerbero(direction:Vector2=Vector2.ZERO):
 	cancerbero.shot()
 	shotTimerCancerbero.start()
 
-func changeAttack():
+func changeAttack(wait:float=6):
 	attack= typeAttack.pick_random()
 	initAttack=true
-	General.createTimer(6,activateAttack)
+	General.createTimer(wait,activateAttack)
 	canInitAttack=false
 	
 func generateNumAttacks(min:int,max:int):

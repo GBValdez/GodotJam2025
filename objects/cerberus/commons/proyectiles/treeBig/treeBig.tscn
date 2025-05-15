@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwpfne75ymmlu"]
+
+[ext_resource type="Script" uid="uid://cqxo4py1nlym0" path="res://objects/cerberus/commons/proyectileCommons.gd" id="1_hxm4a"]
+[ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="2_msd1w"]
+[ext_resource type="Texture2D" uid="uid://1d5rba21sy4m" path="res://utils/tiles/árbol 2 update.png" id="2_y4gyr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msd1w"]
+size = Vector2(22, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4gyr"]
+size = Vector2(19, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjj7n"]
+size = Vector2(38, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufte3"]
+size = Vector2(47, 86)
+
+[node name="threeBig" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_hxm4a")
+timeLive = 1.5
+LIMIT = 50
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_y4gyr")
+
+[node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("2_msd1w")
+force = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(4, 13)
+shape = SubResource("RectangleShape2D_msd1w")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(-2.5, -14)
+shape = SubResource("RectangleShape2D_y4gyr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_fjj7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_ufte3")
+disabled = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.8)

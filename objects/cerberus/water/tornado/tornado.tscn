@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://bops6u03e8bfy"]
+
+[ext_resource type="Script" uid="uid://dg5ph0gyr7i32" path="res://objects/cerberus/water/tornado/tornado.gd" id="1_04vfa"]
+[ext_resource type="Texture2D" uid="uid://8s0hcxy1dqrm" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(2).png" id="2_3ynjw"]
+[ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="3_82yyu"]
+[ext_resource type="Texture2D" uid="uid://715kacrtrvqh" path="res://objects/cerberus/water/sprites/effects/burble/Water bubble.png" id="4_84uky"]
+[ext_resource type="Texture2D" uid="uid://b0lh4mxykvpnn" path="res://objects/cerberus/water/sprites/effects/burble/Water bubble(2).png" id="5_f5kie"]
+[ext_resource type="Texture2D" uid="uid://lk527wwtk4f7" path="res://objects/cerberus/water/sprites/effects/burble/Water bubble(1).png" id="6_mkycn"]
+[ext_resource type="Texture2D" uid="uid://bvon463gvnsg3" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(1).png" id="7_a7tpd"]
+[ext_resource type="Texture2D" uid="uid://bgxhqmhbqp6es" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado(3).png" id="8_rx1by"]
+[ext_resource type="Texture2D" uid="uid://bniyhostgfv1f" path="res://objects/cerberus/water/sprites/effects/tornado/Water tornado.png" id="9_n4g26"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_04vfa"]
+radius = 3.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x0mab"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_kxy1a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3ynjw")]
+}
+
+[sub_resource type="Animation" id="Animation_yvrgm"]
+resource_name = "burble"
+length = 0.30001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_84uky"), ExtResource("5_f5kie"), ExtResource("6_mkycn")]
+}
+
+[sub_resource type="Animation" id="Animation_s70ro"]
+resource_name = "idle"
+length = 0.40001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_a7tpd"), ExtResource("2_3ynjw"), ExtResource("8_rx1by"), ExtResource("9_n4g26")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5lc2m"]
+_data = {
+&"RESET": SubResource("Animation_kxy1a"),
+&"burble": SubResource("Animation_yvrgm"),
+&"idle": SubResource("Animation_s70ro")
+}
+
+[node name="tornado" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_04vfa")
+timeLive = 0.0
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_3ynjw")
+
+[node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("3_82yyu")
+force = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_04vfa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_x0mab")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5lc2m")
+}
+autoplay = "idle"
