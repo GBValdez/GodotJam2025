@@ -19,6 +19,8 @@ func shot():
 	bulletCurrent.direction=dirShot
 	var level= get_tree().get_first_node_in_group("level")
 	level.add_child(bulletCurrent)
+	playSound("audioElement",1,1.2)
+	return bulletCurrent
 	
 
 func motion(delta:float):
@@ -39,4 +41,19 @@ func animation():
 		anim.play("idle")
 	if velocity.x!=0:
 		sprite.scale.x= sign(velocity.x) * abs(sprite.scale.x)
+	
+func onHitDamage(forceHit:bool):
+	animEffects.play("hit")
+	General.shakeCamera(2,0.2)
+	inmortal=true
+	if health>0:
+		playSound("audioHit")
+		General.createTimer(5,normal)
+		print("auxilio")
+	else:
+		playSound("audioHit",0.7,0.8)
+
+func normal():
+	animEffects.play("end_hit")
+	inmortal=false
 	

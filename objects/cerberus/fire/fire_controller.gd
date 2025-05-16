@@ -79,11 +79,13 @@ func cross(delta:float):
 			
 
 func _physics_process(delta: float) -> void:
+	stopSound()
 	if not canInitAttack:
 		return
 	assault(delta)	
 	side(delta)
 	cross(delta)
+	
 
 
 func _on_timer_cross_timeout() -> void:

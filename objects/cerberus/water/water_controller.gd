@@ -9,7 +9,6 @@ preload("res://objects/cerberus/commons/proyectiles/treeLitle/treeLitle.tscn")
 func _ready_help():
 	bulletScene=load("res://objects/cerberus/water/balls_water/ball_water.tscn")
 	typeAttack=["shotAttack","rebound","attackTornado"]
-var innertiaPlayer:float=0
 
 func shotAttack(delta:float):
 	if not attack=="shotAttack":
@@ -48,10 +47,10 @@ func shotAttack(delta:float):
 					else:
 						dir.x= -abs(dir.x)
 					dirs.append(dir)
-				print(dirs)
 			for dir in dirs:
 				cancerbero.dirShot=dir
-				cancerbero.shot()
+				var bulletCurret:Proyectile=cancerbero.shot()
+				bulletCurret.LIMIT=150
 			$timerHelp.start()
 
 func rebound(delta:float):
@@ -63,6 +62,7 @@ func rebound(delta:float):
 			var dir:Vector2= Vector2(cos(radShot),sin(radShot))		
 			var bullet=shot(cancerbero.global_position,dir,10)
 			bullet.LIMIT=300
+			player.INERTIA=0
 		randomize()
 		var dirTornadoDegree:float= randf_range(0,360)
 		var radShot:float=deg_to_rad(dirTornadoDegree)
@@ -101,11 +101,11 @@ func attackTornado(delta:float):
 				if markerSelected==$maker_left:
 					cancerbero.sprite.scale.x=1
 				initAttack=false
-				innertiaPlayer=player.INERTIA
 				var tornadoCurrent = shotTornado(cancerbero.global_position,Vector2.ZERO,20)
 				tornadoCurrent.scale.x=3
 				tornadoCurrent.scale.y=3
 				tornadoCurrent.forceAtraction=2000
+				player.INERTIA=0
 	else:
 		if $timerHelp.is_stopped():
 			var dir:Vector2= Vector2(0,0)
@@ -123,25 +123,11 @@ func attackTornado(delta:float):
 
 
 func shotTornado(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
-	var bulletCurrent:Proyectile=tornado.instantiate()
-	bulletCurrent.global_position=pos
-	bulletCurrent.direction=direction
-	if timeShot!=-1:
-		bulletCurrent.timeLive=timeShot
-	var level= get_tree().get_first_node_in_group("level")
-	level.add_child(bulletCurrent)
-	return bulletCurrent
-
+	return shotPackage(tornado,pos,direction,timeShot)
+	
 func shotThree(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	var sceneCurrent= threes.pick_random()
-	var bulletCurrent:Proyectile=sceneCurrent.instantiate()
-	bulletCurrent.global_position=pos
-	bulletCurrent.direction=direction
-	if timeShot!=-1:
-		bulletCurrent.timeLive=timeShot
-	var level= get_tree().get_first_node_in_group("level")
-	level.add_child(bulletCurrent)
-	return bulletCurrent
+	return shotPackage(sceneCurrent,pos,direction,timeShot)
 
 
 func _physics_process(delta: float) -> void:
@@ -160,4 +146,4 @@ func _on_timer_end_attack_timeout() -> void:
 	initAttack=true
 	markerSelected=null
 	pathSelected=null
-	player.INERTIA=innertiaPlayer
+	player.INERTIA=5000.0

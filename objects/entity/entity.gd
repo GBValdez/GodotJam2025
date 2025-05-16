@@ -28,7 +28,7 @@ func hitDamage(damage: int, point: Vector2,force:float,forceHit:bool=false):
 	if ((health > 0 && not inmortal) or forceHit):	
 		health -= damage
 		velocity = (global_position - point).normalized() * force
-	onHitDamage(forceHit)
+		onHitDamage(forceHit)
 	if (health <= 0):
 		death()
 
@@ -56,6 +56,10 @@ func playSound(name:String, min:float=1, max:float=1):
 	var audio= $audio.get_node(name)
 	General.applyPitchScale(audio,min,max)
 
+func stopSound(name:String):
+	var audio= $audio.get_node(name)
+	audio.stop()
+	
 func playSoundRandom(list:Array[String], min:float=1, max:float=1):
 	playSound(list.pick_random(),min,max)
 #func animScale():

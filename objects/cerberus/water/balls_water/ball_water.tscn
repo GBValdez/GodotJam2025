@@ -75,7 +75,7 @@ _data = {
 &"idle": SubResource("Animation_s70ro")
 }
 
-[node name="ball_water" type="CharacterBody2D"]
+[node name="ball_water" type="CharacterBody2D" groups=["proyectile"]]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_5lc2m")

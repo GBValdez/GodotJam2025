@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://c2fc3h0hmh0x6" path="res://objects/player/sound/step/Player_Foosteps_Grass_1.wav" id="14_x5bgp"]
 [ext_resource type="AudioStream" uid="uid://dlrb408m8hqfu" path="res://objects/player/sound/step/Player_Foosteps_Grass_2.wav" id="15_dthqj"]
 [ext_resource type="AudioStream" uid="uid://c5pki7nhh3wue" path="res://objects/player/sound/step/Player_Foosteps_Grass_3.wav" id="16_xlkbi"]
-[ext_resource type="AudioStream" uid="uid://b6ywwuiqtyopj" path="res://objects/player/sound/Player_Attack_Sword.wav" id="17_dthqj"]
+[ext_resource type="AudioStream" uid="uid://7a3hybktvfeh" path="res://objects/player/sound/Player_Attack_Sword.wav" id="17_dthqj"]
 [ext_resource type="AudioStream" uid="uid://ce61wpril2b5y" path="res://objects/player/sound/hit/Player_RecibeDaño.wav" id="17_l55sg"]
 [ext_resource type="AudioStream" uid="uid://v3xovamcenpx" path="res://objects/player/sound/hit/Player_RecibeDaño_2.wav" id="18_28utn"]
 [ext_resource type="AudioStream" uid="uid://xo7xap8fsri4" path="res://objects/player/sound/Player_Dash.wav" id="20_28utn"]
@@ -1206,20 +1206,24 @@ SPEED_LIMIT = 200.0
 [node name="sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ylcck")
 position = Vector2(-3, -4)
-texture = ExtResource("2_45urx")
+texture = ExtResource("3_jnjyq")
 hframes = 6
 frame = 1
 
-[node name="HitOther" type="Area2D" parent="sprite"]
+[node name="HitOther" type="Area2D" parent="sprite" groups=["player-damage"]]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sprite/HitOther"]
-position = Vector2(1, 14)
+position = Vector2(20, -1)
 shape = SubResource("RectangleShape2D_ssrue")
 disabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="sprite"]
 z_as_relative = false
 position = Vector2(0, 7)
+emitting = false
 amount = 15
 texture = ExtResource("3_bi5m7")
 lifetime = 0.4

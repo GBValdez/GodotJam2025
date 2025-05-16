@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	buffer.update(delta)
+	print(INERTIA)
 	# Detectar entrada del jugador
 	if (enableControl):
 		direction = Vector2.ZERO
@@ -99,7 +100,7 @@ func attack():
 				anim.play("attack")
 			blockMove=true
 			currentDash=false
-			playSound("audioAttack")
+			playSound("audioAttack",1.2,1.2)
 	
 func reset():
 	enableControl=false
@@ -142,8 +143,8 @@ func onHitDamage(forceHit:bool):
 		if(health>0):
 			playSoundRandom(["audioHit","audioHit2"],1,1.1)
 
-		#else:
-			#$audioDead.play()
+		else:
+			playSoundRandom(["audioHit","audioHit2"],0.7,0.8)
 		General.shakeCamera(2, 1)
 		animEffects.play("hit")
 	

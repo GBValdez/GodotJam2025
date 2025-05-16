@@ -1,9 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://c63x1bf80svej"]
+[gd_scene load_steps=28 format=3 uid="uid://c63x1bf80svej"]
 
 [ext_resource type="Script" uid="uid://by5m7u8mpryvg" path="res://objects/cerberus/fire/cerberus_fire.gd" id="1_he64u"]
 [ext_resource type="Texture2D" uid="uid://dbjcohylva2u8" path="res://objects/cerberus/fire/sprites/run.png" id="1_rmqa1"]
+[ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_grnaw"]
 [ext_resource type="Texture2D" uid="uid://b7oj4vbag1dp" path="res://objects/cerberus/fire/sprites/idle.png" id="2_pipyo"]
 [ext_resource type="Texture2D" uid="uid://chk13mmboa72i" path="res://objects/cerberus/fire/sprites/effects/Fire.png" id="4_vdyo6"]
+[ext_resource type="AudioStream" uid="uid://c2r1yavtsjles" path="res://objects/cerberus/fire/sounds/Cerbero_Fuego_loop.wav" id="5_3kae2"]
+[ext_resource type="AudioStream" uid="uid://bdwify7ymwtpc" path="res://objects/cerberus/commons/sounds/Cerbero_Magia.wav" id="6_bevhv"]
+[ext_resource type="AudioStream" uid="uid://eodfm006sp12" path="res://objects/cerberus/commons/sounds/Cerbero_Aullido.wav" id="7_xf686"]
+[ext_resource type="AudioStream" uid="uid://qbyaupvkywgl" path="res://objects/cerberus/commons/sounds/Cerbero_Recibe_Daño.wav" id="8_xf686"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmnr8"]
+shader = ExtResource("2_grnaw")
+shader_parameter/colorFull = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pipyo"]
 size = Vector2(45, 45)
@@ -210,8 +220,11 @@ _data = {
 &"run": SubResource("Animation_vdyo6")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_he64u"]
-size = Vector2(26, 26)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grnaw"]
+size = Vector2(49, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmnr8"]
+size = Vector2(24, 25)
 
 [sub_resource type="Gradient" id="Gradient_3kae2"]
 interpolation_mode = 2
@@ -239,15 +252,128 @@ scale_min = 0.7
 scale_curve = SubResource("CurveTexture_oee5m")
 color_ramp = SubResource("GradientTexture1D_oee5m")
 
-[node name="cerberus_fire" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_xf686"]
+resource_name = "hit"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_jmnr8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
+}
+
+[sub_resource type="Animation" id="Animation_grnaw"]
+resource_name = "normal"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_jmnr8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_jmnr8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+
+[sub_resource type="Animation" id="Animation_o5htm"]
+resource_name = "end_hit"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_jmnr8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grnaw"]
+_data = {
+&"RESET": SubResource("Animation_jmnr8"),
+&"end_hit": SubResource("Animation_o5htm"),
+&"hit": SubResource("Animation_xf686"),
+&"normal": SubResource("Animation_grnaw")
+}
+
+[node name="cerberus_fire" type="CharacterBody2D" groups=["entity"]]
 collision_layer = 2
-collision_mask = 12
+collision_mask = 8
 script = ExtResource("1_he64u")
+forceHitMe = 100
+health = 5
 SPEED = 5.0
 LIMIT = 10
 SPEED_LIMIT = 200.0
 
 [node name="sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jmnr8")
 texture = ExtResource("2_pipyo")
 vframes = 4
 frame = 1
@@ -267,17 +393,23 @@ libraries = {
 autoplay = "idle"
 
 [node name="hitMe" type="Area2D" parent="."]
-visible = false
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
-position = Vector2(0, 6)
-shape = SubResource("RectangleShape2D_he64u")
+visible = false
+position = Vector2(-0.5, 3)
+shape = SubResource("RectangleShape2D_grnaw")
 
 [node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
-position = Vector2(-2, 7)
-shape = SubResource("RectangleShape2D_he64u")
+visible = false
+position = Vector2(-3, 7.5)
+shape = SubResource("RectangleShape2D_jmnr8")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 20
@@ -290,6 +422,25 @@ visible = false
 position = Vector2(-0.499999, 3.5)
 scale = Vector2(2.75, 2.45)
 
-[node name="timerRastro" type="Timer" parent="."]
-wait_time = 0.05
-one_shot = true
+[node name="audio" type="Node" parent="."]
+
+[node name="audioElement" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("5_3kae2")
+volume_db = -10.0
+
+[node name="audioMagic" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("6_bevhv")
+volume_db = -10.0
+
+[node name="audioBark" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("7_xf686")
+volume_db = -10.0
+
+[node name="audioHit" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("8_xf686")
+
+[node name="AnimEffects" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_grnaw")
+}
+autoplay = "normal"

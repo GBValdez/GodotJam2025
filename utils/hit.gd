@@ -10,7 +10,7 @@ func _ready():
 	connect("body_entered", enter_hit)
 
 func enter_hit(body: Node2D):
-	if (body.is_in_group("entity")):
+	if (body.is_in_group("player")):
 		var entityBody = body as Entity
 		entityBody.hitDamage(hit, global_position,force,forceHit)
 	pass # Replace with function body.
