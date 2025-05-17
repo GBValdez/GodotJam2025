@@ -52,7 +52,7 @@ func shotLaser():
 		randomize()
 		var posRandom:Vector2=Vector2(randi_range(0,324*1.5),randi_range(32,200))
 		var bulletCurrent= General.addNode(laserBuller,posRandom)
-		var size:float=randf_range(0.3,1)
+		var size:float=randf_range(0.5,2)
 		bulletCurrent.scale=Vector2(size,size)
 		bulletCurrent.shotPlayer()
 func _physics_process(delta: float) -> void:

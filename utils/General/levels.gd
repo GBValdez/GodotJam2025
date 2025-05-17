@@ -76,7 +76,6 @@ func _ready():
 			TWENMUSIC.tween_property(musNode,"volume_db",dbCurrent,1)
 	if General.players.size()==0:
 		General.setCamera(listPhamToCamera[0].camera)
-		print("pinguino")
 		
 func setShadow(enable:bool):
 	var nodes= get_tree().get_nodes_in_group("pointLight")

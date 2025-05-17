@@ -1,49 +1,58 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd7c62xnodejm"]
+[gd_scene load_steps=11 format=3 uid="uid://dd7c62xnodejm"]
 
 [ext_resource type="Script" uid="uid://bskn3jwbcsb74" path="res://objects/cerberus/electric/laser/laser.gd" id="1_kb2x0"]
 [ext_resource type="AudioStream" uid="uid://dahuiu5gdwhtm" path="res://objects/cerberus/electric/sounds/Cerebero-Rayo.wav" id="2_80pf8"]
-
-[sub_resource type="Gradient" id="Gradient_kb2x0"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_80pf8"]
-gradient = SubResource("Gradient_kb2x0")
-width = 32
-height = 32
-
-[sub_resource type="Gradient" id="Gradient_80pf8"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_f512p"]
-gradient = SubResource("Gradient_80pf8")
-width = 1000
-height = 32
+[ext_resource type="Texture2D" uid="uid://cr1y842737ya7" path="res://objects/cerberus/electric/sprites/Rasho laser.png" id="2_f512p"]
+[ext_resource type="Texture2D" uid="uid://3ogvahfk2fvs" path="res://objects/cerberus/electric/sprites/Head.png" id="2_ky7xa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fai7n"]
-size = Vector2(2366, 20)
+size = Vector2(1123, 5)
 
-[sub_resource type="Animation" id="Animation_kb2x0"]
-resource_name = "shot"
-length = 0.20001
-step = 0.1
+[sub_resource type="Animation" id="Animation_f512p"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/path = NodePath("sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/sprite_laser:visible")
+tracks/1/path = NodePath("sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite/Marker2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -69,77 +78,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/sprite_laser:visible")
+tracks/1/path = NodePath("sprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.50329),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:rotation")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.507365),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-6.28319, 0.0]
 }
-
-[sub_resource type="Animation" id="Animation_f512p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite/sprite_laser:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/Marker2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_ky7xa"]
@@ -161,38 +143,103 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite/sprite_laser:visible")
+tracks/1/path = NodePath("sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite/Marker2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kb2x0"]
+resource_name = "shot"
+length = 0.20001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite/Marker2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("sprite:scale")
+tracks/2/path = NodePath("sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("sprite:rotation")
-tracks/3/interp = 2
+tracks/3/path = NodePath("sprite:visible")
+tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -6.28319]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80pf8"]
@@ -209,16 +256,144 @@ shotDirectionPlayer = true
 force = 300.0
 
 [node name="sprite" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_80pf8")
+z_index = 1
+z_as_relative = false
+texture = ExtResource("2_ky7xa")
+vframes = 3
 
-[node name="sprite_laser" type="Sprite2D" parent="sprite"]
-visible = false
-position = Vector2(1197, 0)
-scale = Vector2(2.386, 1)
-texture = SubResource("GradientTexture2D_f512p")
+[node name="Marker2D" type="Marker2D" parent="sprite"]
+z_as_relative = false
+position = Vector2(-10.5, 4)
+scale = Vector2(0.5, 0.5)
+
+[node name="RashoLaser" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(90.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser2" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(210.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser3" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(330.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser4" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(458.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser5" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(578.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser6" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(706.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser7" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(834.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser8" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(962.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser9" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1090.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser10" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1218.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser11" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1338.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser12" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1458.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser13" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1586.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser14" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1714.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser15" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1842.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser16" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(1970.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser17" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(2098.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
+
+[node name="RashoLaser18" type="Sprite2D" parent="sprite/Marker2D"]
+position = Vector2(2226.5, -18.75)
+scale = Vector2(4.59375, 4.59375)
+texture = ExtResource("2_f512p")
+vframes = 5
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1185, 1)
+position = Vector2(563.5, 4.5)
 shape = SubResource("RectangleShape2D_fai7n")
 disabled = true
 

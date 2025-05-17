@@ -110,6 +110,13 @@ theme_override_constants/outline_size = 15
 theme_override_font_sizes/font_size = 15
 text = "New Game"
 
+[node name="Creditos" type="Label" parent="Camera2D/CanvasLayer/Marker2D/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.760784)
+layout_mode = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 15
+text = "Credits"
+
 [node name="salir" type="Label" parent="Camera2D/CanvasLayer/Marker2D/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.760784)
 layout_mode = 2

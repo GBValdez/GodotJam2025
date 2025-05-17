@@ -9,17 +9,11 @@ func _ready() -> void:
 	
 func _showTwo():
 	modifyBlack(1,0.5)
-	General.createTimer(0.6,_showTwoNow)
+	General.createTimer(0.5,_showTwoNow)
 
 func _showTwoNow():
-	modifyBlack(0,0.5)
-	$CanvasLayer/Marker2D/ThanksForPlaying.visible=true
-	General.createTimer(5,end)
-	print("hola")
-
-func end():
-	modifyBlack(1,0.5)
-	General.createTimer(1,endTween)
+	General.go_to_level("res://Levels/MenuPrincipal/menu_principal.tscn")
+	
 
 func modifyBlack(a:float,time:float):
 	var TWEN = get_tree().create_tween()

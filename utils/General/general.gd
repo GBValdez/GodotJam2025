@@ -184,10 +184,12 @@ func applyPitchScale(audio,min:float,max:float):
 
 func shakeSprite(sprite:Sprite2D,min:float=0.1,max:float=0.1,offset:bool=false):
 	randomize()
+	var randomPos:Vector2=Vector2(randf_range(min,max),randf_range(min,max))
 	if offset:
-		sprite.offset= Vector2(randf_range(min,max),randf_range(min,max))
+		sprite.offset= randomPos
 	else:
-		sprite.position= Vector2(randf_range(min,max),randf_range(min,max))
+		sprite.position= randomPos
+	return randomPos
 
 func addNode(package,pos:Vector2):
 	var nodeCurrent= package.instantiate()

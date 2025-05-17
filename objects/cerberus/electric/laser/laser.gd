@@ -12,7 +12,7 @@ func shotPlayer():
 		global_rotation = angle
 		
 func _process(delta: float) -> void:
-	General.shakeSprite($sprite,2)
+	General.shakeSprite($sprite,2,true)
 
 
 func _on_timer_start_timeout() -> void:

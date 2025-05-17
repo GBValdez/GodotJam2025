@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://d27ifmkjm0lkx"]
+[gd_scene load_steps=5 format=3 uid="uid://d27ifmkjm0lkx"]
 
 [ext_resource type="Script" uid="uid://cr1f6erik8uo8" path="res://levels/creditos/creditos.gd" id="1_84r2m"]
-[ext_resource type="Texture2D" uid="uid://cne1d3fgwsj3n" path="res://levels/creditos/sprites/Created by.png" id="2_j0ner"]
-[ext_resource type="Texture2D" uid="uid://dnjj2lf2vr5f3" path="res://levels/creditos/sprites/Thanks for playing.png" id="3_55j1h"]
 
 [sub_resource type="Animation" id="Animation_0skra"]
 length = 0.001
@@ -48,14 +46,16 @@ script = ExtResource("1_84r2m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
-position = Vector2(572, 320)
-scale = Vector2(1.01, 1.01)
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+offset_left = -11.0
+offset_top = -8.0
+offset_right = 756.0
+offset_bottom = 407.0
+color = Color(0, 0, 0, 1)
 
-[node name="CreatedBy" type="Sprite2D" parent="CanvasLayer/Marker2D"]
-position = Vector2(8.8889, 5.00001)
-scale = Vector2(0.612963, 0.612963)
-texture = ExtResource("2_j0ner")
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
+position = Vector2(301, 8)
+scale = Vector2(1.01, 1.01)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Marker2D"]
 anchors_preset = 8
@@ -78,12 +78,12 @@ theme_override_font_sizes/font_size = 10
 
 [node name="Label19" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Programmer: Gabriel Valdez"
 
 [node name="Label20" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Programmer: Jonathan Zor"
 
 [node name="Label15" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
@@ -92,17 +92,17 @@ theme_override_font_sizes/font_size = 10
 
 [node name="Label12" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Art: Eddodoodles (Eduardo Nila )"
 
 [node name="Label17" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Art: Jacky Sanchez"
 
 [node name="Label18" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Art: Sl Game"
 
 [node name="Label13" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
@@ -111,7 +111,7 @@ theme_override_font_sizes/font_size = 10
 
 [node name="Label2" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Music: Lydium Music"
 
 [node name="Label16" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
@@ -120,15 +120,9 @@ theme_override_font_sizes/font_size = 10
 
 [node name="Label7" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 12
 text = "Sound effects: Lydium Music
 "
-
-[node name="ThanksForPlaying" type="Sprite2D" parent="CanvasLayer/Marker2D"]
-visible = false
-position = Vector2(8.889, 5)
-scale = Vector2(0.613, 0.613)
-texture = ExtResource("3_55j1h")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["blackSquare"]]
 visible = false
