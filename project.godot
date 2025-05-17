@@ -14,7 +14,8 @@ config/name="Ecos del pasado"
 run/main_scene="res://levels/MenuPrincipal/menu_principal.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
-config/icon="res://utils/General/icon.jpg"
+config/icon="uid://c2uphg1ymb7sk"
+config/windows_native_icon="res://utils/General/Logo_Schutten.ico"
 
 [autoload]
 

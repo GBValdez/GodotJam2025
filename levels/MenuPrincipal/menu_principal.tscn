@@ -1,22 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://bv4qxsxwvk5ne"]
+[gd_scene load_steps=17 format=3 uid="uid://bv4qxsxwvk5ne"]
 
 [ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_jwuxd"]
 [ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
 [ext_resource type="Script" uid="uid://bdg4rd177egl7" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_jhqct"]
 [ext_resource type="Script" uid="uid://8p6wacq2yrdq" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="5_1yjw1"]
-[ext_resource type="Texture2D" uid="uid://db52glwgabwt4" path="res://utils/General/BG.png" id="5_10jhh"]
 [ext_resource type="Script" uid="uid://qbpqf3uf1xsg" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_7qy4h"]
-[ext_resource type="Shader" uid="uid://ci64dvtbm31vx" path="res://utils/shaderTest.gdshader" id="7_ndfuf"]
+[ext_resource type="SpriteFrames" uid="uid://dmp4bsl7nins7" path="res://levels/MenuPrincipal/sprite/banner1-_2_.gif" id="6_xbnbe"]
 [ext_resource type="Script" uid="uid://jefe05u3a4dq" path="res://levels/MenuPrincipal/menuCtrl.gd" id="8_cfeoc"]
 [ext_resource type="Script" uid="uid://h8o3lm2jyyrl" path="res://levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="8_qq8ly"]
-[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="9_5i22e"]
+[ext_resource type="AudioStream" uid="uid://cmjrq2jfyto1x" path="res://utils/music/Main_menu_loop.ogg" id="10_xbnbe"]
 [ext_resource type="AudioStream" uid="uid://cyt3qvqcchi7y" path="res://utils/effect/menu/Boton_Select.wav" id="12_1ymek"]
 [ext_resource type="AudioStream" uid="uid://b1squri1wehd2" path="res://utils/effect/menu/Boton_Press.wav" id="13_1xw1r"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_csbyc"]
-shader = ExtResource("7_ndfuf")
-shader_parameter/iMouse = Vector4(0, 0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_k7p71"]
 script = ExtResource("6_7qy4h")
@@ -63,13 +58,12 @@ _data = {
 &"idle": SubResource("Animation_84kgc")
 }
 
-[node name="menuPrincipal" type="Node2D"]
+[node name="menuPrincipal" type="Node2D" groups=["level"]]
 script = ExtResource("1_jwuxd")
-saveLevel = false
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["cameraGamePri"]]
+position = Vector2(8, 0)
 anchor_mode = 0
-zoom = Vector2(2, 2)
 script = ExtResource("2_ipj18")
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -81,13 +75,16 @@ script = ExtResource("3_jhqct")
 script = ExtResource("8_dwtby")
 
 [node name="Marker2D" type="Marker2D" parent="Camera2D/CanvasLayer"]
-position = Vector2(584, 320)
+position = Vector2(528, 136)
 scale = Vector2(1.01, 1.01)
 
-[node name="Bg" type="Sprite2D" parent="Camera2D/CanvasLayer/Marker2D"]
-position = Vector2(4, 3)
-scale = Vector2(0.62037, 0.62037)
-texture = ExtResource("5_10jhh")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D/CanvasLayer/Marker2D"]
+position = Vector2(-248.515, 27.7228)
+scale = Vector2(0.618516, 0.618516)
+sprite_frames = ExtResource("6_xbnbe")
+animation = &"gif"
+autoplay = "gif"
+speed_scale = 0.3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/Marker2D"]
 anchors_preset = 8
@@ -110,14 +107,14 @@ script = ExtResource("8_cfeoc")
 modulate = Color(1, 1, 1, 0.760784)
 layout_mode = 2
 theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 33
+theme_override_font_sizes/font_size = 15
 text = "New Game"
 
 [node name="salir" type="Label" parent="Camera2D/CanvasLayer/Marker2D/VBoxContainer"]
 modulate = Color(1, 1, 1, 0.760784)
 layout_mode = 2
 theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 15
 text = "Exit"
 
 [node name="blackSquare" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
@@ -129,19 +126,11 @@ offset_right = 1539.0
 offset_bottom = 874.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
-visible = false
-material = SubResource("ShaderMaterial_csbyc")
-offset_left = -23.0
-offset_right = 1224.0
-offset_bottom = 670.0
-color = Color(0, 0, 0, 1)
-
 [node name="zones" type="Node2D" parent="."]
 
 [node name="c_init" type="Node2D" parent="zones" groups=["cameraGame"]]
+position = Vector2(8, 0)
 script = ExtResource("5_1yjw1")
-zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_k7p71")
 draw_limits = true
 
@@ -150,7 +139,7 @@ script = ExtResource("8_qq8ly")
 key = "init"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
-stream = ExtResource("9_5i22e")
+stream = ExtResource("10_xbnbe")
 volume_db = -10.0
 autoplay = true
 

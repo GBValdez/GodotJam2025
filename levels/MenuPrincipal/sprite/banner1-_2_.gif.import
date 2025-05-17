@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dmp4bsl7nins7"
+path="res://.godot/imported/banner1-_2_.gif-1cf54065040be12f1cd161d56539cbc0.tres"
+
+[deps]
+
+source_file="res://levels/MenuPrincipal/sprite/banner1-_2_.gif"
+dest_files=["res://.godot/imported/banner1-_2_.gif-1cf54065040be12f1cd161d56539cbc0.tres"]
+
+[params]
+
+frames_per_second=30

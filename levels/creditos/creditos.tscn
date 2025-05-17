@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d27ifmkjm0lkx"]
+[gd_scene load_steps=7 format=3 uid="uid://d27ifmkjm0lkx"]
 
 [ext_resource type="Script" uid="uid://cr1f6erik8uo8" path="res://levels/creditos/creditos.gd" id="1_84r2m"]
 [ext_resource type="Texture2D" uid="uid://cne1d3fgwsj3n" path="res://levels/creditos/sprites/Created by.png" id="2_j0ner"]
 [ext_resource type="Texture2D" uid="uid://dnjj2lf2vr5f3" path="res://levels/creditos/sprites/Thanks for playing.png" id="3_55j1h"]
-[ext_resource type="AudioStream" uid="uid://fpe8hd20ss1k" path="res://utils/music/Como solitario.mp3" id="4_c4kdh"]
 
 [sub_resource type="Animation" id="Animation_0skra"]
 length = 0.001
@@ -77,11 +76,15 @@ size_flags_vertical = 4
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 
-[node name="Label3" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+[node name="Label19" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Programmer: Gabriel Valdez
-"
+text = "Programmer: Gabriel Valdez"
+
+[node name="Label20" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Programmer: Jonathan Zor"
 
 [node name="Label15" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
@@ -95,6 +98,11 @@ text = "Art: Eddodoodles (Eduardo Nila )"
 [node name="Label17" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
+text = "Art: Jacky Sanchez"
+
+[node name="Label18" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Art: Sl Game"
 
 [node name="Label13" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
@@ -104,7 +112,7 @@ theme_override_font_sizes/font_size = 10
 [node name="Label2" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Music: Joshua Mayorga"
+text = "Music: Lydium Music"
 
 [node name="Label16" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
@@ -138,6 +146,5 @@ libraries = {
 autoplay = "idle"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music_node"]]
-stream = ExtResource("4_c4kdh")
 volume_db = -10.0
 autoplay = true
