@@ -246,52 +246,6 @@ scale_min = 0.7
 scale_curve = SubResource("CurveTexture_oee5m")
 color_ramp = SubResource("GradientTexture1D_oee5m")
 
-[sub_resource type="Animation" id="Animation_xf686"]
-resource_name = "hit"
-length = 0.50001
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_jmnr8")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.4]
-}
-
-[sub_resource type="Animation" id="Animation_grnaw"]
-resource_name = "normal"
-length = 0.50001
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
 [sub_resource type="Animation" id="Animation_jmnr8"]
 length = 0.001
 tracks/0/type = "value"
@@ -348,6 +302,52 @@ tracks/1/keys = {
 "values": [0.5, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_xf686"]
+resource_name = "hit"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_jmnr8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
+}
+
+[sub_resource type="Animation" id="Animation_grnaw"]
+resource_name = "normal"
+length = 0.50001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_grnaw"]
 _data = {
 &"RESET": SubResource("Animation_jmnr8"),
@@ -367,7 +367,7 @@ collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_e2i8p")
 forceHitMe = 100
-health = 4
+health = 6
 INERTIA = 700.0
 LIMIT = 200
 SPEED_LIMIT = 500.0
@@ -398,11 +398,6 @@ texture = ExtResource("5_e2i8p")
 lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_bevhv")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(-0.499999, 3.5)
-scale = Vector2(2.75, 2.45)
-
 [node name="timerRastro" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
@@ -411,15 +406,12 @@ one_shot = true
 
 [node name="audioElement" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("5_lys0j")
-volume_db = -10.0
 
 [node name="audioMagic" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("6_lys0j")
-volume_db = -10.0
 
 [node name="audioBark" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("7_tnhka")
-volume_db = -10.0
 
 [node name="audioHit" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("8_tnhka")

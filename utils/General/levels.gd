@@ -75,9 +75,6 @@ func _ready():
 			TWENMUSIC.set_ease(Tween.EASE_IN_OUT)
 			TWENMUSIC.tween_property(musNode,"volume_db",dbCurrent,1)
 		
-	
-	pass # Replace with function body.
-	
 func setShadow(enable:bool):
 	var nodes= get_tree().get_nodes_in_group("pointLight")
 	for light  in nodes:

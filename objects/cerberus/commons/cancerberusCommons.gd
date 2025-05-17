@@ -4,8 +4,8 @@ var player:Player
 var bulletScene
 var dirShot:Vector2= Vector2.ZERO
 @onready var shotPointer= $sprite/shotPointer
-@onready var visibleNotifier:VisibleOnScreenNotifier2D=$VisibleOnScreenNotifier2D
 func _ready():
+	print("emepzar")
 	conectHit()
 	_ready_help()
 
@@ -52,6 +52,7 @@ func onHitDamage(forceHit:bool):
 		print("auxilio")
 	else:
 		playSound("audioHit",0.7,0.8)
+		$hitMe/CollisionShape2D.disabled=true
 
 func normal():
 	animEffects.play("end_hit")

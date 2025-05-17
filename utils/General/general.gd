@@ -12,6 +12,7 @@ var dataGame={
 	"hit":0
 }
 var endGame:bool=false
+var fase:int=0
 func string_to_vector2(input: String) -> Vector2:
 	var partsTemp = input.replace("(","").replace(")","").split(",")
 	if partsTemp.size() == 2:
@@ -180,3 +181,17 @@ func applyPitchScale(audio,min:float,max:float):
 	var pich= randf_range(min,max)
 	audio.pitch_scale=pich
 	audio.play()
+
+func shakeSprite(sprite:Sprite2D,min:float=0.1,max:float=0.1,offset:bool=false):
+	randomize()
+	if offset:
+		sprite.offset= Vector2(randf_range(min,max),randf_range(min,max))
+	else:
+		sprite.position= Vector2(randf_range(min,max),randf_range(min,max))
+
+func addNode(package,pos:Vector2):
+	var nodeCurrent= package.instantiate()
+	var level= get_tree().get_first_node_in_group("level")
+	level.add_child(nodeCurrent)
+	nodeCurrent.global_position=pos
+	return nodeCurrent

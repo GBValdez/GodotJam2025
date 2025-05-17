@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Hit
 @export_category("Config")
 @export_group("general")
 @export var hit: int = 1;

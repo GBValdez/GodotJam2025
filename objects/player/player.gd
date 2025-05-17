@@ -17,7 +17,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	buffer.update(delta)
-	print(INERTIA)
 	# Detectar entrada del jugador
 	if (enableControl):
 		direction = Vector2.ZERO

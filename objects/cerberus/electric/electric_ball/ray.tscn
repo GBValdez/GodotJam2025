@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b51n6l0mnfjcl"]
+[gd_scene load_steps=18 format=3 uid="uid://b51n6l0mnfjcl"]
 
-[ext_resource type="Script" uid="uid://sd52ftw77ntj" path="res://objects/cerberus/electric/electric_ball/ray.gd" id="1_af0l2"]
+[ext_resource type="Script" uid="uid://cqxo4py1nlym0" path="res://objects/cerberus/commons/proyectileCommons.gd" id="1_af0l2"]
 [ext_resource type="Texture2D" uid="uid://b2c4d3mlgsrw" path="res://objects/cerberus/electric/sprites/effects/sparks/Lighting 2.png" id="2_af0l2"]
-[ext_resource type="Script" uid="uid://drnk3bnb7ymks" path="res://objects/cerberus/electric/electric_ball/hit_other.gd" id="3_wlni2"]
+[ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="2_ji2ql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bqon"]
 atlas = ExtResource("2_af0l2")
@@ -48,50 +48,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gtdua"]
-radius = 8.0
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q77j2"]
 radius = 13.0
-
-[sub_resource type="Animation" id="Animation_r3yye"]
-resource_name = "ray"
-length = 0.17
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"default"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("hitOther/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.17),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_dhksc"]
 length = 0.001
@@ -119,6 +79,94 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r3yye"]
+resource_name = "ray"
+length = 1.46667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.23333, 1.26667, 1.3, 1.33333, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("hitOther/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D2:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.23669),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.23333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bo3xq"]
 _data = {
@@ -126,19 +174,37 @@ _data = {
 &"ray": SubResource("Animation_r3yye")
 }
 
+[sub_resource type="Gradient" id="Gradient_ji2ql"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u2bqc"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_ji2ql")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_af0l2"]
+emission_shape = 2
+emission_sphere_radius = 8.25
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -1.6
+tangential_accel_max = 17.5
+scale_min = 0.7
+color = Color(0.966374, 0.962133, 0.835461, 1)
+color_ramp = SubResource("GradientTexture1D_u2bqc")
+
 [node name="ray" type="CharacterBody2D"]
 script = ExtResource("1_af0l2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_nmgdo")
 frame = 1
 
 [node name="hitOther" type="Area2D" parent="."]
 collision_layer = 0
-script = ExtResource("3_wlni2")
+script = ExtResource("2_ji2ql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
-position = Vector2(0, 21)
 shape = SubResource("CircleShape2D_gtdua")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -155,3 +221,10 @@ scale = Vector2(1.6, 1.85)
 libraries = {
 &"": SubResource("AnimationLibrary_bo3xq")
 }
+autoplay = "ray"
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_af0l2")

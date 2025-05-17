@@ -22,16 +22,12 @@ func shotAttack(delta:float):
 		var dirPlayer:Vector2=markerSelected.global_position-cancerbero.global_position 
 		cancerbero.direction= dirPlayer.normalized() 
 		if dirPlayer.length()<20:
-			$timerHelp.wait_time=0.2
-			$timerHelp.start()
-			$timerEndAttack.wait_time=15
-			$timerEndAttack.start()
+			startAlarms(15,0.2)
 			cancerbero.direction=Vector2.ZERO
 			if cancerbero.velocity.length()==0:
 				cancerbero.sprite.scale.x=-1
 				if markerSelected==$maker_left:
 					cancerbero.sprite.scale.x=1
-				generateNumAttacks(3,5)
 				initAttack=false
 
 	else:
@@ -70,8 +66,7 @@ func rebound(delta:float):
 		var tornadoCurrent= shotTornado(cancerbero.global_position,dir,10)
 		tornadoCurrent.scale.x=2
 		tornadoCurrent.scale.y=2
-		$timerEndAttack.wait_time=10
-		$timerEndAttack.start()
+		startAlarms(10,-1)
 		initAttack=false
 	else:
 		var dirPlayer:Vector2=player.global_position-cancerbero.global_position 
@@ -91,10 +86,7 @@ func attackTornado(delta:float):
 		var dirPlayer:Vector2=markerSelected.global_position-cancerbero.global_position 
 		cancerbero.direction= dirPlayer.normalized() 
 		if dirPlayer.length()<20:
-			$timerHelp.wait_time=0.3
-			$timerHelp.start()
-			$timerEndAttack.wait_time=20
-			$timerEndAttack.start()
+			startAlarms(20,0.3)
 			cancerbero.direction=Vector2.ZERO
 			if cancerbero.velocity.length()==0:
 				cancerbero.sprite.scale.x=-1
@@ -131,6 +123,13 @@ func shotThree(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 
 
 func _physics_process(delta: float) -> void:
+	stopSound()
+	apparecing()
+	deapparecing()
+	if cancerbero.health==0:
+		return
+	if initFight:
+		return
 	if not canInitAttack:
 		return
 	shotAttack(delta)	

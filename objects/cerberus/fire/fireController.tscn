@@ -13,7 +13,7 @@ point_count = 5
 script = ExtResource("1_f6wed")
 
 [node name="cancerbero" parent="." instance=ExtResource("2_rke2b")]
-position = Vector2(161, 141)
+position = Vector2(274, -155)
 
 [node name="shotTimer" type="Timer" parent="."]
 wait_time = 0.05
@@ -23,7 +23,11 @@ one_shot = true
 wait_time = 0.05
 one_shot = true
 
-[node name="timerAssoult" type="Timer" parent="."]
+[node name="timerHelp" type="Timer" parent="."]
+one_shot = true
+
+[node name="timerEndAttack" type="Timer" parent="."]
+wait_time = 30.0
 one_shot = true
 
 [node name="pathFire" type="Path2D" parent="."]
@@ -37,8 +41,4 @@ rotation = 0.0038314
 position = Vector2(27, 20)
 rotation = 0.0038314
 
-[node name="timerCross" type="Timer" parent="."]
-wait_time = 30.0
-one_shot = true
-
-[connection signal="timeout" from="timerCross" to="." method="_on_timer_cross_timeout"]
+[connection signal="timeout" from="timerEndAttack" to="." method="_on_timer_cross_timeout"]

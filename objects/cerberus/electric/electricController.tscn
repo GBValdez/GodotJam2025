@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://48myo55eowtp"]
+
+[ext_resource type="Script" uid="uid://c2gmbju6vdmrv" path="res://objects/cerberus/electric/electric_controller.gd" id="1_nb06w"]
+[ext_resource type="PackedScene" uid="uid://vsnw2mhav6bm" path="res://objects/cerberus/electric/cerberus_electric.tscn" id="2_nb06w"]
+
+[node name="electricController" type="Node2D"]
+script = ExtResource("1_nb06w")
+
+[node name="cancerbero" parent="." instance=ExtResource("2_nb06w")]
+position = Vector2(294, -94)
+
+[node name="shotTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="shotTimerCancerbero" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="timerHelp" type="Timer" parent="."]
+one_shot = true
+
+[node name="timerEndAttack" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="timerEndAttack" to="." method="_on_timer_end_attack_timeout"]

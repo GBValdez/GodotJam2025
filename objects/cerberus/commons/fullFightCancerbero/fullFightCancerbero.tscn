@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gwuwrg8u31pd"]
+
+[ext_resource type="Script" uid="uid://cxrpy61hkqfcl" path="res://objects/cerberus/commons/fullFightCancerbero/full_fight_cancerbero.gd" id="1_t2lrr"]
+
+[node name="FullFightCancerbero" type="Node2D"]
+script = ExtResource("1_t2lrr")

@@ -27,7 +27,7 @@ wait_time = 0.05
 one_shot = true
 
 [node name="cancerbero" parent="." instance=ExtResource("2_j7irq")]
-position = Vector2(280, 48)
+position = Vector2(280, -144)
 
 [node name="maker_right" type="Marker2D" parent="."]
 position = Vector2(544, 160)
