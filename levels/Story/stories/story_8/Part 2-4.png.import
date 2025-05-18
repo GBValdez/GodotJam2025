@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6srha53aoxnp"
-path="res://.godot/imported/1.png-17a1b8fbef63d31159da27edb22c4e97.ctex"
+uid="uid://bq5dfucg8qf5a"
+path="res://.godot/imported/Part 2-4.png-30b79bf155fabf2a4ad1d3360e8e108d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/Story/Sprites/1.png"
-dest_files=["res://.godot/imported/1.png-17a1b8fbef63d31159da27edb22c4e97.ctex"]
+source_file="res://levels/Story/stories/story_8/Part 2-4.png"
+dest_files=["res://.godot/imported/Part 2-4.png-30b79bf155fabf2a4ad1d3360e8e108d.ctex"]
 
 [params]
 

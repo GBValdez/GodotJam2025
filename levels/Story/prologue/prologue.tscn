@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfsbcyyld4x1u"]
+
+[ext_resource type="Script" uid="uid://ehi7mx8b4vw5" path="res://levels/Story/prologue/prologue.gd" id="1_qbff4"]
+[ext_resource type="AudioStream" uid="uid://c1kx1jij80fdv" path="res://utils/music/Cinematic_01.ogg" id="2_x30hh"]
+
+[node name="Prologue" type="Node2D" groups=["level"]]
+script = ExtResource("1_qbff4")
+
+[node name="audioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x30hh")
+autoplay = true

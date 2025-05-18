@@ -52,6 +52,10 @@ ui_change={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://utils/General/dialog.en.translation", "res://utils/General/dialog.es.translation")
+
 [layer_names]
 
 2d_physics/layer_1="player"

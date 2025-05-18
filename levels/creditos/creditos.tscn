@@ -74,19 +74,19 @@ size_flags_vertical = 4
 
 [node name="Label14" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
+text = "Thank you very much for playing"
+
+[node name="Label15" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
 
 [node name="Label19" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Programmer: Gabriel Valdez"
 
-[node name="Label20" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Programmer: Jonathan Zor"
-
-[node name="Label15" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+[node name="Label21" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 
@@ -123,6 +123,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Sound effects: Lydium Music
 "
+
+[node name="Label20" type="Label" parent="CanvasLayer/Marker2D/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Assistant programmer: Jonathan Zor"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" groups=["blackSquare"]]
 visible = false

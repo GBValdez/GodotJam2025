@@ -1,0 +1,238 @@
+[gd_scene load_steps=16 format=3 uid="uid://j5tby21m45ex"]
+
+[ext_resource type="Script" uid="uid://c1jcyy148nfb5" path="res://levels/Story/script/storyCommons.gd" id="1_88vo4"]
+[ext_resource type="Texture2D" uid="uid://bq5dfucg8qf5a" path="res://levels/Story/stories/story_8/Part 2-4.png" id="2_ckca7"]
+[ext_resource type="FontFile" uid="uid://clg72uxkok5a1" path="res://levels/Story/Fonts/dogica.ttf" id="3_44a42"]
+[ext_resource type="AudioStream" uid="uid://b2072rml47t10" path="res://levels/Story/Sounds/typewriter-key-1.wav" id="4_fuiy2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckca7"]
+atlas = ExtResource("2_ckca7")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea7al"]
+atlas = ExtResource("2_ckca7")
+region = Rect2(0, 160, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85c5h"]
+atlas = ExtResource("2_ckca7")
+region = Rect2(0, 320, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkr7a"]
+atlas = ExtResource("2_ckca7")
+region = Rect2(0, 480, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhepc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckca7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea7al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85c5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkr7a")
+}],
+"loop": true,
+"name": &"animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_7rj6x"]
+length = 0.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Story1_animation:root_node")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("..")]
+}
+
+[sub_resource type="Animation" id="Animation_8y4ci"]
+resource_name = "idle"
+length = 0.14
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Story1_animation:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0234545),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Story1_animation:root_node")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.14),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("..")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ah6h2"]
+_data = {
+&"RESET": SubResource("Animation_7rj6x"),
+&"idle": SubResource("Animation_8y4ci")
+}
+
+[sub_resource type="Animation" id="Animation_i22y4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_vquhp"]
+resource_name = "Text"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhepc"]
+_data = {
+&"RESET": SubResource("Animation_i22y4"),
+&"Text": SubResource("Animation_vquhp")
+}
+
+[node name="Story8" type="Node2D"]
+script = ExtResource("1_88vo4")
+dialog = "dialog_8"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -217.0
+offset_right = 418.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(288, 112)
+sprite_frames = SubResource("SpriteFrames_rhepc")
+animation = &"animation"
+autoplay = "animation"
+frame = 1
+speed_scale = -0.115
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 512.0
+offset_bottom = 296.0
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("3_44a42")
+scroll_following = true
+autowrap_mode = 2
+
+[node name="Story1_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ah6h2")
+}
+autoplay = "idle"
+speed_scale = 0.05
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fuiy2")
+
+[node name="Text" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Erase una vez…
+ O eso susurran quienes aún se atreven a recordarlo.
+ La verdad es que el bosque guarda un silencio inquietante, como si contuviera la respiración.
+ El pueblo intento ponerle nombre…
+ Bestia.
+ Sombra.
+ Monstruo.
+ Sediento de sangre, con una ira inhumana y un rugido que helaba la sangre.
+ Nadie sabe con certeza de dónde vino.
+ Ni siquiera si alguna vez fue realmente humano."
+
+[node name="Text1_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_rhepc")
+}
+autoplay = "Text"

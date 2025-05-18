@@ -1,0 +1,265 @@
+[gd_scene load_steps=17 format=3 uid="uid://dapykjrkrny2d"]
+
+[ext_resource type="Texture2D" uid="uid://c6srha53aoxnp" path="res://levels/Story/Sprites/1.png" id="1_flmcw"]
+[ext_resource type="Script" uid="uid://bxj3heddjmwfq" path="res://levels/Story/stories/story_1/story_1.gd" id="1_imhpx"]
+[ext_resource type="AudioStream" uid="uid://b2072rml47t10" path="res://levels/Story/Sounds/typewriter-key-1.wav" id="3_mg1cn"]
+[ext_resource type="FontFile" uid="uid://clg72uxkok5a1" path="res://levels/Story/Fonts/dogica.ttf" id="3_vquhp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imhpx"]
+atlas = ExtResource("1_flmcw")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg1cn"]
+atlas = ExtResource("1_flmcw")
+region = Rect2(0, 160, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vquhp"]
+atlas = ExtResource("1_flmcw")
+region = Rect2(0, 320, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i22y4"]
+atlas = ExtResource("1_flmcw")
+region = Rect2(0, 480, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhepc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imhpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg1cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vquhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vquhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i22y4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_7rj6x"]
+length = 0.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Story1_animation:root_node")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("..")]
+}
+
+[sub_resource type="Animation" id="Animation_rhepc"]
+resource_name = "Shadow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_8y4ci"]
+resource_name = "idle"
+length = 0.14
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Story1_animation:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0234545),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Story1_animation:root_node")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.14),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [NodePath("..")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ah6h2"]
+_data = {
+&"RESET": SubResource("Animation_7rj6x"),
+&"Shadow": SubResource("Animation_rhepc"),
+&"idle": SubResource("Animation_8y4ci")
+}
+
+[sub_resource type="Animation" id="Animation_i22y4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_vquhp"]
+resource_name = "Text"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhepc"]
+_data = {
+&"RESET": SubResource("Animation_i22y4"),
+&"Text": SubResource("Animation_vquhp")
+}
+
+[node name="Story1" type="Node2D"]
+script = ExtResource("1_imhpx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -217.0
+offset_right = 418.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(288, 112)
+scale = Vector2(1.59975, 1.04399)
+sprite_frames = SubResource("SpriteFrames_rhepc")
+frame = 1
+speed_scale = -0.115
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 512.0
+offset_bottom = 296.0
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("3_vquhp")
+scroll_following = true
+autowrap_mode = 2
+
+[node name="Story1_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ah6h2")
+}
+speed_scale = 0.05
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mg1cn")
+
+[node name="Text" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Erase una vez…
+ O eso susurran quienes aún se atreven a recordarlo.
+ La verdad es que el bosque guarda un silencio inquietante, como si contuviera la respiración.
+ El pueblo intento ponerle nombre…
+ Bestia.
+ Sombra.
+ Monstruo.
+ Sediento de sangre, con una ira inhumana y un rugido que helaba la sangre.
+ Nadie sabe con certeza de dónde vino.
+ Ni siquiera si alguna vez fue realmente humano."
+
+[node name="Text1_animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_rhepc")
+}
