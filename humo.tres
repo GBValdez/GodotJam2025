@@ -1,4 +1,4 @@
-[gd_resource type="ParticleProcessMaterial" load_steps=7 format=3 uid="uid://cdcn4lwdklnvu"]
+[gd_resource type="ParticleProcessMaterial" load_steps=7 format=3 uid="uid://s46ak0lenxv7"]
 
 [sub_resource type="Curve" id="Curve_w5vl8"]
 _data = [Vector2(0, 0.018868), 0.0, 5.60647, 0, 0, Vector2(0.502, 0.562264), 0.0, 0.0, 0, 0, Vector2(0.99, 0.00377357), 0.0, 0.0, 0, 0]
@@ -8,7 +8,7 @@ point_count = 3
 curve = SubResource("Curve_w5vl8")
 
 [sub_resource type="Curve" id="Curve_51o8j"]
-min_value = -1.0
+_limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -0.449057), 0.0, 0.0, 0, 0, Vector2(0.498, 0.516981), 0.0, 0.0, 0, 0, Vector2(1, -0.539623), 0.0, 0.0, 0, 0]
 point_count = 3
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq3vs2wejflvh"]
+
+[ext_resource type="Script" uid="uid://c4707xrx3vsum" path="res://levels/Story/cinematic/cinematic.gd" id="1_k4rrp"]
+[ext_resource type="AudioStream" uid="uid://c1kx1jij80fdv" path="res://utils/music/Cinematic_01.ogg" id="2_65ppg"]
+[ext_resource type="PackedScene" uid="uid://bv86t5p33qqjj" path="res://utils/General/controls/gui.tscn" id="3_c573t"]
+
+[node name="Cinematic" type="Node2D" groups=["level"]]
+script = ExtResource("1_k4rrp")
+
+[node name="audioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_65ppg")
+pitch_scale = 0.5
+autoplay = true
+
+[node name="gui" parent="." instance=ExtResource("3_c573t")]

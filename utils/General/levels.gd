@@ -37,7 +37,6 @@ func _ready():
 			if zone.camera == currentCamera.camera:
 				currentCamera.zones.append(zone)
 		listPhamToCamera.append(currentCamera)
-	
 	var playersNode=  get_tree().get_nodes_in_group("player")
 	General.players.clear()
 	for player in playersNode:
@@ -63,7 +62,7 @@ func _ready():
 	TWEN.set_ease(Tween.EASE_IN_OUT)
 	TWEN.tween_property(squareBlock,"color",Color(0,0,0,0),1)
 	TWEN.connect("finished",endInitSquare)
-	
+
 	var musicNode:Array[Node]=get_tree().get_nodes_in_group("music_node")	
 	for musNode:AudioStreamPlayer in musicNode:
 		listMusic.append(musNode)
@@ -76,7 +75,9 @@ func _ready():
 			TWENMUSIC.tween_property(musNode,"volume_db",dbCurrent,1)
 	if General.players.size()==0:
 		General.setCamera(listPhamToCamera[0].camera)
-		
+	General.createTimer(0.5,startLevel)
+func startLevel():
+	JoystickGeneral.initJoysTick()		
 func setShadow(enable:bool):
 	var nodes= get_tree().get_nodes_in_group("pointLight")
 	for light  in nodes:

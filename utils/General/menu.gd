@@ -32,8 +32,15 @@ func setOptions():
 	pass
 
 func move():
-	var up:int= 1 if Input.is_action_pressed("ui_up")else 0
-	var down:int=1 if Input.is_action_pressed("ui_down") else 0
+	var up:int=0
+	var down:int=0
+	
+	if JoystickGeneral.joysticks.size()==1:
+		up= 1 if JoystickGeneral.joysticks[0].direccion.y<0 else 0
+		down= 1 if JoystickGeneral.joysticks[0].direccion.y>0 else 0
+	else:
+		up= 1 if Input.is_action_pressed("ui_up")  else 0
+		down=1 if Input.is_action_pressed("ui_down") else 0
 	if(up!=1 and down!=1):
 		return
 	canMove=false

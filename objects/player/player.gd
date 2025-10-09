@@ -6,23 +6,42 @@ class_name  Player
 var previousVelocity:Vector2=Vector2.ZERO
 var buffer : bufferPlayer= bufferPlayer.new()
 var currentDash:bool= false
+var attackExtra:float=0;
+var attackBase:float=15;
+var attackBaseExtra:float=30;
+var ultimeDirection:Vector2=Vector2.ZERO
 @onready var inmorTimer:Timer= $inmortalidad
+@onready var attackBar:attack_bar= $"CanvasLayer/attack-bar"
 
 @export var blockMove:bool=false;
 func _ready() -> void:
 	anim.play("idle")
-	#General.shakeCamera(5, 10)
+	JoystickGeneral.initJoysTick()
 
-	
+func onHitOther(body: Node2D):
+	var enemy:enemyBasic=body.get_parent();
+	if (enemy.is_in_group("entity")):
+		var isDamage:bool= enemy.hitDamage(attackBase+(attackBaseExtra*attackExtra/100),global_position,enemy.forceHitMe,false)
+		if isDamage:
+			attackExtra+=2
+			if attackExtra>=100:
+				attackExtra=100
+			attackBar.setCant(2.0/100.0)
+			
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	if health==0:
+		return
 	buffer.update(delta)
 	# Detectar entrada del jugador
 	if (enableControl):
 		direction = Vector2.ZERO
 		if (not blockMove):
-			direction.x = Input.get_axis("ui_left", "ui_right")
-			direction.y = Input.get_axis("ui_up", "ui_down")
+			if JoystickGeneral.joysticks.size()>0:
+				direction= JoystickGeneral.joysticks[0].direccion
+			else:
+				direction.x = int(Input.is_action_pressed("ui_left"))
+			ultimeDirection=direction
 	direction = direction.normalized()
 	# Aplicar movimiento basado en entrada
 	velocity += direction * SPEED*delta	
@@ -34,7 +53,18 @@ func _physics_process(delta: float) -> void:
 	previousVelocity=velocity
 	move_and_slide()
 	animation()
-	
+
+func moreAttack(damage):
+	attackExtra+=3.5*damage
+	attackBar.setCant(3.5/100)
+	if attackExtra>=100:
+		attackExtra=100
+	else:
+		animEffects.play("avalaible")
+		General.createTimer(0.1,normalEffect)
+func normalEffect():
+	animEffects.play("normal")
+
 func animation():
 	if General.endGame:
 		return
@@ -135,15 +165,23 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match  anim_name:
 		"dash_up","dash_down","dash_lateral":
 			currentDash=false
-func onHitDamage(forceHit:bool):
+func onHitDamage(forceHit:bool,damage:float):
 	if((not inmortal or forceHit) and  enableControl):
+		var music:AudioStreamPlayer= get_tree().get_first_node_in_group("music")
+		music.pitch_scale+=0.1
 		inmorTimer.start()
 		inmortal=true
+		attackExtra=0
+		attackBar.empty()
 		if(health>0):
 			playSoundRandom(["audioHit","audioHit2"],1,1.1)
 
 		else:
 			playSoundRandom(["audioHit","audioHit2"],0.7,0.8)
+			anim.play("death")
+			music.stop()
+			$sprite/GPUParticles2D.emitting=false
+			General.createTimer(2,resetGame)
 		General.shakeCamera(2, 1)
 		animEffects.play("hit")
 	
@@ -156,7 +194,8 @@ func onHitDamage(forceHit:bool):
 		TWEN.tween_property(self,"modulate", Color(1, 1, 1,0.5),0.2)
 		timer.connect("timeout", _finishGlish);
 	
-	
+func resetGame():
+	get_tree().reload_current_scene()
 
 func _finishGlish():
 	var TWEN = get_tree().create_tween()
@@ -164,8 +203,8 @@ func _finishGlish():
 	TWEN.set_ease(Tween.EASE_IN_OUT)
 	TWEN.tween_property(Engine, "time_scale", 1, 0.05)
 	animEffects.play("normal")
-	if(health==0):
-		get_tree().reload_current_scene()
+	#if(health==0):
+	#	get_tree().reload_current_scene()
 
 func death():
 	pass

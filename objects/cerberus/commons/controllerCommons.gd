@@ -32,7 +32,7 @@ func apparecing():
 			cancerbero.direction=Vector2.ZERO
 		
 func deapparecing():
-	if cancerbero.health==0:
+	if cancerbero.health<=0:
 		cancerbero.get_node("CollisionShape2D").disabled=true
 		var dirPlayer:Vector2=cancerbero.global_position-Vector2(300,150) 
 		cancerbero.direction=dirPlayer.normalized()

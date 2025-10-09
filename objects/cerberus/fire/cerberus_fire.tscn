@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c63x1bf80svej"]
+[gd_scene load_steps=29 format=3 uid="uid://c63x1bf80svej"]
 
 [ext_resource type="Script" uid="uid://by5m7u8mpryvg" path="res://objects/cerberus/fire/cerberus_fire.gd" id="1_he64u"]
 [ext_resource type="Texture2D" uid="uid://dbjcohylva2u8" path="res://objects/cerberus/fire/sprites/run.png" id="1_rmqa1"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bdwify7ymwtpc" path="res://objects/cerberus/commons/sounds/Cerbero_Magia.wav" id="6_bevhv"]
 [ext_resource type="AudioStream" uid="uid://eodfm006sp12" path="res://objects/cerberus/commons/sounds/Cerbero_Aullido.wav" id="7_xf686"]
 [ext_resource type="AudioStream" uid="uid://qbyaupvkywgl" path="res://objects/cerberus/commons/sounds/Cerbero_Recibe_Daño.wav" id="8_xf686"]
+[ext_resource type="PackedScene" uid="uid://buk4gbgj6nyc" path="res://utils/General/live-bar/live_bar.tscn" id="10_jmnr8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmnr8"]
 shader = ExtResource("2_grnaw")
@@ -224,7 +225,7 @@ _data = {
 size = Vector2(49, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmnr8"]
-size = Vector2(24, 25)
+size = Vector2(30, 30)
 
 [sub_resource type="Gradient" id="Gradient_3kae2"]
 interpolation_mode = 2
@@ -366,8 +367,8 @@ _data = {
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_he64u")
-forceHitMe = 100
-health = 6
+forceHitMe = 10
+health = 200
 INERTIA = 700.0
 LIMIT = 200
 SPEED_LIMIT = 500.0
@@ -393,12 +394,11 @@ libraries = {
 autoplay = "idle"
 
 [node name="hitMe" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
-visible = false
 position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_grnaw")
 
@@ -408,7 +408,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 visible = false
-position = Vector2(-3, 7.5)
+position = Vector2(-1, 7)
 shape = SubResource("RectangleShape2D_jmnr8")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -436,3 +436,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_grnaw")
 }
 autoplay = "normal"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="live-bar" parent="CanvasLayer" instance=ExtResource("10_jmnr8")]
+position = Vector2(245, 304)

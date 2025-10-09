@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bv4qxsxwvk5ne"]
+[gd_scene load_steps=18 format=3 uid="uid://bv4qxsxwvk5ne"]
 
 [ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_jwuxd"]
 [ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cmjrq2jfyto1x" path="res://utils/music/Main_menu_loop.ogg" id="10_xbnbe"]
 [ext_resource type="AudioStream" uid="uid://cyt3qvqcchi7y" path="res://utils/effect/menu/Boton_Select.wav" id="12_1ymek"]
 [ext_resource type="AudioStream" uid="uid://b1squri1wehd2" path="res://utils/effect/menu/Boton_Press.wav" id="13_1xw1r"]
+[ext_resource type="PackedScene" uid="uid://bv86t5p33qqjj" path="res://utils/General/controls/gui.tscn" id="13_1ymek"]
 
 [sub_resource type="Resource" id="Resource_k7p71"]
 script = ExtResource("6_7qy4h")
@@ -163,3 +164,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_s7axx")
 }
 autoplay = "idle"
+
+[node name="gui" parent="." instance=ExtResource("13_1ymek")]

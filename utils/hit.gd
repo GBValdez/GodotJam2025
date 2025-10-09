@@ -6,9 +6,16 @@ class_name Hit
 @export var force:float =200;
 @export var forceHit:bool=false;
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	connect("body_entered", enter_hit)
+func onHitOtherAvalaible(body: Node2D):
+	if (body.is_in_group("player-avalaible")):
+		var entityBody = body.get_parent().get_parent() as Player
+		if entityBody!=null:
+			entityBody.moreAttack(1)
 
+func _ready():
+	connect("body_entered", enter_hit)	
+	connect("area_entered", onHitOtherAvalaible)
+	
 func enter_hit(body: Node2D):
 	if (body.is_in_group("player")):
 		var entityBody = body as Entity

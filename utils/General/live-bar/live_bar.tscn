@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://buk4gbgj6nyc"]
+
+[ext_resource type="Texture2D" uid="uid://cj0lhkh7vdfd7" path="res://utils/General/live-bar/bar.png" id="1_l53ca"]
+[ext_resource type="Script" uid="uid://cwjv2ftabpw41" path="res://utils/General/live-bar/live_bar.gd" id="1_vgw7y"]
+[ext_resource type="Texture2D" uid="uid://bvg3ouuliuvdg" path="res://utils/General/live-bar/healt_bar.png" id="2_avdny"]
+[ext_resource type="Shader" uid="uid://cuykb7ahlp5w" path="res://utils/General/live-bar/live_bar.gdshader" id="2_vgw7y"]
+[ext_resource type="Texture2D" uid="uid://ddx3g85pa3m4t" path="res://utils/General/live-bar/Sprite-0003.png" id="3_vgw7y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgw7y"]
+shader = ExtResource("2_vgw7y")
+shader_parameter/life = 0.0
+shader_parameter/totalLife = 100.0
+shader_parameter/variant = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1esad"]
+shader = ExtResource("2_vgw7y")
+shader_parameter/life = 0.0
+shader_parameter/totalLife = 100.0
+shader_parameter/variant = 0.0
+
+[node name="live-bar" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_vgw7y")
+
+[node name="content" type="Sprite2D" parent="."]
+texture = ExtResource("1_l53ca")
+offset = Vector2(37, -1)
+
+[node name="reallive" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vgw7y")
+texture = ExtResource("2_avdny")
+offset = Vector2(37, -1)
+
+[node name="live" type="Sprite2D" parent="."]
+modulate = Color(0.52549, 1, 1, 1)
+material = SubResource("ShaderMaterial_1esad")
+texture = ExtResource("2_avdny")
+offset = Vector2(37, -1)
+
+[node name="icon" type="Sprite2D" parent="."]
+texture = ExtResource("3_vgw7y")

@@ -3,8 +3,6 @@ extends menuCtrl
 			
 func _readyAux() -> void:
 	selectItem(0)
-	TranslationServer.set_locale("en")
-
 func setOptions():
 	match (currentOpt):
 		0:

@@ -19,7 +19,7 @@ func assault(delta:float):
 		cancerbero.LIMIT=700
 		cancerbero.direction= dirPlayer.normalized() 
 		initAttack=false
-		startAlarms(10,1)
+		startAlarms(10,1.3)
 	else:
 		shotWithTimeCerbero()
 		if $timerHelp.is_stopped():

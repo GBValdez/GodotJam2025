@@ -24,15 +24,18 @@ func apply_limit(delta)->void:
 	if abs(velocity.y) > abs(limitNormalize.y):
 		velocity.y -= normalizeV.y * SPEED_LIMIT * delta
 
-func hitDamage(damage: int, point: Vector2,force:float,forceHit:bool=false):
+func hitDamage(damage: int, point: Vector2,force:float,forceHit:bool=false)->bool:
 	if ((health > 0 && not inmortal) or forceHit):	
 		health -= damage
 		velocity = (global_position - point).normalized() * force
-		onHitDamage(forceHit)
+		onHitDamage(forceHit,damage)
+		return true
 	if (health <= 0):
 		death()
+		return true
+	return false
 
-func onHitDamage(forceHit:bool):
+func onHitDamage(forceHit:bool,damage:float):
 	pass
 func death():
 	pass

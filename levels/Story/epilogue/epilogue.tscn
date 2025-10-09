@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqrg1kv2hvk8s"]
+[gd_scene load_steps=3 format=3 uid="uid://dqrg1kv2hvk8s"]
 
 [ext_resource type="Script" uid="uid://br7fih6djghdn" path="res://levels/Story/epilogue/epilogue.gd" id="1_hmj57"]
+[ext_resource type="PackedScene" uid="uid://bv86t5p33qqjj" path="res://utils/General/controls/gui.tscn" id="2_i4yii"]
 
 [node name="Epilogue" type="Node2D" groups=["level"]]
 script = ExtResource("1_hmj57")
+
+[node name="gui" parent="." instance=ExtResource("2_i4yii")]

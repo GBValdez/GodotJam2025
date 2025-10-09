@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://jaudt8vb1l3"]
+
+[ext_resource type="Texture2D" uid="uid://c5a6uafppbcq1" path="res://objects/shade/sprite/Assets.png" id="1_1kheb"]
+[ext_resource type="Script" uid="uid://dgtgpfi43mull" path="res://objects/shade/bulletDark/dark_bullet.gd" id="1_q1ukk"]
+[ext_resource type="Shader" uid="uid://ddccq6bc10evk" path="res://objects/shade/bulletDark/darkBullet.gdshader" id="2_tle80"]
+[ext_resource type="Script" uid="uid://cv2pbxk4vmuve" path="res://utils/hit.gd" id="3_30adm"]
+
+[sub_resource type="Gradient" id="Gradient_30adm"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.509091, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.995914, 0.685623, 0.624658, 0.662745, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q1ukk"]
+gradient = SubResource("Gradient_30adm")
+
+[sub_resource type="Curve" id="Curve_3rmph"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.992647, 0.932584), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ea5y"]
+curve = SubResource("Curve_3rmph")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dju82"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 7.17
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -1.16
+tangential_accel_max = 27.58
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_6ea5y")
+color_ramp = SubResource("GradientTexture1D_q1ukk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30adm"]
+shader = ExtResource("2_tle80")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q1ukk"]
+radius = 11.0
+
+[node name="darkBullet" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_q1ukk")
+speed = 600.0
+returnPlat = true
+keepTime = 0.5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 5
+texture = ExtResource("1_1kheb")
+lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_dju82")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1kheb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_30adm")
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="hitOther" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource("3_30adm")
+force = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
+shape = SubResource("CircleShape2D_q1ukk")

@@ -8,6 +8,7 @@ var current_index = 0
 var waiting = false
 var special_chars = ["\n"]  
 var char_velocity = 0.009;
+var timeSleep=0;
 @export() var dialog:String=""
 signal finishScene
 func _ready() -> void:
@@ -28,8 +29,16 @@ func _process(delta: float) -> void:
 		waiting = true
 		await get_tree().create_timer(time_on_end).timeout
 		show_next_text()
-		
-
+		time_on_end=1
+	if Input.is_action_just_pressed("ui_action"):
+		$Text1_animation.stop()
+		var text:RichTextLabel = $%RichTextLabel
+		text.visible_ratio=1
+		time_on_end=2.25
+	if Input.is_action_pressed("ui_action"):
+		timeSleep+=delta
+		if timeSleep>3:
+			_endScene()
 func assign_text():
 	var text= tr(dialog)
 	var words = text.split(" ")

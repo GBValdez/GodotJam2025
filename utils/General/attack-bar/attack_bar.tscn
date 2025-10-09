@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf7sgw341bjkn"]
+
+[ext_resource type="Texture2D" uid="uid://c8ccnjhdvb5eg" path="res://utils/General/attack-bar/spr_contorno_attack.png" id="1_rq83g"]
+[ext_resource type="Script" uid="uid://cb5k5gaaxnn5p" path="res://utils/General/attack-bar/attack_bar.gd" id="2_gkmyt"]
+[ext_resource type="Shader" uid="uid://f4ic6trr6xmr" path="res://utils/General/attack-bar/attack-bar.gdshader" id="2_kku70"]
+[ext_resource type="Texture2D" uid="uid://bj38txmrvvpj8" path="res://utils/General/attack-bar/sprite_relleno.png" id="3_gkmyt"]
+[ext_resource type="Texture2D" uid="uid://dglj6ostm5un4" path="res://utils/General/attack-bar/spr_lleno.png" id="4_kku70"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0uo2"]
+shader = ExtResource("2_kku70")
+shader_parameter/fill_amount = 0.0
+
+[node name="attack-bar" type="Sprite2D"]
+texture = ExtResource("1_rq83g")
+script = ExtResource("2_gkmyt")
+
+[node name="stuffed" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_n0uo2")
+texture = ExtResource("3_gkmyt")
+
+[node name="full" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_kku70")

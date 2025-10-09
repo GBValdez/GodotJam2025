@@ -22,7 +22,7 @@ func shotAttack(delta:float):
 		var dirPlayer:Vector2=markerSelected.global_position-cancerbero.global_position 
 		cancerbero.direction= dirPlayer.normalized() 
 		if dirPlayer.length()<20:
-			startAlarms(15,0.2)
+			startAlarms(15,0.4)
 			cancerbero.direction=Vector2.ZERO
 			if cancerbero.velocity.length()==0:
 				cancerbero.sprite.scale.x=-1
@@ -35,7 +35,7 @@ func shotAttack(delta:float):
 			if dirs.size()==0:
 				randomize()
 				var degreeRandom:int = randi_range(0,360)
-				for i in range(7):
+				for i in range(3):
 					var radShot:float=deg_to_rad(degreeRandom+i*30)
 					var dir:Vector2= Vector2(cos(radShot),sin(radShot))		
 					if markerSelected==$maker_left:
@@ -53,7 +53,7 @@ func rebound(delta:float):
 	if not attack=="rebound":
 		return
 	if initAttack:
-		for i in range(7):
+		for i in range(5):
 			var radShot:float=deg_to_rad(i*45+10)
 			var dir:Vector2= Vector2(cos(radShot),sin(radShot))		
 			var bullet=shot(cancerbero.global_position,dir,10)

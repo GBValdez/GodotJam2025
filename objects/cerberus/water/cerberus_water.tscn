@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bho03prxroykj"]
+[gd_scene load_steps=29 format=3 uid="uid://bho03prxroykj"]
 
 [ext_resource type="Script" uid="uid://b4qkr7w3m8y8c" path="res://objects/cerberus/water/cerberus_water.gd" id="1_e2i8p"]
 [ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_tnhka"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bdwify7ymwtpc" path="res://objects/cerberus/commons/sounds/Cerbero_Magia.wav" id="6_lys0j"]
 [ext_resource type="AudioStream" uid="uid://eodfm006sp12" path="res://objects/cerberus/commons/sounds/Cerbero_Aullido.wav" id="7_tnhka"]
 [ext_resource type="AudioStream" uid="uid://qbyaupvkywgl" path="res://objects/cerberus/commons/sounds/Cerbero_Recibe_Daño.wav" id="8_tnhka"]
+[ext_resource type="PackedScene" uid="uid://buk4gbgj6nyc" path="res://utils/General/live-bar/live_bar.tscn" id="10_2sk16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmnr8"]
 shader = ExtResource("2_tnhka")
@@ -360,14 +361,14 @@ _data = {
 size = Vector2(49, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2sk16"]
-size = Vector2(24, 25)
+size = Vector2(29, 30)
 
 [node name="cerberus_water" type="CharacterBody2D" groups=["entity"]]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_e2i8p")
-forceHitMe = 100
-health = 6
+forceHitMe = 10
+health = 200
 INERTIA = 700.0
 LIMIT = 200
 SPEED_LIMIT = 500.0
@@ -423,12 +424,11 @@ libraries = {
 autoplay = "normal"
 
 [node name="hitMe" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
+collision_layer = 2
+collision_mask = 0
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
-visible = false
 position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_tnhka")
 
@@ -438,5 +438,10 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 visible = false
-position = Vector2(-3, 7.5)
+position = Vector2(-1.5, 6)
 shape = SubResource("RectangleShape2D_2sk16")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="live-bar" parent="CanvasLayer" instance=ExtResource("10_2sk16")]
+position = Vector2(256, 296)

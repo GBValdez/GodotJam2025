@@ -5,10 +5,10 @@ var bulletScene
 var dirShot:Vector2= Vector2.ZERO
 @onready var shotPointer= $sprite/shotPointer
 func _ready():
-	print("emepzar")
+	liveBar= $"CanvasLayer/live-bar"
 	conectHit()
 	_ready_help()
-
+	liveBar.start(health)
 func _ready_help():
 	pass
 	
@@ -23,14 +23,9 @@ func shot():
 	return bulletCurrent
 	
 
-func motion(delta:float):
-	velocity += direction * SPEED*delta	
-	apply_inertia(delta,direction)
-	apply_limit(delta) 
-	move_and_slide()
 
 func _physics_process(delta: float) -> void:
-	motion(delta)
+	move(delta)
 	animation()
 
 func animation():
@@ -41,20 +36,3 @@ func animation():
 		anim.play("idle")
 	if velocity.x!=0:
 		sprite.scale.x= sign(velocity.x) * abs(sprite.scale.x)
-	
-func onHitDamage(forceHit:bool):
-	animEffects.play("hit")
-	General.shakeCamera(2,0.2)
-	inmortal=true
-	if health>0:
-		playSound("audioHit")
-		General.createTimer(5,normal)
-		print("auxilio")
-	else:
-		playSound("audioHit",0.7,0.8)
-		$hitMe/CollisionShape2D.disabled=true
-
-func normal():
-	animEffects.play("end_hit")
-	inmortal=false
-	
