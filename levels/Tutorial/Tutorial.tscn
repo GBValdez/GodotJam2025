@@ -560,7 +560,7 @@ curve = SubResource("Curve2D_1ex1j")
 [node name="endLevel" parent="." instance=ExtResource("12_5ts84")]
 position = Vector2(200, -1712)
 collision_mask = 1
-redirectLevel = "D:/backup/Documentos/Godot Proyectos/Game Jam Wild/levels/Story/cinematic/cinematic.tscn"
+redirectLevel = "res://levels/Story/cinematic/cinematic.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="endLevel"]
 position = Vector2(112, -46)
