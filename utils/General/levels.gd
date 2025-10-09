@@ -75,7 +75,8 @@ func _ready():
 			TWENMUSIC.tween_property(musNode,"volume_db",dbCurrent,1)
 	if General.players.size()==0:
 		General.setCamera(listPhamToCamera[0].camera)
-	General.createTimer(0.5,startLevel)
+	General.createTimer(1,startLevel)
+	JoystickGeneral.reset()
 func startLevel():
 	JoystickGeneral.initJoysTick()		
 func setShadow(enable:bool):

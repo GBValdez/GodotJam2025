@@ -5,10 +5,11 @@ func _ready() -> void:
 	connect("body_entered",enter)
 	connect("area_entered",enterArea2D)
 func enter(body:Node2D):
-	if(body.get_parent().is_in_group("player")):
+	
+	if(body.is_in_group("playerPro")):
 		General.go_to_level(redirectLevel)
 
 
 func enterArea2D(body:Area2D):
-	if(body.get_parent().is_in_group("player")):
+	if(body.is_in_group("playerPro")):
 		General.go_to_level(redirectLevel)		

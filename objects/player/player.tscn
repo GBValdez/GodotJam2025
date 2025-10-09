@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6i26cm4cvd2x"]
+[gd_scene load_steps=51 format=3 uid="uid://c6i26cm4cvd2x"]
 
 [ext_resource type="Script" uid="uid://c2fntvxmbu07g" path="res://objects/player/player.gd" id="1_tln4k"]
 [ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_45rsp"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://v3xovamcenpx" path="res://objects/player/sound/hit/Player_RecibeDaño_2.wav" id="18_28utn"]
 [ext_resource type="AudioStream" uid="uid://xo7xap8fsri4" path="res://objects/player/sound/Player_Dash.wav" id="20_28utn"]
 [ext_resource type="PackedScene" uid="uid://bf7sgw341bjkn" path="res://utils/General/attack-bar/attack_bar.tscn" id="22_u8bnf"]
+[ext_resource type="PackedScene" uid="uid://bv86t5p33qqjj" path="res://utils/General/controls/gui.tscn" id="23_lc6id"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssrue"]
 size = Vector2(20, 11)
@@ -1271,6 +1272,7 @@ tracks/0/keys = {
 shader = ExtResource("2_45rsp")
 shader_parameter/colorFull = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.7
+shader_parameter/alpha = 1.0
 
 [sub_resource type="Animation" id="Animation_lc6id"]
 resource_name = "avalaible"
@@ -1385,6 +1387,10 @@ script = ExtResource("1_tln4k")
 health = 4
 SPEED = 200.0
 
+[node name="attack-bar" parent="." instance=ExtResource("22_u8bnf")]
+modulate = Color(1, 1, 1, 0.403922)
+position = Vector2(23, -31)
+
 [node name="sprite" type="Sprite2D" parent="."]
 z_as_relative = false
 y_sort_enabled = true
@@ -1481,10 +1487,7 @@ stream = ExtResource("17_dthqj")
 [node name="audioDash" type="AudioStreamPlayer" parent="audio"]
 stream = ExtResource("20_28utn")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="attack-bar" parent="CanvasLayer" instance=ExtResource("22_u8bnf")]
-position = Vector2(24, 24)
+[node name="gui" parent="." instance=ExtResource("23_lc6id")]
 
 [connection signal="area_entered" from="sprite/HitOther" to="." method="onHitOther"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

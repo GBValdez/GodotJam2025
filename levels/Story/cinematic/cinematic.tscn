@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq3vs2wejflvh"]
+[gd_scene load_steps=5 format=3 uid="uid://bq3vs2wejflvh"]
 
 [ext_resource type="Script" uid="uid://c4707xrx3vsum" path="res://levels/Story/cinematic/cinematic.gd" id="1_k4rrp"]
 [ext_resource type="AudioStream" uid="uid://c1kx1jij80fdv" path="res://utils/music/Cinematic_01.ogg" id="2_65ppg"]
-[ext_resource type="PackedScene" uid="uid://bv86t5p33qqjj" path="res://utils/General/controls/gui.tscn" id="3_c573t"]
+
+[sub_resource type="Gradient" id="Gradient_x30hh"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6tgq1"]
+gradient = SubResource("Gradient_x30hh")
 
 [node name="Cinematic" type="Node2D" groups=["level"]]
 script = ExtResource("1_k4rrp")
@@ -12,4 +17,18 @@ stream = ExtResource("2_65ppg")
 pitch_scale = 0.5
 autoplay = true
 
-[node name="gui" parent="." instance=ExtResource("3_c573t")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="attack_button" type="TouchScreenButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-64.0001, -198)
+scale = Vector2(12.2188, 9.84375)
+texture_normal = SubResource("GradientTexture2D_6tgq1")
+action = "ui_action"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -18.0
+offset_top = -16.0
+offset_right = 661.0
+offset_bottom = 373.0
+color = Color(0, 0, 0, 1)

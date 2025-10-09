@@ -1,9 +1,10 @@
 extends Entity
 class_name enemyBasic;
+
 @export_category("Enemy Atributes")
 @export var forceHit=1000;
 @export var forceHitMe=1000;
-
+@export var pichVolume:Vector2 = Vector2(1,1)
 @onready var hitAreaMe:Area2D= $hitMe
 @onready var hitAreaOther:Area2D= $hitOther
 @onready var liveBar:LiveBar=$"live-bar"
@@ -48,10 +49,12 @@ func onHitDamage(forceHit:bool,damage:float):
 	inmortal=true
 	liveBar.hit(damage)
 	if health>0:
-		#playSound("audioHit")
+		playSound("audioHit",pichVolume.x,pichVolume.y)
 		General.createTimer(2,normal)
 	else:
-		#playSound("audioHit",0.7,0.8)
+		playSound("audioHit",0.7* pichVolume.x,0.8* pichVolume.y)
+		$GPUParticles2D.emitting=true
+		animEffects.play("dead")
 		$hitMe/CollisionShape2D.disabled=true
 
 func normal():

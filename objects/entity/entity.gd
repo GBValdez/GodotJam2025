@@ -14,7 +14,7 @@ var inmortal:bool=false
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var animEffects: AnimationPlayer = $AnimEffects
 var direction:Vector2= Vector2.ZERO
-@onready var sprite = $sprite
+@onready var sprite:Sprite2D = $sprite
 
 func apply_limit(delta)->void:
 	var normalizeV= velocity.normalized()

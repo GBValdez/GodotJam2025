@@ -76,9 +76,8 @@ func show_next_text():
 		waiting = false
 	else:
 		_endAnimation()
-		General.createTimer(2,_endScene)
+		General.createTimer(5,_endScene)
 func _endScene():
 	finishScene.emit()
-	queue_free()
 func _endAnimation():
 	pass

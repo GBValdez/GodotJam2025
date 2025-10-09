@@ -15,6 +15,7 @@
 shader = ExtResource("2_grnaw")
 shader_parameter/colorFull = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.4
+shader_parameter/alpha = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pipyo"]
 size = Vector2(45, 45)

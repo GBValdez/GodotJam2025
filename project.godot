@@ -11,10 +11,11 @@ config_version=5
 [application]
 
 config/name="Schutten Re:flections"
-run/main_scene="res://levels/MenuPrincipal/menu_principal.tscn"
+run/main_scene="uid://1jqp0kj31t1b"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="uid://c2uphg1ymb7sk"
 config/windows_native_icon="res://utils/General/Logo_Schutten.ico"
 
@@ -73,3 +74,4 @@ locale/translations=PackedStringArray("res://utils/General/dialog.en.translation
 
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

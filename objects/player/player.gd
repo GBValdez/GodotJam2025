@@ -11,7 +11,7 @@ var attackBase:float=15;
 var attackBaseExtra:float=30;
 var ultimeDirection:Vector2=Vector2.ZERO
 @onready var inmorTimer:Timer= $inmortalidad
-@onready var attackBar:attack_bar= $"CanvasLayer/attack-bar"
+@onready var attackBar:attack_bar= $"attack-bar"
 
 @export var blockMove:bool=false;
 func _ready() -> void:
@@ -40,7 +40,8 @@ func _process(delta: float) -> void:
 			if JoystickGeneral.joysticks.size()>0:
 				direction= JoystickGeneral.joysticks[0].direccion
 			else:
-				direction.x = int(Input.is_action_pressed("ui_left"))
+				direction.x = Input.get_axis("ui_left", "ui_right")
+				direction.y = Input.get_axis("ui_up", "ui_down")
 			ultimeDirection=direction
 	direction = direction.normalized()
 	# Aplicar movimiento basado en entrada

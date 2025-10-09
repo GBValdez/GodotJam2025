@@ -121,13 +121,15 @@ func go_to_level(levelNew:String):
 	createTimer(2,endLevel.bind(levelNew))
 	
 func  endLevel(levelNew:String):
+	print("ejecutar endlevel")
 	var squareBlock= get_tree().get_first_node_in_group("blackSquare")	
 	squareBlock.visible=true
 	var TWEN = get_tree().create_tween()
 	TWEN.set_trans(Tween.TRANS_CUBIC)
 	TWEN.set_ease(Tween.EASE_IN_OUT)
 	TWEN.tween_property(squareBlock,"color",Color(0,0,0,1),1)
-	TWEN.connect("finished",redirection.bind(levelNew))
+	print("ejecutar finished")
+	General.createTimer(1,redirection.bind(levelNew))
 	
 	var musicNode:AudioStreamPlayer=get_tree().get_first_node_in_group("music_node")	
 	if(musicNode!=null):
@@ -135,14 +137,17 @@ func  endLevel(levelNew:String):
 		TWENMUSIC.set_trans(Tween.TRANS_CUBIC)
 		TWENMUSIC.set_ease(Tween.EASE_IN_OUT)
 		TWENMUSIC.tween_property(musicNode,"volume_db",-100,1)
+	print("se ejecuto todito")
 
 		
 func redirection(redirectLevel:String):
+	print("adonde rey")
 	if(redirectLevel!=""):
 		if redirectLevel=="reset":
 			get_tree().reload_current_scene()
 		else:
 			currentEndpont=null
+			print("redireccionear")
 			get_tree().change_scene_to_file(redirectLevel)
 	else:
 		get_tree().quit()

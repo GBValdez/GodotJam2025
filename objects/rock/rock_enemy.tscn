@@ -1,46 +1,181 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2v52t57mnh8o"]
+[gd_scene load_steps=26 format=3 uid="uid://b2v52t57mnh8o"]
 
 [ext_resource type="Script" uid="uid://h3vw71kbjhiv" path="res://objects/rock/rock_enemy.gd" id="1_m6tv3"]
-[ext_resource type="Shader" uid="uid://htkvi2nj1k1a" path="res://utils/shaders/mixColor.gdshader" id="2_vcpf4"]
-[ext_resource type="Texture2D" uid="uid://crnyomf3kwj6m" path="res://objects/rock/sprite/roca.png" id="3_2j1ns"]
+[ext_resource type="Texture2D" uid="uid://o5dgd62ag81s" path="res://objects/rock/sprite/Stone monster walk.png" id="3_1pjnj"]
+[ext_resource type="Texture2D" uid="uid://qves0uu2snwa" path="res://objects/rock/sprite/Stone monster.png" id="3_5s2ng"]
 [ext_resource type="PackedScene" uid="uid://buk4gbgj6nyc" path="res://utils/General/live-bar/live_bar.tscn" id="4_1pjnj"]
+[ext_resource type="Texture2D" uid="uid://bcorp7nhp25u5" path="res://objects/rock/sprite/Stone monster jump.png" id="4_sq7b2"]
+[ext_resource type="Texture2D" uid="uid://c5a6uafppbcq1" path="res://objects/shade/sprite/Assets.png" id="7_ieich"]
+[ext_resource type="AudioStream" uid="uid://qbyaupvkywgl" path="res://objects/cerberus/commons/sounds/Cerbero_Recibe_Daño.wav" id="7_w3mff"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmnr8"]
-shader = ExtResource("2_vcpf4")
-shader_parameter/colorFull = Color(1, 1, 1, 1)
-shader_parameter/intensity = 0.4
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pjnj"]
-size = Vector2(49, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcpf4"]
-size = Vector2(30, 16)
-
-[sub_resource type="Animation" id="Animation_jmnr8"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_1pjnj"]
+resource_name = "idle"
+length = 0.70001
+loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
+tracks/0/path = NodePath("sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("ShaderMaterial_jmnr8")]
+"values": [ExtResource("4_sq7b2")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
+tracks/1/path = NodePath("sprite:vframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_5s2ng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_sq7b2"]
+resource_name = "run"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_5s2ng")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ieich"]
+resource_name = "walk"
+length = 0.6667
+loop_mode = 1
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_1pjnj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sq7b2"]
+_data = {
+&"RESET": SubResource("Animation_5s2ng"),
+&"idle": SubResource("Animation_1pjnj"),
+&"run": SubResource("Animation_sq7b2"),
+&"walk": SubResource("Animation_ieich")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pjnj"]
+size = Vector2(38, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcpf4"]
+size = Vector2(29, 35)
+
+[sub_resource type="Animation" id="Animation_jmnr8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.4]
+"values": [Color(1, 1, 1, 0.756863)]
 }
 
 [sub_resource type="Animation" id="Animation_o5htm"]
@@ -50,26 +185,14 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
+tracks/0/path = NodePath("sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_jmnr8")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.396533),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.5, 0.0]
+"values": [Color(1, 1, 1, 0.670588), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xf686"]
@@ -79,26 +202,14 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
+tracks/0/path = NodePath("sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("ShaderMaterial_jmnr8")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:material:shader_parameter/intensity")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.393483),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.4]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.45098)]
 }
 
 [sub_resource type="Animation" id="Animation_grnaw"]
@@ -108,44 +219,93 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:material")
+tracks/0/path = NodePath("sprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w3mff"]
+resource_name = "dead"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.384332, 0.905925),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_grnaw"]
 _data = {
 &"RESET": SubResource("Animation_jmnr8"),
+&"dead": SubResource("Animation_w3mff"),
 &"end_hit": SubResource("Animation_o5htm"),
 &"hit": SubResource("Animation_xf686"),
 &"normal": SubResource("Animation_grnaw")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2j1ns"]
-size = Vector2(37, 21)
+size = Vector2(32, 39)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2j1ns"]
 radius = 119.038
+
+[sub_resource type="Gradient" id="Gradient_w3mff"]
+offsets = PackedFloat32Array(0, 0.154696, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.152941, 0.152941, 0.152941, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_65431"]
+gradient = SubResource("Gradient_w3mff")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwnvw"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 2
+emission_sphere_radius = 18.0
+angle_min = -720.0
+angle_max = 693.6
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 14.69
+radial_accel_max = 14.69
+tangential_accel_min = 10.61
+tangential_accel_max = 10.61
+scale_min = 0.5
+scale_max = 0.6
+color = Color(1, 1, 1, 0.45098)
+color_ramp = SubResource("GradientTexture1D_65431")
 
 [node name="rock_enemy" type="CharacterBody2D" groups=["entity"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_m6tv3")
 forceHitMe = 300
+pichVolume = Vector2(0.5, 0.6)
 health = 20
 LIMIT = 50
 
 [node name="sprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_jmnr8")
-scale = Vector2(0.03925, 0.03925)
-texture = ExtResource("3_2j1ns")
+modulate = Color(1, 1, 1, 0.756863)
+position = Vector2(0, 7)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_sq7b2")
+vframes = 7
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sq7b2")
+}
+autoplay = "idle"
 
 [node name="hitMe" type="Area2D" parent="."]
 collision_layer = 2
@@ -154,7 +314,7 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitMe"]
 visible = false
-position = Vector2(-0.5, 3)
+position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_1pjnj")
 
 [node name="hitOther" type="Area2D" parent="."]
@@ -163,6 +323,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 visible = false
+position = Vector2(-0.5, 13.5)
 shape = SubResource("RectangleShape2D_vcpf4")
 
 [node name="AnimEffects" type="AnimationPlayer" parent="."]
@@ -172,7 +333,8 @@ libraries = {
 autoplay = "normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
+visible = false
+position = Vector2(0, 12.5)
 shape = SubResource("RectangleShape2D_2j1ns")
 
 [node name="detectPlayer" type="Area2D" parent="."]
@@ -186,5 +348,18 @@ shape = SubResource("CircleShape2D_2j1ns")
 [node name="live-bar" parent="." instance=ExtResource("4_1pjnj")]
 position = Vector2(-32, -19)
 scale = Vector2(1, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = ExtResource("7_ieich")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_hwnvw")
+
+[node name="audio" type="Node" parent="."]
+
+[node name="audioHit" type="AudioStreamPlayer" parent="audio"]
+stream = ExtResource("7_w3mff")
+pitch_scale = 0.5
 
 [connection signal="body_entered" from="detectPlayer" to="." method="_on_detect_player_body_entered"]

@@ -8,11 +8,15 @@ func _ready() -> void:
 	General.createTimer(5,_showTwo)
 	
 func _showTwo():
+	#General.go_to_level("res://Levels/MenuPrincipal/menu_principal.tscn")
 	modifyBlack(1,0.5)
-	General.createTimer(0.5,_showTwoNow)
+	General.createTimer(1,_showTwoNow)
+	print("safawfqwf")
 
 func _showTwoNow():
-	General.go_to_level("res://Levels/MenuPrincipal/menu_principal.tscn")
+	print("hhhh")
+	#General.go_to_level("res://Levels/MenuPrincipal/menu_principal.tscn")
+	get_tree().change_scene_to_file("res://levels/MenuPrincipal/menu_principal.tscn")
 	
 
 func modifyBlack(a:float,time:float):
@@ -20,7 +24,3 @@ func modifyBlack(a:float,time:float):
 	TWEN.set_trans(Tween.TRANS_CUBIC)
 	TWEN.set_ease(Tween.EASE_IN_OUT)
 	TWEN.tween_property($CanvasLayer/ColorRect,"color",Color(0,0,0,a),time)
-	
-
-func endTween():
-	General.go_to_level("res://Levels/MenuPrincipal/menu_principal.tscn")

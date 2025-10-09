@@ -90,5 +90,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_timer_cross_timeout() -> void:
-	changeAttack()
+	changeAttack(8)
 	cancerbero.direction=Vector2.ZERO

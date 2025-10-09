@@ -24,3 +24,10 @@ position = Vector2(-64.0001, -198)
 scale = Vector2(12.2188, 9.84375)
 texture_normal = SubResource("GradientTexture2D_u5684")
 action = "ui_action"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -18.0
+offset_top = -16.0
+offset_right = 661.0
+offset_bottom = 373.0
+color = Color(0, 0, 0, 1)

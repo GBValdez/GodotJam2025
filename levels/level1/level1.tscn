@@ -98,17 +98,17 @@ script = ExtResource("3_r2nwx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
-visible = false
-offset_right = 1151.0
-offset_bottom = 647.0
-color = Color(0, 0, 0, 1)
-
 [node name="ColorRect2" type="ColorRect" parent="Camera2D/CanvasLayer"]
 material = SubResource("ShaderMaterial_n5g8f")
 offset_right = 746.0
 offset_bottom = 402.0
 color = Color(1, 1, 1, 0.439216)
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
+visible = false
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 1)
 
 [node name="shockWave" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["shockWave"]]
 material = SubResource("ShaderMaterial_xc23s")

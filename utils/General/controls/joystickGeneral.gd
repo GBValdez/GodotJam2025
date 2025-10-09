@@ -1,5 +1,7 @@
 extends Node
 var joysticks:Array[Joystick]=[]
+func reset():
+	joysticks=[]
 func _ready() -> void:
 	initJoysTick()
 func initJoysTick():
