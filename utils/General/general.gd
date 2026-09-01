@@ -6,7 +6,7 @@ var savePath:String="user://Data.dat"
 var dataGame={
 	"music_db":1,
 	"sfx_db":1,
-	"currentLevel":"res://Levels/tutorial.tscn",
+	"currentLevel":"res://levels/Tutorial/Tutorial.tscn",
 	"endpoint":"",
 	"deaths":0,
 	"hit":0
