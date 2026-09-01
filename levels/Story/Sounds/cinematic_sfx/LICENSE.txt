@@ -1,0 +1,15 @@
+Cinematic sound effects used in this folder are CC0 assets from OpenGameArt unless noted otherwise.
+
+Sources:
+- schutten_laugh.ogg: Evil Cackle Laugh 1 by Nocturnal_Vanguard, CC0, https://opengameart.org/content/evil-cackle-laugh-1
+- witch_reveal.ogg: Witch Cackle by AntumDeluge, CC0, https://opengameart.org/content/witch-cackle
+- wolf_barks.wav: Dog barking mono by Brandon Morris / submitted by HaelDB, CC0 also listed on asset page, https://opengameart.org/content/dog-barking-mono
+- monster_snarl.ogg: Monster snarls by Darsycho, CC0, https://opengameart.org/content/monster-snarls
+- forest_whisper.ogg: Ambient horror by techiew, CC0, https://opengameart.org/content/ambient-horror
+- shadow_sting.ogg: String and piano horror stings by congusbongus, CC0, https://opengameart.org/content/string-and-piano-horror-stings
+- mirror_reveal.ogg: Long Sci-fi Sting by Fupi, CC0, https://opengameart.org/content/long-sci-fi-sting
+- stone_shift.wav: Jump Landing by Macro, CC0 also listed on asset page, https://opengameart.org/content/jump-landing
+- final_void.ogg: Scary High-pitched Ghost by Fupi, CC0, https://opengameart.org/content/scary-high-pitched-ghost
+- lukas_scream.wav: Male Grunt/Yelling sounds by HaelDB, CC0 also listed on asset page, https://opengameart.org/content/male-gruntyelling-sounds
+
+Attribution is not required for CC0, but these links are kept for license traceability.

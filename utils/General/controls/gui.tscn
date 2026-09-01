@@ -11,16 +11,16 @@
 script = ExtResource("1_b5uyh")
 
 [node name="dash_button" type="TouchScreenButton" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(563, 165)
+modulate = Color(1, 1, 1, 0.52)
+position = Vector2(488, 154)
 scale = Vector2(0.0890625, 0.0890625)
 texture_normal = ExtResource("3_lsagc")
 texture_pressed = ExtResource("4_8s0h0")
 action = "ui_dash"
 
 [node name="attack_button" type="TouchScreenButton" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-position = Vector2(499, 244)
+modulate = Color(1, 1, 1, 0.52)
+position = Vector2(488, 244)
 scale = Vector2(0.089, 0.089)
 texture_normal = ExtResource("1_6h2t7")
 texture_pressed = ExtResource("2_v7don")

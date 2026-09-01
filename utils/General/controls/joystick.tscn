@@ -11,12 +11,12 @@ radius = 63.9531
 script = ExtResource("1_ix6ns")
 
 [node name="Joystick" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(1, 1, 1, 0.52)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_mhyh3")
 
 [node name="JoystickOutline" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
+modulate = Color(1, 1, 1, 0.52)
 scale = Vector2(0.147786, 0.147786)
 texture = ExtResource("2_ix6ns")
 

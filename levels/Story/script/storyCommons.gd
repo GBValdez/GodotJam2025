@@ -15,6 +15,10 @@ var _last_sound_character := 0
 var _sound_players: Array[AudioStreamPlayer2D] = []
 var _sound_player_index := 0
 var _advance_started := false
+var _cue_player: AudioStreamPlayer
+var _ambient_player: AudioStreamPlayer
+var _sfx_streams: Dictionary = {}
+var _played_cues: Dictionary = {}
 
 @export() var dialog: String = ""
 signal finishScene
@@ -24,6 +28,18 @@ const TEXT_BOTTOM_MARGIN := 22.0
 const TEXT_HEIGHT := 126.0
 const READ_CHARS_PER_SECOND := 20.0
 const SOUND_PLAYER_COUNT := 5
+const CUE_MAP := {
+	"dialog_2": {0: "forest_whisper"},
+	"dialog_6": {0: "forest_whisper", 1: "stone_shift"},
+	"dialog_7": {0: "shadow_sting", 2: "shadow_sting"},
+	"dialog_8": {0: "shadow_sting", 1: "mirror_reveal", 2: "final_void"},
+	"dialog_9": {0: "witch_reveal", 3: "witch_reveal"},
+	"dialog_10": {1: "stone_shift", 2: "shadow_sting"},
+	"dialog_11": {0: "wolf_barks", 1: "monster_snarl"},
+	"dialog_12": {1: "shadow_sting", 2: "schutten_laugh", 6: "mirror_reveal"},
+	"dialog_13": {0: "mirror_reveal", 4: "schutten_laugh", 5: "lukas_scream"},
+	"dialog_14": {0: "final_void", 5: "shadow_sting"}
+}
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(_apply_layout)
@@ -35,6 +51,7 @@ func _ready() -> void:
 	if sections.is_empty():
 		sections.append("")
 	_setup_type_sounds()
+	_setup_story_sfx()
 	$Text1_animation.stop()
 	_set_current_text()
 
@@ -139,6 +156,7 @@ func _set_current_text() -> void:
 	text_box.text = String(sections[current_index])
 	text_box.visible_ratio = 1.0
 	text_box.visible_characters = 0
+	_play_story_cue()
 
 func _configure_text_box(text_box: RichTextLabel) -> void:
 	text_box.bbcode_enabled = false
@@ -171,23 +189,76 @@ func _play_type_sound(new_visible_characters: int) -> void:
 	_last_sound_character = new_visible_characters
 	if typed_character == " " or typed_character == "\n" or typed_character == "\t":
 		return
-	var player := _sound_players[_sound_player_index]
+	if _sound_players.is_empty():
+		return
+	var player: AudioStreamPlayer2D = _sound_players[_sound_player_index]
 	_sound_player_index = (_sound_player_index + 1) % _sound_players.size()
 	player.stop()
 	player.play()
 
 func _setup_type_sounds() -> void:
 	_sound_players.clear()
-	var original := $AudioStreamPlayer2D as AudioStreamPlayer2D
+	var original: AudioStreamPlayer2D = $AudioStreamPlayer2D as AudioStreamPlayer2D
 	_sound_players.append(original)
 	for i in range(SOUND_PLAYER_COUNT - 1):
-		var player := AudioStreamPlayer2D.new()
+		var player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 		player.name = "TypeSound" + str(i + 2)
 		player.stream = original.stream
 		player.volume_db = original.volume_db
 		player.pitch_scale = original.pitch_scale
 		add_child(player)
 		_sound_players.append(player)
+
+func _setup_story_sfx() -> void:
+	_sfx_streams = {
+		"forest_whisper": load("res://levels/Story/Sounds/cinematic_sfx/forest_whisper.ogg"),
+		"shadow_sting": load("res://levels/Story/Sounds/cinematic_sfx/shadow_sting.ogg"),
+		"witch_reveal": load("res://levels/Story/Sounds/cinematic_sfx/witch_reveal.ogg"),
+		"stone_shift": load("res://levels/Story/Sounds/cinematic_sfx/stone_shift.wav"),
+		"wolf_barks": load("res://levels/Story/Sounds/cinematic_sfx/wolf_barks.wav"),
+		"monster_snarl": load("res://levels/Story/Sounds/cinematic_sfx/monster_snarl.ogg"),
+		"schutten_laugh": load("res://levels/Story/Sounds/cinematic_sfx/schutten_laugh.ogg"),
+		"mirror_reveal": load("res://levels/Story/Sounds/cinematic_sfx/mirror_reveal.ogg"),
+		"lukas_scream": load("res://levels/Story/Sounds/cinematic_sfx/lukas_scream.wav"),
+		"final_void": load("res://levels/Story/Sounds/cinematic_sfx/final_void.ogg")
+	}
+	_cue_player = AudioStreamPlayer.new()
+	_cue_player.name = "StoryCuePlayer"
+	_cue_player.volume_db = -7.0
+	add_child(_cue_player)
+	_ambient_player = AudioStreamPlayer.new()
+	_ambient_player.name = "StoryAmbientPlayer"
+	_ambient_player.volume_db = -14.0
+	add_child(_ambient_player)
+
+func _play_story_cue() -> void:
+	if !CUE_MAP.has(dialog):
+		return
+	var cue_by_index: Dictionary = CUE_MAP[dialog]
+	if !cue_by_index.has(current_index):
+		return
+	var cue_name: String = String(cue_by_index[current_index])
+	var cue_key: String = dialog + ":" + str(current_index)
+	if _played_cues.has(cue_key):
+		return
+	_played_cues[cue_key] = true
+	_play_cue_stream(cue_name)
+
+func _play_cue_stream(cue_name: String) -> void:
+	if !_sfx_streams.has(cue_name):
+		return
+	var stream: AudioStream = _sfx_streams[cue_name] as AudioStream
+	if stream == null:
+		return
+	if cue_name == "forest_whisper":
+		if stream is AudioStreamWAV:
+			(stream as AudioStreamWAV).loop_mode = AudioStreamWAV.LOOP_FORWARD
+		_ambient_player.stream = stream
+		_ambient_player.play()
+		return
+	_cue_player.stop()
+	_cue_player.stream = stream
+	_cue_player.play()
 
 func _finish_current_text() -> void:
 	if waiting:
