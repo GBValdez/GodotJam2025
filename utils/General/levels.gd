@@ -3,7 +3,7 @@ class_name level
 var listPhamToCamera: Array[camera2dInfo] = []
 var listMusic:Array[AudioStreamPlayer]=[]
 var squareBlock:ColorRect
-@onready var animPlay:AnimationPlayer=$AnimationPlayer
+@onready var animPlay: AnimationPlayer = get_node_or_null("AnimationPlayer") as AnimationPlayer
 @export var labelFPS:Label
 @export var saveLevel:bool=true
 # Called when the node enters the scene tree for the first time.

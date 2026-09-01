@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv4qxsxwvk5ne"]
+[gd_scene load_steps=19 format=3 uid="uid://bv4qxsxwvk5ne"]
 
 [ext_resource type="Script" uid="uid://cp8r4kn527ovw" path="res://utils/General/levels.gd" id="1_jwuxd"]
 [ext_resource type="Script" uid="uid://bbfnl2bs1idca" path="res://utils/camera/cameraUtils.gd" id="2_ipj18"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://jefe05u3a4dq" path="res://levels/MenuPrincipal/menuCtrl.gd" id="8_cfeoc"]
 [ext_resource type="Script" uid="uid://h8o3lm2jyyrl" path="res://levels/MenuPrincipal/canvas_menu.gd" id="8_dwtby"]
 [ext_resource type="Script" uid="uid://c1k1utarmpqux" path="res://utils/General/zone.gd" id="8_qq8ly"]
+[ext_resource type="Script" path="res://utils/General/responsive_screen.gd" id="14_responsive"]
 [ext_resource type="AudioStream" uid="uid://cmjrq2jfyto1x" path="res://utils/music/Main_menu_loop.ogg" id="10_xbnbe"]
 [ext_resource type="AudioStream" uid="uid://cyt3qvqcchi7y" path="res://utils/effect/menu/Boton_Select.wav" id="12_1ymek"]
 [ext_resource type="AudioStream" uid="uid://b1squri1wehd2" path="res://utils/effect/menu/Boton_Press.wav" id="13_1xw1r"]
@@ -81,7 +82,7 @@ scale = Vector2(1.01, 1.01)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Camera2D/CanvasLayer/Marker2D"]
 position = Vector2(-248.515, 27.7228)
-scale = Vector2(0.618516, 0.618516)
+scale = Vector2(1.237032, 1.237032)
 sprite_frames = ExtResource("6_xbnbe")
 animation = &"gif"
 autoplay = "gif"
@@ -166,3 +167,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="gui" parent="." instance=ExtResource("13_1ymek")]
+
+[node name="ResponsiveScreen" type="Node" parent="Camera2D/CanvasLayer"]
+script = ExtResource("14_responsive")
+target_path = NodePath("../Marker2D")
