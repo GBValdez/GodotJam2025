@@ -10,7 +10,7 @@ func _ready_help():
 	bulletScene=load("res://objects/cerberus/water/balls_water/ball_water.tscn")
 	typeAttack=["shotAttack","rebound","attackTornado"]
 func tornado_attack_scale() -> float:
-	return 1.0 + float(General.get_cerberus_difficulty(phase_key)) * 0.08
+	return 1.0 + float(General.get_cerberus_difficulty(phase_key)) * 0.05
 
 func tornado_attack_wait(time: float) -> float:
 	return time * hard_scale() / tornado_attack_scale()
@@ -105,7 +105,7 @@ func attackTornado(delta:float):
 				var tornadoCurrent = shotTornado(cancerbero.global_position,Vector2.ZERO,20)
 				tornadoCurrent.scale.x=3
 				tornadoCurrent.scale.y=3
-				tornadoCurrent.forceAtraction=tornado_attack_stat(1400)
+				tornadoCurrent.forceAtraction=tornado_attack_stat(1250)
 				player.INERTIA=0
 	else:
 		if $timerHelp.is_stopped():

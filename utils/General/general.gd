@@ -13,8 +13,8 @@ var dataGame={
 }
 var endGame:bool=false
 var fase:int=0
-const CERBERUS_MAX_DIFFICULTY := 3
-const CERBERUS_DIFFICULTY_STEP := 0.18
+const CERBERUS_MAX_DIFFICULTY := 2
+const CERBERUS_DIFFICULTY_STEP := 0.10
 var active_cerberus_phase := ""
 var cerberus_difficulty := {
 	"fire": CERBERUS_MAX_DIFFICULTY,
@@ -40,7 +40,7 @@ func get_cerberus_scale(phase_key: String) -> float:
 	return 1.0 + float(get_cerberus_difficulty(phase_key)) * CERBERUS_DIFFICULTY_STEP
 
 func get_cerberus_health_scale(phase_key: String) -> float:
-	return 1.0 + float(get_cerberus_difficulty(phase_key)) * 0.12
+	return 1.0 + float(get_cerberus_difficulty(phase_key)) * 0.08
 
 func scale_cerberus_wait(time: float, phase_key: String) -> float:
 	if time <= 0.0:
