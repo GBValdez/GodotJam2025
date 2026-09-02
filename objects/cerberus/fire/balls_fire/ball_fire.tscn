@@ -54,7 +54,7 @@ process_material = SubResource("ParticleProcessMaterial_n1mll")
 collision_layer = 0
 monitorable = false
 script = ExtResource("3_hnb0h")
-force = 1000.0
+force = 700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 shape = SubResource("CircleShape2D_oee5m")

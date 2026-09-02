@@ -36,7 +36,7 @@ void fragment() {
 	float noise = texture(noise_texture, uv).r;
 	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
 	// and clamp it between 0.0 and 1.0 again
-	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	float fog = clamp(noise * 2.55 - 0.58, 0.0, 1.0);
 	// Apply the fog effect
 	COLOR.a *= fog * density;
 }
@@ -56,7 +56,7 @@ noise = SubResource("FastNoiseLite_f7y8c")
 shader = SubResource("Shader_tkc1i")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xc23s")
 shader_parameter/density = 1.0
-shader_parameter/speed = Vector2(0.02, 0.02)
+shader_parameter/speed = Vector2(0.016, 0.024)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xc23s"]
 shader = ExtResource("5_3k3ue")
@@ -197,9 +197,9 @@ script = ExtResource("3_5ts84")
 
 [node name="ColorRect2" type="ColorRect" parent="Camera2D/CanvasLayer"]
 material = SubResource("ShaderMaterial_f6hv5")
-offset_right = 746.0
-offset_bottom = 402.0
-color = Color(1, 1, 1, 0.619608)
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(1, 1, 1, 0.56)
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer" groups=["blackSquare"]]
 visible = false
@@ -299,6 +299,7 @@ position = Vector2(272, 136)
 
 [node name="shade" parent="zones/r_init" instance=ExtResource("11_5ts84")]
 position = Vector2(320, 36)
+speed = 80
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_init/shade"]
 position = Vector2(-80, 246)
@@ -428,17 +429,6 @@ scale = Vector2(2, 2)
 progress = 540.0
 keepTime = 0.9
 
-[node name="Path2D7" type="Path2D" parent="zones/r_1"]
-position = Vector2(56, -464)
-curve = SubResource("Curve2D_5ts84")
-
-[node name="darkBullet" parent="zones/r_1/Path2D7" instance=ExtResource("12_f6hv5")]
-position = Vector2(327, -536)
-rotation = -0.00598795
-scale = Vector2(2, 2)
-progress = 540.0
-keepTime = 0.9
-
 [node name="Path2D8" type="Path2D" parent="zones/r_1"]
 position = Vector2(56, -528)
 curve = SubResource("Curve2D_5ts84")
@@ -449,43 +439,11 @@ rotation = -0.00598795
 scale = Vector2(2, 2)
 keepTime = 0.9
 
-[node name="Path2D9" type="Path2D" parent="zones/r_1"]
-position = Vector2(56, -592)
-curve = SubResource("Curve2D_5ts84")
-
-[node name="darkBullet" parent="zones/r_1/Path2D9" instance=ExtResource("12_f6hv5")]
-position = Vector2(160, -535)
-rotation = -0.00598795
-scale = Vector2(2, 2)
-keepTime = 0.9
-
 [node name="Path2D10" type="Path2D" parent="zones/r_1"]
 position = Vector2(56, -656)
 curve = SubResource("Curve2D_5ts84")
 
 [node name="darkBullet" parent="zones/r_1/Path2D10" instance=ExtResource("12_f6hv5")]
-position = Vector2(327, -536)
-rotation = -0.00598795
-scale = Vector2(2, 2)
-progress = 540.0
-keepTime = 0.9
-
-[node name="Path2D11" type="Path2D" parent="zones/r_1"]
-position = Vector2(56, -720)
-curve = SubResource("Curve2D_5ts84")
-
-[node name="darkBullet" parent="zones/r_1/Path2D11" instance=ExtResource("12_f6hv5")]
-position = Vector2(327, -536)
-rotation = -0.00598795
-scale = Vector2(2, 2)
-progress = 540.0
-keepTime = 0.9
-
-[node name="Path2D14" type="Path2D" parent="zones/r_1"]
-position = Vector2(56, -928)
-curve = SubResource("Curve2D_5ts84")
-
-[node name="darkBullet" parent="zones/r_1/Path2D14" instance=ExtResource("12_f6hv5")]
 position = Vector2(327, -536)
 rotation = -0.00598795
 scale = Vector2(2, 2)
@@ -540,7 +498,7 @@ position = Vector2(160, -840)
 
 [node name="shade" parent="zones/r_1" instance=ExtResource("11_5ts84")]
 position = Vector2(448, -132)
-speed = 170
+speed = 120
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_1/shade"]
 position = Vector2(-80.5, 44)
@@ -548,6 +506,7 @@ shape = SubResource("RectangleShape2D_02qbx")
 
 [node name="shade2" parent="zones/r_1" instance=ExtResource("11_5ts84")]
 position = Vector2(312, -1604)
+speed = 95
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zones/r_1/shade2"]
 position = Vector2(-7.5, 78.5)

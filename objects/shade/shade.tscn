@@ -64,14 +64,16 @@ tangential_accel_min = 10.61
 tangential_accel_max = 10.61
 scale_min = 0.5
 scale_max = 0.6
-color = Color(1, 1, 1, 0.45098)
+color = Color(1, 1, 1, 0.72)
 color_ramp = SubResource("GradientTexture1D_65431")
 
 [node name="shade" type="Area2D"]
 script = ExtResource("1_65431")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+z_index = 12
+scale = Vector2(2.6, 2.6)
+modulate = Color(1, 1, 1, 0.95)
 texture = ExtResource("1_8p1l2")
 vframes = 4
 frame = 1
@@ -84,6 +86,6 @@ autoplay = "idle"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 50
+amount = 80
 texture = ExtResource("2_bg2l7")
 process_material = SubResource("ParticleProcessMaterial_65431")

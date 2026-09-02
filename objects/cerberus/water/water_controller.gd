@@ -9,6 +9,14 @@ preload("res://objects/cerberus/commons/proyectiles/treeLitle/treeLitle.tscn")
 func _ready_help():
 	bulletScene=load("res://objects/cerberus/water/balls_water/ball_water.tscn")
 	typeAttack=["shotAttack","rebound","attackTornado"]
+func tornado_attack_scale() -> float:
+	return 1.0 + float(General.get_cerberus_difficulty(phase_key)) * 0.08
+
+func tornado_attack_wait(time: float) -> float:
+	return time * hard_scale() / tornado_attack_scale()
+
+func tornado_attack_stat(value: float) -> float:
+	return value * tornado_attack_scale()
 
 func shotAttack(delta:float):
 	if not attack=="shotAttack":
@@ -22,7 +30,7 @@ func shotAttack(delta:float):
 		var dirPlayer:Vector2=markerSelected.global_position-cancerbero.global_position 
 		cancerbero.direction= dirPlayer.normalized() 
 		if dirPlayer.length()<20:
-			startAlarms(15,0.4)
+			startAlarms(15,0.6)
 			cancerbero.direction=Vector2.ZERO
 			if cancerbero.velocity.length()==0:
 				cancerbero.sprite.scale.x=-1
@@ -35,7 +43,7 @@ func shotAttack(delta:float):
 			if dirs.size()==0:
 				randomize()
 				var degreeRandom:int = randi_range(0,360)
-				for i in range(3):
+				for i in range(harder_count(2)):
 					var radShot:float=deg_to_rad(degreeRandom+i*30)
 					var dir:Vector2= Vector2(cos(radShot),sin(radShot))		
 					if markerSelected==$maker_left:
@@ -46,18 +54,19 @@ func shotAttack(delta:float):
 			for dir in dirs:
 				cancerbero.dirShot=dir
 				var bulletCurret:Proyectile=cancerbero.shot()
-				bulletCurret.LIMIT=150
+				_apply_projectile_difficulty(bulletCurret)
+				bulletCurret.LIMIT=harder_stat(150)
 			$timerHelp.start()
 
 func rebound(delta:float):
 	if not attack=="rebound":
 		return
 	if initAttack:
-		for i in range(5):
+		for i in range(harder_count(4)):
 			var radShot:float=deg_to_rad(i*45+10)
 			var dir:Vector2= Vector2(cos(radShot),sin(radShot))		
 			var bullet=shot(cancerbero.global_position,dir,10)
-			bullet.LIMIT=300
+			bullet.LIMIT=harder_stat(300)
 			player.INERTIA=0
 		randomize()
 		var dirTornadoDegree:float= randf_range(0,360)
@@ -86,7 +95,7 @@ func attackTornado(delta:float):
 		var dirPlayer:Vector2=markerSelected.global_position-cancerbero.global_position 
 		cancerbero.direction= dirPlayer.normalized() 
 		if dirPlayer.length()<20:
-			startAlarms(20,0.3)
+			startAlarms(18,tornado_attack_wait(0.45))
 			cancerbero.direction=Vector2.ZERO
 			if cancerbero.velocity.length()==0:
 				cancerbero.sprite.scale.x=-1
@@ -96,7 +105,7 @@ func attackTornado(delta:float):
 				var tornadoCurrent = shotTornado(cancerbero.global_position,Vector2.ZERO,20)
 				tornadoCurrent.scale.x=3
 				tornadoCurrent.scale.y=3
-				tornadoCurrent.forceAtraction=2000
+				tornadoCurrent.forceAtraction=tornado_attack_stat(1400)
 				player.INERTIA=0
 	else:
 		if $timerHelp.is_stopped():
@@ -109,7 +118,7 @@ func attackTornado(delta:float):
 			pathSelected.progress_ratio= randf_range(0,1)
 			var threeCurrent =shotThree(pathSelected.global_position,dir,20)
 			randomize()
-			threeCurrent.LIMIT= randf_range(200,400)
+			threeCurrent.LIMIT= randf_range(tornado_attack_stat(150),tornado_attack_stat(260))
 			threeCurrent.rotation_degrees= randf_range(0,360)
 			$timerHelp.start()
 

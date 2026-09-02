@@ -1,13 +1,37 @@
 extends Node
 class_name storyGroup
+const SKIP_WHOLE_HOLD_TIME := 1.8
 var scenes:Array=[]
 var index:int=0
 var sceneCurrent:storyCommons=null
+var skip_hold_time := 0.0
+var skip_all_started := false
 func _ready() -> void:
 	get_viewport().size_changed.connect(_apply_layout)
 	_apply_layout()
 	modifyBlack(0,2)
 	General.createTimer(0.5,nextScene)
+
+func _process(delta: float) -> void:
+	if skip_all_started:
+		return
+	if Input.is_action_pressed("ui_action"):
+		skip_hold_time += delta
+		if skip_hold_time >= SKIP_WHOLE_HOLD_TIME:
+			skip_all_scenes()
+	else:
+		skip_hold_time = 0.0
+
+func skip_all_scenes() -> void:
+	skip_all_started = true
+	skip_hold_time = 0.0
+	index = scenes.size()
+	if sceneCurrent != null:
+		sceneCurrent.queue_free()
+		sceneCurrent = null
+	modifyBlack(1, 0.35)
+	await get_tree().create_timer(0.35).timeout
+	endScenes()
 	
 func modifyBlack(a:float,time:float):
 	var TWEN = get_tree().create_tween()
@@ -16,6 +40,8 @@ func modifyBlack(a:float,time:float):
 	TWEN.tween_property($CanvasLayer/ColorRect,"color",Color(0,0,0,a),time)
 
 func nextScene():
+	if skip_all_started:
+		return
 	if index==scenes.size():
 		modifyBlack(1,2)
 		General.createTimer(2,endScenes)

@@ -2,7 +2,7 @@ extends Entity
 class_name enemyBasic;
 
 @export_category("Enemy Atributes")
-@export var forceHit=1000;
+@export var forceHit=750;
 @export var forceHitMe=1000;
 @export var pichVolume:Vector2 = Vector2(1,1)
 @onready var hitAreaMe:Area2D= $hitMe

@@ -19,11 +19,11 @@ point_count = 2
 script = ExtResource("1_05cp3")
 
 [node name="shotTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.12
 one_shot = true
 
 [node name="shotTimerCancerbero" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.12
 one_shot = true
 
 [node name="cancerbero" parent="." instance=ExtResource("2_j7irq")]

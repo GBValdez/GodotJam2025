@@ -1,11 +1,18 @@
 extends Entity
 class_name  Player
+
+const WALK_DOWN_TEXTURE = preload("res://objects/player/sprite/ps jam 32x32 caminando de frente-Sheet.png")
+const WALK_UP_TEXTURE = preload("res://objects/player/sprite/ps jam 32x32  caminando espalda-Sheet.png")
+const FACING_DEADZONE:float = 0.2
+const ATTACK_LOCK_TIME:float = 0.42
+
 @export_category("Controls")
 @export var enableControl:bool=true
 @export var speedDash: float = 10000;
 var previousVelocity:Vector2=Vector2.ZERO
 var buffer : bufferPlayer= bufferPlayer.new()
 var currentDash:bool= false
+var attackLock:float=0.0
 var attackExtra:float=0;
 var attackBase:float=15;
 var attackBaseExtra:float=30;
@@ -33,6 +40,12 @@ func _process(delta: float) -> void:
 	if health==0:
 		return
 	buffer.update(delta)
+	if attackLock > 0.0:
+		attackLock-=delta
+		if attackLock <= 0.0:
+			finish_attack_lock()
+	elif blockMove and not currentDash and not is_attack_playing():
+		finish_attack_lock()
 	# Detectar entrada del jugador
 	if (enableControl):
 		direction = Vector2.ZERO
@@ -42,7 +55,8 @@ func _process(delta: float) -> void:
 			else:
 				direction.x = Input.get_axis("ui_left", "ui_right")
 				direction.y = Input.get_axis("ui_up", "ui_down")
-			ultimeDirection=direction
+			if direction.length() > 0.2:
+				ultimeDirection=direction
 	direction = direction.normalized()
 	# Aplicar movimiento basado en entrada
 	velocity += direction * SPEED*delta	
@@ -89,12 +103,21 @@ func animation():
 		playSoundRandom(["audioStep","audioStep2","audioStep3"])
 	else:
 		if not currentDash:
-			anim.play("idle")
+			play_idle()
 
 	if velocity.x!=0:
 		sprite.scale.x= sign(velocity.x) * abs(sprite.scale.x) 
 
-
+func play_idle():
+	if abs(ultimeDirection.y) > abs(ultimeDirection.x) and abs(ultimeDirection.y) > FACING_DEADZONE:
+		anim.stop()
+		sprite.texture = WALK_UP_TEXTURE if ultimeDirection.y < 0 else WALK_DOWN_TEXTURE
+		sprite.hframes = 4
+		sprite.frame = 0
+		$sprite/GPUParticles2D.emitting = false
+		$sprite/HitOther/CollisionShape2D.disabled = true
+	else:
+		anim.play("idle")
 
 func dash():
 	if (Input.is_action_just_pressed("ui_dash")):
@@ -114,21 +137,32 @@ func dash():
 				else:
 					anim.play("dash_down")
 			
+func is_attack_playing() -> bool:
+	return anim.is_playing() and (anim.current_animation == "attack" or anim.current_animation == "atack_up" or anim.current_animation == "attack_down")
+
+func finish_attack_lock() -> void:
+	attackLock=0.0
+	blockMove=false
+	$sprite/HitOther/CollisionShape2D.disabled = true
+
 func attack():
 	if (Input.is_action_just_pressed("ui_action")):
 		buffer.addKey(("attack"))
-	if (not anim.current_animation=="attack"):
+	if (not is_attack_playing()):
 		if (buffer.validFirst("attack")):
 			buffer.eraseKey("attack")
-			if (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
-				anim.play("attack")
-			elif Input.is_action_pressed("ui_up"):
-				anim.play("atack_up")
-			elif Input.is_action_pressed("ui_down"):
+			var attack_direction:Vector2 = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+			if attack_direction.length() < 0.2:
+				attack_direction = ultimeDirection
+			if abs(attack_direction.y) > abs(attack_direction.x) and abs(attack_direction.y) > 0.2:
+				if attack_direction.y < 0:
+					anim.play("atack_up")
+				else:
 					anim.play("attack_down")
 			else:
 				anim.play("attack")
 			blockMove=true
+			attackLock=ATTACK_LOCK_TIME
 			currentDash=false
 			playSound("audioAttack",1.2,1.2)
 	
@@ -166,6 +200,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	match  anim_name:
 		"dash_up","dash_down","dash_lateral":
 			currentDash=false
+		"attack","atack_up","attack_down":
+			finish_attack_lock()
 func onHitDamage(forceHit:bool,damage:float):
 	if((not inmortal or forceHit) and  enableControl):
 		var music:AudioStreamPlayer= get_tree().get_first_node_in_group("music")
@@ -182,6 +218,7 @@ func onHitDamage(forceHit:bool,damage:float):
 			anim.play("death")
 			music.stop()
 			$sprite/GPUParticles2D.emitting=false
+			General.on_player_killed_by_cerberus()
 			General.createTimer(2,resetGame)
 		General.shakeCamera(2, 1)
 		animEffects.play("hit")

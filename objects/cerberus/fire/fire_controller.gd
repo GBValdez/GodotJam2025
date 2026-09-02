@@ -13,13 +13,13 @@ func assault(delta:float):
 		return
 	var dirPlayer:Vector2=player.global_position-cancerbero.global_position 
 	if initAttack:
-		cancerbero.SPEED=1500
-		cancerbero.INERTIA=1200
-		cancerbero.SPEED_LIMIT=1500
-		cancerbero.LIMIT=700
+		cancerbero.SPEED=harder_stat(1500)
+		cancerbero.INERTIA=harder_stat(1200)
+		cancerbero.SPEED_LIMIT=harder_stat(1500)
+		cancerbero.LIMIT=harder_stat(700)
 		cancerbero.direction= dirPlayer.normalized() 
 		initAttack=false
-		startAlarms(10,1.3)
+		startAlarms(10,1.7)
 	else:
 		shotWithTimeCerbero()
 		if $timerHelp.is_stopped():
@@ -36,7 +36,7 @@ func side(delta:float):
 		shotWithTime($pathFire/pathFollowNormalFire.global_position,Vector2.ZERO,10)
 		if $pathFire/pathFollowNormalFire.progress_ratio>0.9:
 					initAttack=false
-					startAlarms(10,0.2)
+					startAlarms(10,0.35)
 		
 	else:
 		$pathFire/pathFollowNormalFire.progress+=delta*300
@@ -52,19 +52,20 @@ func cross(delta:float):
 		return
 	if initAttack:
 		initAttack=false
-		startAlarms(10,0.5)
+		startAlarms(10,0.75)
 		angleCross=0
-		cancerbero.SPEED=30
-		cancerbero.INERTIA=70
-		cancerbero.SPEED_LIMIT=80
-		cancerbero.LIMIT=20
+		cancerbero.SPEED=harder_stat(30)
+		cancerbero.INERTIA=harder_stat(70)
+		cancerbero.SPEED_LIMIT=harder_stat(80)
+		cancerbero.LIMIT=harder_stat(20)
 	else:
 		var dirPlayer:Vector2=player.global_position-cancerbero.global_position 
 		cancerbero.direction.x=dirPlayer.normalized().x
 		cancerbero.direction.y=-dirPlayer.normalized().y
 		if $timerHelp.is_stopped():
-			for i in range(0, 361, 30):  # Empieza en 0, llega hasta 360, sumando de 10 en 10
-				var rad= deg_to_rad(i+angleCross)
+			var bullet_count := harder_count(9)
+			for shot_index in range(bullet_count):  # Empieza en 0, llega hasta 360, sumando de 10 en 10
+				var rad= deg_to_rad((360.0 * float(shot_index) / float(bullet_count)) + angleCross)
 				var dir:Vector2 = Vector2(cos(rad),sin(rad))* 10
 				var posInitial=cancerbero.global_position+ dir.normalized()*30
 				

@@ -40,14 +40,14 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q1ukk"]
-radius = 11.0
+radius = 9.0
 
 [node name="darkBullet" type="PathFollow2D"]
 loop = false
 script = ExtResource("1_q1ukk")
-speed = 600.0
+speed = 420.0
 returnPlat = true
-keepTime = 0.5
+keepTime = 0.75
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 5
@@ -70,7 +70,7 @@ offset_bottom = 20.0
 collision_layer = 0
 monitorable = false
 script = ExtResource("3_30adm")
-force = 1000.0
+force = 650.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitOther"]
 shape = SubResource("CircleShape2D_q1ukk")

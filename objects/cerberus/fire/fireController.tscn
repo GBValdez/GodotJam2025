@@ -16,11 +16,11 @@ script = ExtResource("1_f6wed")
 position = Vector2(274, -155)
 
 [node name="shotTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.12
 one_shot = true
 
 [node name="shotTimerCancerbero" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.12
 one_shot = true
 
 [node name="timerHelp" type="Timer" parent="."]

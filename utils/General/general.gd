@@ -13,6 +13,53 @@ var dataGame={
 }
 var endGame:bool=false
 var fase:int=0
+const CERBERUS_MAX_DIFFICULTY := 3
+const CERBERUS_DIFFICULTY_STEP := 0.18
+var active_cerberus_phase := ""
+var cerberus_difficulty := {
+	"fire": CERBERUS_MAX_DIFFICULTY,
+	"water": CERBERUS_MAX_DIFFICULTY,
+	"electric": CERBERUS_MAX_DIFFICULTY
+}
+
+func get_cerberus_phase_key(path: String) -> String:
+	if path.find("/fire/") != -1:
+		return "fire"
+	if path.find("/water/") != -1:
+		return "water"
+	if path.find("/electric/") != -1:
+		return "electric"
+	return ""
+
+func get_cerberus_difficulty(phase_key: String) -> int:
+	if !cerberus_difficulty.has(phase_key):
+		return 0
+	return int(cerberus_difficulty[phase_key])
+
+func get_cerberus_scale(phase_key: String) -> float:
+	return 1.0 + float(get_cerberus_difficulty(phase_key)) * CERBERUS_DIFFICULTY_STEP
+
+func get_cerberus_health_scale(phase_key: String) -> float:
+	return 1.0 + float(get_cerberus_difficulty(phase_key)) * 0.12
+
+func scale_cerberus_wait(time: float, phase_key: String) -> float:
+	if time <= 0.0:
+		return time
+	return max(time / get_cerberus_scale(phase_key), 0.05)
+
+func scale_cerberus_count(count: int, phase_key: String) -> int:
+	return max(count, int(ceil(float(count) * get_cerberus_scale(phase_key))))
+
+func scale_cerberus_stat(value: float, phase_key: String) -> float:
+	return value * get_cerberus_scale(phase_key)
+
+func on_player_killed_by_cerberus() -> void:
+	if active_cerberus_phase == "":
+		return
+	if !cerberus_difficulty.has(active_cerberus_phase):
+		return
+	cerberus_difficulty[active_cerberus_phase] = max(0, int(cerberus_difficulty[active_cerberus_phase]) - 1)
+
 func string_to_vector2(input: String) -> Vector2:
 	var partsTemp = input.replace("(","").replace(")","").split(",")
 	if partsTemp.size() == 2:

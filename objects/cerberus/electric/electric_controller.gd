@@ -12,7 +12,7 @@ func rayAttack(delta:float):
 		return
 	if initAttack:
 		initAttack=false
-		startAlarms(10,1)
+		startAlarms(10,1.1)
 	else:
 		if $timerHelp.is_stopped():
 			randomize()
@@ -20,7 +20,7 @@ func rayAttack(delta:float):
 			var PLAYER_POS:Vector2= Vector2(floor(player.global_position.x/32)*32,floor(player.global_position.y/32)*32) 
 			cancerbero.playSound("audioRay")
 			shotPackage(rayBullet,PLAYER_POS)
-			for i in range(110):
+			for i in range(harder_count(90)):
 				var randomPos:Vector2= Vector2.ZERO
 				var no_exist:bool=false
 				while  not no_exist:
@@ -38,7 +38,7 @@ func laserAttack(delta:float):
 		return
 	if initAttack:
 		initAttack=false
-		startAlarms(10,1.2)
+		startAlarms(10,1.3)
 		shotLaser()
 	else:
 		if $timerHelp.is_stopped():
@@ -47,13 +47,14 @@ func laserAttack(delta:float):
 			
 func shotLaser():
 	randomize()
-	var numShot=randi_range(1,5)
+	var numShot=randi_range(1,harder_count(4))
 	for i in range(numShot):
 		randomize()
 		var posRandom:Vector2=Vector2(randi_range(0,324*1.5),randi_range(32,200))
 		var bulletCurrent= General.addNode(laserBuller,posRandom)
 		var size:float=randf_range(0.5,2)
 		bulletCurrent.scale=Vector2(size,size)
+		bulletCurrent.force=harder_stat(bulletCurrent.force)
 		bulletCurrent.shotPlayer()
 func _physics_process(delta: float) -> void:
 	stopSound()

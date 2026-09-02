@@ -14,10 +14,12 @@ var initAttack: bool=true
 var canInitAttack:bool=false
 var shockWake:ColorRect
 var initFight:bool=true
+var phase_key:String=""
 func _ready() -> void:
 	player=get_tree().get_first_node_in_group("player")
 	shockWake= get_tree().get_first_node_in_group("shockWave")
 	_ready_help()
+	_apply_dynamic_difficulty()
 	cancerbero.get_node("CollisionShape2D").disabled=true
 	
 
@@ -41,6 +43,28 @@ func deapparecing():
 			General.fase+=1
 func _ready_help():
 	pass
+func _apply_dynamic_difficulty() -> void:
+	phase_key = General.get_cerberus_phase_key(get_script().resource_path)
+	General.active_cerberus_phase = phase_key
+	cancerbero.health = int(round(float(cancerbero.health) * General.get_cerberus_health_scale(phase_key)))
+	cancerbero.forceHit = General.scale_cerberus_stat(cancerbero.forceHit, phase_key)
+	cancerbero.forceHitMe = General.scale_cerberus_stat(cancerbero.forceHitMe, phase_key)
+	shotTimer.wait_time = harder_wait(shotTimer.wait_time)
+	shotTimerCancerbero.wait_time = harder_wait(shotTimerCancerbero.wait_time)
+	if cancerbero.liveBar != null:
+		cancerbero.liveBar.start(cancerbero.health)
+
+func hard_scale() -> float:
+	return General.get_cerberus_scale(phase_key)
+
+func harder_wait(time: float) -> float:
+	return General.scale_cerberus_wait(time, phase_key)
+
+func harder_count(count: int) -> int:
+	return General.scale_cerberus_count(count, phase_key)
+
+func harder_stat(value: float) -> float:
+	return General.scale_cerberus_stat(value, phase_key)
 
 func shot(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	cancerbero.playSound("audioElement")
@@ -49,6 +73,7 @@ func shot(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 func shotPackage(package,pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	var bulletCurrent:Proyectile=package.instantiate()
 	bulletCurrent.global_position=pos
+	_apply_projectile_difficulty(bulletCurrent)
 	bulletCurrent.direction=direction
 	if timeShot!=-1:
 		bulletCurrent.timeLive=timeShot
@@ -56,6 +81,13 @@ func shotPackage(package,pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:flo
 	level.add_child(bulletCurrent)
 	return bulletCurrent
 	
+func _apply_projectile_difficulty(projectile: Proyectile) -> void:
+	projectile.SPEED = harder_stat(projectile.SPEED)
+	projectile.LIMIT = harder_stat(projectile.LIMIT)
+	projectile.SPEED_LIMIT = harder_stat(projectile.SPEED_LIMIT)
+	var hit_other := projectile.get_node_or_null("hitOther") as Hit
+	if hit_other != null:
+		hit_other.force = harder_stat(hit_other.force)
 func shotWithTime(pos:Vector2,direction:Vector2=Vector2.ZERO,timeShot:float=-1):
 	if not shotTimer.is_stopped():
 		return
@@ -66,14 +98,16 @@ func shotWithTimeCerbero(direction:Vector2=Vector2.ZERO):
 	if not shotTimerCancerbero.is_stopped():
 		return
 	cancerbero.dirShot=direction
-	cancerbero.shot()
+	var bullet_current:Proyectile=cancerbero.shot()
+	_apply_projectile_difficulty(bullet_current)
 	shotTimerCancerbero.start()
 
 func changeAttack(wait:float=6):
+	var scaled_wait := harder_wait(wait)
 	attack= typeAttack.pick_random()
 	initAttack=true
-	General.createTimer(wait-1.5,alertAttack)
-	General.createTimer(wait,activateAttack)
+	General.createTimer(max(scaled_wait - 1.5, 0.2),alertAttack)
+	General.createTimer(scaled_wait,activateAttack)
 	canInitAttack=false
 func  alertAttack():
 	cancerbero.playSound("audioBark",1,1.2)
@@ -97,7 +131,7 @@ func startAlarms(endAttack:float,help:float):
 		tEndAttack.wait_time= endAttack
 		tEndAttack.start()
 	if(help!=-1):
-		tTimerHelp.wait_time=help
+		tTimerHelp.wait_time=harder_wait(help)
 		tTimerHelp.start()	
 
 
